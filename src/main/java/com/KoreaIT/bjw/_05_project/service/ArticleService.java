@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.KoreaIT.bjw._05_project.repository.ArticleRepository;
 import com.KoreaIT.bjw._05_project.vo.Article;
 
+
 @Service
 public class ArticleService {
 
@@ -16,12 +17,15 @@ public class ArticleService {
 
 	public ArticleService(ArticleRepository articleRepository) {
 		this.articleRepository = articleRepository;
-		articleRepository.makeTestData();
 	}
 
 	// 서비스 메서드
-	public Article writeArticle(String title, String body) {
-		return articleRepository.writeArticle(title, body);
+	public int writeArticle(String title, String body) {
+		
+		articleRepository.writeArticle(title, body);
+		
+		return articleRepository.getLastInsertId();
+		
 	}
 
 	public Article getArticle(int id) {
