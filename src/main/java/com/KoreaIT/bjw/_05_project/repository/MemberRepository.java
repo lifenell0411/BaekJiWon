@@ -11,7 +11,7 @@ public interface MemberRepository {
 
 	@Insert("""
 			INSERT INTO `member`
-			set regDate = NOW(),
+			SET regDate = NOW(),
 			updateDate = NOW(),
 			loginId = #{loginId},
 			loginPw = #{loginPw},
@@ -33,5 +33,12 @@ public interface MemberRepository {
 			SELECT LAST_INSERT_ID()
 			""")
 	int getLastInsertId();
+
+	@Select("""
+			SELECT *
+			FROM `member`
+			WHERE loginId = #{loginId}
+			""")
+	Member getMemberByLoginId(String loginId);
 
 }
