@@ -1,4 +1,5 @@
 package com.KoreaIT.bjw._05_project.controller;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.bjw._05_project.service.ArticleService;
 import com.KoreaIT.bjw._05_project.vo.Article;
-
 
 @Controller
 public class UsrArticleController {

@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.KoreaIT.bjw._05_project.vo.Article;
 
-
 @Mapper
 public interface ArticleRepository {
 
