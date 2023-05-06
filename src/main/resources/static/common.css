@@ -1,0 +1,20 @@
+/* 폰트적용 */
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+html>body {
+	font-family: 'GmarketSansMedium', sans;
+}
+
+/* 라이브러리 */
+.table-box-type-1 thead th, .table-box-type-1 td {
+	border: 1px solid black;
+	padding: 10px;
+	text-align: center;
+}
