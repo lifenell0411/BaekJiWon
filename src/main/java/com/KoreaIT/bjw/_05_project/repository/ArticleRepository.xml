@@ -4,7 +4,7 @@
 <mapper
 	namespace="com.KoreaIT.bjw._05_project.repository.ArticleRepository">
 
-	<insert id="writeArticle">
+		<insert id="writeArticle">
 		INSERT INTO article
 		SET regDate = NOW(),
 		updateDate =
@@ -14,19 +14,6 @@
 		`body`= #{body}
 	</insert>
 
-	<select id="getArticles" resultType="Article">
-		SELECT *
-		FROM article
-		ORDER BY
-		id DESC
-	</select>
-
-	<select id="getArticle" resultType="Article">
-		SELECT *
-		FROM article
-		WHERE id
-		= #{id}
-	</select>
 
 	<delete id="deleteArticle">
 		DELETE FROM
