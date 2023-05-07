@@ -12,13 +12,10 @@
 <script>
 	function ArticleDetail__increaseHitCount() {
 		const localStorageKey = 'article__' + params.id + '__alreadyView';
-
 		if (localStorage.getItem(localStorageKey)) {
 			return;
 		}
-
 		localStorage.setItem(localStorageKey, true);
-
 		$.get('../article/doIncreaseHitCountRd', {
 			id : params.id,
 			ajaxMode : 'Y'
@@ -26,11 +23,9 @@
 			$('.article-detail__hit-count').empty().html(data.data1);
 		}, 'json');
 	}
-
 	$(function() {
 		// 실전코드
 		// 		ArticleDetail__increaseHitCount();
-
 		// 연습코드
 		setTimeout(ArticleDetail__increaseHitCount, 2000);
 	})
@@ -69,6 +64,18 @@
 						<td>
 							<span class="article-detail__hit-count">${article.hitCount }</span>
 						</td>
+					</tr>
+					<tr>
+						<th>좋아요</th>
+						<td>${article.extra__goodReactionPoint }</td>
+					</tr>
+					<tr>
+						<th>싫어요</th>
+						<td>${article.extra__badReactionPoint }</td>
+					</tr>
+					<tr>
+						<th>추천 총합</th>
+						<td>${article.extra__sumReactionPoint }</td>
 					</tr>
 					<tr>
 						<th>제목</th>
