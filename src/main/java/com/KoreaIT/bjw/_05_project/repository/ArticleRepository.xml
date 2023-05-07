@@ -3,13 +3,13 @@
 
 <mapper
 	namespace="com.KoreaIT.bjw._05_project.repository.ArticleRepository">
-
 		<insert id="writeArticle">
 		INSERT INTO article
 		SET regDate = NOW(),
 		updateDate =
 		NOW(),
 		memberId = #{memberId},
+		boardId = #{boardId},
 		title =#{title},
 		`body`= #{body}
 	</insert>

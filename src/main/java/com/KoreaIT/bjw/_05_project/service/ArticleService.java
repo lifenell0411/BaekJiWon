@@ -19,10 +19,9 @@ public class ArticleService {
 		this.articleRepository = articleRepository;
 	}
 
-	// 서비스 메서드
-	public ResultData<Integer> writeArticle(int memberId, String title, String body) {
+	public ResultData<Integer> writeArticle(int memberId, int boardId, String title, String body) {
 
-		articleRepository.writeArticle(memberId, title, body);
+		articleRepository.writeArticle(memberId, boardId, title, body);
 
 		int id = articleRepository.getLastInsertId();
 
@@ -90,8 +89,14 @@ public class ArticleService {
 		return ResultData.from("S-1", "삭제 가능");
 	}
 
-	public List<Article> getForPrintArticles(int boardId) {
-		return articleRepository.getForPrintArticles(boardId);
+	public List<Article> getForPrintArticles(int boardId, int itemsInAPage, int page) {
+		/*
+		 * SELECT * FROM article WHERE boardId = 1 ORDER BY id DESC LIMIT 0, 10
+		 */
+		int limitFrom = (page - 1) * itemsInAPage;
+		int limitTake = itemsInAPage;
+
+		return articleRepository.getForPrintArticles(boardId, limitFrom, limitTake);
 	}
 
 	public int getArticlesCount(int boardId) {
