@@ -9,6 +9,7 @@ import com.KoreaIT.bjw._05_project.repository.ArticleRepository;
 import com.KoreaIT.bjw._05_project.util.Ut;
 import com.KoreaIT.bjw._05_project.vo.Article;
 import com.KoreaIT.bjw._05_project.vo.ResultData;
+
 @Service
 public class ArticleService {
 
@@ -134,6 +135,25 @@ public class ArticleService {
 			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
 		}
 		return ResultData.from("S-1", "싫어요 증가", "affectedRow", affectedRow);
+	}
+
+	public ResultData decreaseGoodReationPoint(int relId) {
+		int affectedRow = articleRepository.decreaseGoodReationPoint(relId);
+
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
+		}
+		return ResultData.from("S-1", "좋아요 감소", "affectedRow", affectedRow);
+	}
+
+	public ResultData decreaseBadReationPoint(int relId) {
+		int affectedRow = articleRepository.decreaseBadReationPoint(relId);
+
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
+		}
+		return ResultData.from("S-1", "싫어요 감소", "affectedRow", affectedRow);
+
 	}
 
 }
