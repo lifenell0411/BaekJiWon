@@ -11,15 +11,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.bjw._05_project.service.ArticleService;
+import com.KoreaIT.bjw._05_project.service.BoardService;
 import com.KoreaIT.bjw._05_project.util.Ut;
 import com.KoreaIT.bjw._05_project.vo.Article;
+import com.KoreaIT.bjw._05_project.vo.Board;
 import com.KoreaIT.bjw._05_project.vo.ResultData;
 import com.KoreaIT.bjw._05_project.vo.Rq;
+
+
+
 @Controller
 public class UsrArticleController {
 
 	@Autowired
 	private ArticleService articleService;
+
+	@Autowired
+	private BoardService boardService;
 
 	@RequestMapping("/usr/article/modify")
 	public String showModify(HttpServletRequest req, Model model, int id) {
@@ -113,9 +121,18 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/list")
-	public String showList(Model model) {
-		List<Article> articles = articleService.getForPrintArticles();
+	public String showList(HttpServletRequest req, Model model, int boardId) {
+		Rq rq = (Rq) req.getAttribute("rq");
 
+		Board board = boardService.getBoardById(boardId);
+
+		if (board == null) {
+			return rq.jsHitoryBackOnView("없는 게시판이야");
+		}
+
+		List<Article> articles = articleService.getForPrintArticles(boardId);
+
+		model.addAttribute("board", board);
 		model.addAttribute("articles", articles);
 
 		return "usr/article/list";
@@ -132,3 +149,4 @@ public class UsrArticleController {
 	}
 
 }
+
