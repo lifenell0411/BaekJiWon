@@ -15,7 +15,6 @@ import com.KoreaIT.bjw._05_project.util.Ut;
 import com.KoreaIT.bjw._05_project.vo.Article;
 import com.KoreaIT.bjw._05_project.vo.ResultData;
 import com.KoreaIT.bjw._05_project.vo.Rq;
-
 @Controller
 public class UsrArticleController {
 
@@ -51,18 +50,18 @@ public class UsrArticleController {
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
-			return Ut.jsHitoryBack("F-1", Ut.f("%d번 글은 존재하지 않습니다@", id));
+			return rq.jsHitoryBack("F-1", Ut.f("%d번 글은 존재하지 않습니다@", id));
 		}
 
 		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
 
 		if (actorCanModifyRd.isFail()) {
-			return Ut.jsHitoryBack(actorCanModifyRd.getResultCode(), actorCanModifyRd.getMsg());
+			return rq.jsHitoryBack(actorCanModifyRd.getResultCode(), actorCanModifyRd.getMsg());
 		}
 
 		articleService.modifyArticle(id, title, body);
 
-		return Ut.jsReplace(Ut.f("%d번 글을 수정 했습니다", id), Ut.f("../article/detail?id=%d", id));
+		return rq.jsReplace(Ut.f("%d번 글을 수정 했습니다", id), Ut.f("../article/detail?id=%d", id));
 	}
 
 	@RequestMapping("/usr/article/doDelete")
@@ -84,25 +83,33 @@ public class UsrArticleController {
 		return Ut.jsReplace(Ut.f("%d번 글을 삭제 했습니다", id), "../article/list");
 	}
 
+	@RequestMapping("/usr/article/write")
+	public String showWrite(HttpServletRequest req, String title, String body) {
+
+		return "usr/article/write";
+	}
+
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public ResultData<Article> doWrite(HttpServletRequest req, String title, String body) {
+	public String doWrite(HttpServletRequest req, String title, String body, String replaceUri) {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (Ut.empty(title)) {
-			return ResultData.from("F-1", "제목을 입력해주세요");
+			return rq.jsHitoryBack("F-1", "제목을 입력해주세요");
 		}
 		if (Ut.empty(body)) {
-			return ResultData.from("F-2", "내용을 입력해주세요");
+			return rq.jsHitoryBack("F-2", "내용을 입력해주세요");
 		}
 
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(), title, body);
 
 		int id = (int) writeArticleRd.getData1();
 
-		Article article = articleService.getArticle(id);
+		if (Ut.empty(replaceUri)) {
+			replaceUri = Ut.f("../article/detail?id=%d", id);
+		}
 
-		return ResultData.newData(writeArticleRd, "article", article);
+		return rq.jsReplace(Ut.f("%d번 글이 생성되었습니다", id), replaceUri);
 	}
 
 	@RequestMapping("/usr/article/list")
