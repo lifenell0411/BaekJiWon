@@ -100,7 +100,6 @@ public interface ArticleRepository {
 				""")
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
 
-	
 	@Update("""
 			<script>
 				UPDATE article
@@ -109,6 +108,15 @@ public interface ArticleRepository {
 			</script>
 			""")
 
-	public void increaseHitCount(int id);
+	public int increaseHitCount(int id);
+
+	@Select("""
+			<script>
+				SELECT hitCount
+				FROM article
+				WHERE id = #{id}
+			</script>
+			""")
+	public int getArticleHitCount(int id);
 
 }
