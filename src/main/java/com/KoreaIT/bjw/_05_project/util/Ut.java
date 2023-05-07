@@ -1,5 +1,12 @@
 package com.KoreaIT.bjw._05_project.util;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 public class Ut {
+
+	private HttpServletRequest req;
+	private HttpServletResponse resp;
 
 	public static boolean empty(Object obj) {
 
@@ -75,6 +82,13 @@ public class Ut {
 				</script>
 				""", msg, uri);
 
+	}
+
+	public static String jsHitoryBackOnView(HttpServletRequest req, String msg) {
+		req.setAttribute("msg", msg);
+		req.setAttribute("historyBack", true);
+
+		return "usr/common/js";
 	}
 
 }
