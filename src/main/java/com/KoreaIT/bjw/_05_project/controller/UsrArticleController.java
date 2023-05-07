@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.bjw._05_project.service.ArticleService;
 import com.KoreaIT.bjw._05_project.service.BoardService;
+import com.KoreaIT.bjw._05_project.service.ReactionPointService;
 import com.KoreaIT.bjw._05_project.util.Ut;
 import com.KoreaIT.bjw._05_project.vo.Article;
 import com.KoreaIT.bjw._05_project.vo.Board;
@@ -28,6 +29,8 @@ public class UsrArticleController {
 	private BoardService boardService;
 	@Autowired
 	private Rq rq;
+	@Autowired
+	private ReactionPointService reactionPointService;
 
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
@@ -153,7 +156,11 @@ public class UsrArticleController {
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
+		boolean actorCanMakeReaction = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(), "article",
+				id);
+
 		model.addAttribute("article", article);
+		model.addAttribute("actorCanMakeReaction", actorCanMakeReaction);
 
 		return "usr/article/detail";
 	}
@@ -176,3 +183,4 @@ public class UsrArticleController {
 	}
 
 }
+

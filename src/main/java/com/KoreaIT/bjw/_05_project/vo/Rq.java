@@ -14,7 +14,6 @@ import com.KoreaIT.bjw._05_project.service.MemberService;
 import com.KoreaIT.bjw._05_project.util.Ut;
 
 import lombok.Getter;
-
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
@@ -93,6 +92,24 @@ public class Rq {
 		return Ut.jsReplace(msg, uri);
 	}
 
+	public String getCurrentUri() {
+		String currentUri = req.getRequestURI();
+		String queryString = req.getQueryString();
+		
+		System.out.println(currentUri);
+		System.out.println(queryString);
+		
+		if (queryString != null && queryString.length() > 0) {
+			currentUri += "?" + queryString;
+		}
+
+		System.out.println(currentUri);
+		return currentUri;
+
+	}
+
+	// Rq 객체 생성 유도
+	// 삭제 x, BeforeActionInterceptor 에서 강제 호출
 	public void initOnBeforeActionInterceptor() {
 
 	}

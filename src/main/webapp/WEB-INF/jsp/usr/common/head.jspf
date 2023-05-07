@@ -24,56 +24,81 @@
 
 
 	<header>
-		<div class=" h-20 flex container mx-auto text-4xl ">
+		<div class=" h-20 flex container mx-auto text-4xl bg-black text-white">
 			<a href="#" class=" flex items-center px-3">
-				<span>로고</span>
+				<span>문신사</span>
 			</a>
 
 			<div class="flex-grow"></div>
 
-			<ul class="flex menu menu-horizontal bg-base-100 rounded-box p-2">
+			<ul class="flex menu menu-horizontal bg-black-700">
 				<li class="hover:underline">
 					<a class="h-full px-3 flex items-center" href="/">
 						<span>HOME</span>
 					</a>
 				</li>
-
-				<li class="hover:underline">
-					<a class="h-full px-3 flex items-center" href="/usr/article/list">
-						<span>LIST</span>
-					</a>
-					<ul class="z-10">
-						<li class="hover:underline">
-							<a href="/usr/article/list?boardId=1">NOTICE</a>
-						</li>
-						<li class="hover:underline">
-							<a href="/usr/article/list?boardId=2">FREE</a>
-						</li>
-						<li class="hover:underline">
-							<a href="/usr/article/list?boardId=3">QnA</a>
-						</li>
-					</ul>
-				</li>
-				<li class="hover:underline">
-					<a class="h-full px-3 flex items-center" href="/usr/article/write">
-						<span>WRITE</span>
-					</a>
-				</li>
-				<c:if test="${!rq.isLogined() }">
+				<ul class="flex menu menu-horizontal bg-black-700">
 					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" href="/usr/member/login">
-							<span>LOGIN</span>
+						<a class="h-full px-3 flex items-center" href="/">
+							<span>소개</span>
 						</a>
 					</li>
-				</c:if>
-				<c:if test="${rq.isLogined() }">
 					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" href="/usr/member/doLogout">
-							<span>LOGOUT</span>
+						<a class="h-full px-3 flex items-center" href="/usr/article/list">
+							<span>도안</span>
+						</a>
+						<ul class="z-10 bg-black">
+							<li class="hover:underline ">
+								<a href="/">레터링</a>
+							</li>
+							<li class="hover:underline">
+								<a href="/">미니타투</a>
+							</li>
+							<li class="hover:underline">
+								<a href="/">블랙워크</a>
+							</li>
+						</ul>
+					</li>
+					
+						<li class="hover:underline">
+						<a class="h-full px-3 flex items-center" href="/usr/article/list">
+							<span>게시판</span>
+						</a>
+						<ul class="z-10 bg-black">
+							<li class="hover:underline">
+								<a href="/usr/article/list?boardId=1">공지사항</a>
+							</li>
+							<li class="hover:underline">
+								<a href="/usr/article/list?boardId=2">자유게시판</a>
+							</li>
+							<li class="hover:underline">
+								<a href="/">타투후기</a>
+							</li>
+								<li class="hover:underline">
+								<a href="/usr/article/list?boardId=3">QnA</a>
+							</li>
+						</ul>
+					</li>
+					<li class="hover:underline">
+						<a class="h-full px-3 flex items-center" href="/usr/article/write">
+							<span>글쓰기</span>
 						</a>
 					</li>
-				</c:if>
-			</ul>
+					<c:if test="${!rq.isLogined() }">
+						<li class="hover:underline">
+							<a class="h-full px-3 flex items-center" href="/usr/member/login">
+								<span>LOGIN</span>
+							</a>
+						</li>
+					</c:if>
+					<c:if test="${rq.isLogined() }">
+						<li class="hover:underline">
+							<a class="h-full px-3 flex items-center" href="/usr/member/doLogout">
+								<span>LOGOUT</span>
+							</a>
+						</li>
+					</c:if>
+				</ul>
 		</div>
 	</header>
 
@@ -83,3 +108,15 @@
 		</div>
 	</section>
 	<main>
+	
+	<style>
+	/* 2차 메뉴에 마우스 오버시 배경색 변경 */
+	ul ul ul :hover {
+		background-color: #B711C6;
+	 
+	}
+	
+	.menu-horizontal > li:hover > a {
+  background-color: #B711C6;
+}
+</style>

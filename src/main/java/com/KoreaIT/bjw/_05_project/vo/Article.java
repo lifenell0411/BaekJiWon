@@ -2,6 +2,7 @@ package com.KoreaIT.bjw._05_project.vo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,10 +14,8 @@ public class Article {
 	private String title;
 	private String body;
 	private int hitCount;
-
-	private int extra__sumReactionPoint;
-	private int extra__goodReactionPoint;
-	private int extra__badReactionPoint;
+	private int goodReactionPoint;
+	private int badReactionPoint;
 
 	private String extra__writer;
 

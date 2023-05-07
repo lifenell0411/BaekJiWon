@@ -65,18 +65,36 @@
 							<span class="article-detail__hit-count">${article.hitCount }</span>
 						</td>
 					</tr>
+
 					<tr>
-						<th>좋아요</th>
-						<td>${article.extra__goodReactionPoint }</td>
+						<th>추천</th>
+						<td>
+							<span>&nbsp;좋아요 : ${article.goodReactionPoint }&nbsp;</span>
+							<span>&nbsp;싫어요 : ${article.badReactionPoint }&nbsp;</span>
+							<c:if test="${actorCanMakeReaction }">
+								<div>
+									<span>
+										<span>&nbsp;</span>
+										<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
+											class="btn btn-xs">좋아요 👍</a>
+									</span>
+									<span>
+										<span>&nbsp;</span>
+										<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
+											class="btn btn-xs">싫어요 👎</a>
+									</span>
+								</div>
+							</c:if>
+						</td>
 					</tr>
-					<tr>
-						<th>싫어요</th>
-						<td>${article.extra__badReactionPoint }</td>
-					</tr>
-					<tr>
-						<th>추천 총합</th>
-						<td>${article.extra__sumReactionPoint }</td>
-					</tr>
+					<!-- 					<tr> -->
+					<!-- 						<th>싫어요</th> -->
+					<%-- 						<td>${article.extra__badReactionPoint }</td> --%>
+					<!-- 					</tr> -->
+					<!-- 					<tr> -->
+					<!-- 						<th>추천 총합</th> -->
+					<%-- 						<td>${article.extra__sumReactionPoint }</td> --%>
+					<!-- 					</tr> -->
 					<tr>
 						<th>제목</th>
 						<td>${article.title }</td>
