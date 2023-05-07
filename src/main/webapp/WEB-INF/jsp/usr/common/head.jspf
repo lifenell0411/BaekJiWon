@@ -24,14 +24,14 @@
 
 
 	<header>
-		<div class=" h-20 flex container mx-auto text-4xl">
+		<div class=" h-20 flex container mx-auto text-4xl ">
 			<a href="#" class=" flex items-center px-3">
 				<span>로고</span>
 			</a>
 
 			<div class="flex-grow"></div>
 
-			<ul class="flex">
+			<ul class="flex menu menu-horizontal bg-base-100 rounded-box p-2">
 				<li class="hover:underline">
 					<a class="h-full px-3 flex items-center" href="/">
 						<span>HOME</span>

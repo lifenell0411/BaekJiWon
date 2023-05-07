@@ -57,7 +57,7 @@
 			</form>
 		</div>
 		<div class="btns">
-			<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
+			<button class="btn-text-link btn btn btn-active" type="button" onclick="history.back();">뒤로가기</button>
 
 
 		</div>
