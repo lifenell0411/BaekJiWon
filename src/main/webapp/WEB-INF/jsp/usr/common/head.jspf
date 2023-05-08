@@ -24,9 +24,12 @@
 
 
 	<header>
-		<div class=" h-20 flex container mx-auto text-4xl bg-black text-white">
-			<a href="#" class=" flex items-center px-3">
+		<div class=" h-20 flex container mx-auto text-4xl bg-black text-white btn-contain">
+			<a href="/" class=" flex items-center px-3" >
 				<span>문신사</span>
+				
+				
+				
 			</a>
 
 			<div class="flex-grow"></div>
@@ -56,6 +59,9 @@
 							</li>
 							<li class="hover:underline">
 								<a href="/">블랙워크</a>
+							</li>
+								<li class="hover:underline">
+								<a href="/">ETC</a>
 							</li>
 						</ul>
 					</li>
@@ -112,11 +118,19 @@
 	<style>
 	/* 2차 메뉴에 마우스 오버시 배경색 변경 */
 	ul ul ul :hover {
-		background-color: #B711C6;
-	 
+		background: #03e9f4;
+
 	}
-	
+ 
 	.menu-horizontal > li:hover > a {
-  background-color: #B711C6;
+  background-color: #03e9f4;
 }
+
+
+	    body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background: linear-gradient(black, #243b55);
+      }
 </style>
