@@ -2,6 +2,7 @@ package com.KoreaIT.bjw._05_project.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -10,6 +11,15 @@ import com.KoreaIT.bjw._05_project.vo.Article;
 @Mapper
 public interface ArticleRepository {
 
+	@Insert("""
+			INSERT INTO article
+			SET regDate = NOW(),
+			updateDate = NOW(),
+			memberId = #{memberId},
+			boardId = #{boardId},
+			title =#{title},
+			`body`= #{body}
+				""")
 	public void writeArticle(int memberId, int boardId, String title, String body);
 
 	@Select("""

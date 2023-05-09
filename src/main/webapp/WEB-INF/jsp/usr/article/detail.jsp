@@ -9,13 +9,17 @@
 	params.id = parseInt('${param.id}');
 </script>
 
+<!-- 조회수 관련 -->
 <script>
 	function ArticleDetail__increaseHitCount() {
 		const localStorageKey = 'article__' + params.id + '__alreadyView';
+
 		if (localStorage.getItem(localStorageKey)) {
 			return;
 		}
+
 		localStorage.setItem(localStorageKey, true);
+
 		$.get('../article/doIncreaseHitCountRd', {
 			id : params.id,
 			ajaxMode : 'Y'
@@ -23,12 +27,35 @@
 			$('.article-detail__hit-count').empty().html(data.data1);
 		}, 'json');
 	}
+
 	$(function() {
 		// 실전코드
 		// 		ArticleDetail__increaseHitCount();
+
 		// 연습코드
 		setTimeout(ArticleDetail__increaseHitCount, 2000);
 	})
+</script>
+
+<script type="text/javascript">
+	let ReplyWrite__submitFormDone = false;
+
+	function ReplyWrite__submitForm(form) {
+		if (ReplyWrite__submitFormDone) {
+			return;
+		}
+		form.body.value = form.body.value.trim();
+
+		if (form.body.value.length < 3) {
+			alert('3글자 이상 입력하세요');
+			form.body.focus();
+			return;
+		}
+
+		ReplyWrite__submitFormDone = true;
+		form.submit();
+
+	}
 </script>
 
 <section class="mt-8 text-xl">
@@ -93,7 +120,7 @@
 										<span>&nbsp;</span>
 										<a
 											href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-											class="btn btn-xs">좋아요 취소👍</a>
+											class="btn btn-xs">좋아요 👍</a>
 									</span>
 									<span>
 										<span>&nbsp;</span>
@@ -113,13 +140,13 @@
 										<span>&nbsp;</span>
 										<a
 											href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-											class="btn btn-xs">싫어요 취소👎</a>
+											class="btn btn-xs">싫어요 👎</a>
 									</span>
 								</div>
 							</c:if>
 						</td>
 					</tr>
-		
+
 					<tr>
 						<th>제목</th>
 						<td>${article.title }</td>
@@ -143,6 +170,46 @@
 					href="../article/doDelete?id=${article.id }">삭제</a>
 			</c:if>
 		</div>
+	</div>
+</section>
+
+<section class="mt-8 text-xl">
+	<div class="container mx-auto px-3">
+		<div class="table-box-type-1">
+			<c:if test="${rq.logined }">
+				<form action="../reply/doWrite" method="POST" onsubmit="ReplyWrite__submitForm(this); return false;">
+					<input type="hidden" name="relTypeCode" value="article" />
+					<input type="hidden" name="relId" value="${article.id }" />
+					<table>
+						<colgroup>
+							<col width="200" />
+						</colgroup>
+
+						<tbody>
+							<tr>
+								<th>댓글</th>
+								<td>
+									<textarea class="input input-bordered w-full max-w-xs" type="text" name="body" placeholder="내용을 입력해주세요" /></textarea>
+								</td>
+							</tr>
+							<tr>
+								<th></th>
+								<td>
+									<button type="submit" value="작성" />
+									댓글 작성
+									</button>
+								</td>
+							</tr>
+						</tbody>
+
+					</table>
+				</form>
+			</c:if>
+			<c:if test="${rq.notLogined }">
+				<a class="btn-text-link btn btn-active btn-ghost" href="/usr/member/login">로그인</a> 후 이용해줘
+			</c:if>
+		</div>
+
 	</div>
 </section>
 
