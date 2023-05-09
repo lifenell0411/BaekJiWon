@@ -103,4 +103,64 @@ public class UsrMemberController {
 		return Ut.jsReplace("S-1", "로그아웃 되었습니다", "/");
 	}
 
+	@RequestMapping("/usr/member/myPage")
+	public String showMyPage() {
+
+		return "usr/member/myPage";
+	}
+
+	@RequestMapping("/usr/member/checkPw")
+	public String showCheckPw() {
+
+		return "usr/member/checkPw";
+	}
+
+	@RequestMapping("/usr/member/doCheckPw")
+	@ResponseBody
+	public String doCheckPw(String loginPw, String replaceUri) {
+		System.out.println("========================================" + loginPw);
+		System.out.println("========================================" + replaceUri);
+		if (Ut.empty(loginPw)) {
+			return rq.jsHitoryBackOnView("비밀번호 입력해");
+		}
+
+		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
+			return rq.jsHitoryBack("", "비밀번호 틀림");
+		}
+
+		return rq.jsReplace("", replaceUri);
+	}
+
+	@RequestMapping("/usr/member/modify")
+	public String showModify() {
+
+		return "usr/member/modify";
+	}
+
+	@RequestMapping("/usr/member/doModify")
+	@ResponseBody
+	public String doModify(String loginPw, String name, String nickname, String cellphoneNum, String email) {
+
+		if (Ut.empty(loginPw)) {
+			loginPw = null;
+		}
+		if (Ut.empty(name)) {
+			return rq.jsHitoryBackOnView("name 입력해");
+		}
+		if (Ut.empty(nickname)) {
+			return rq.jsHitoryBackOnView("nickname 입력해");
+		}
+		if (Ut.empty(cellphoneNum)) {
+			return rq.jsHitoryBackOnView("cellphoneNum 입력해");
+		}
+		if (Ut.empty(email)) {
+			return rq.jsHitoryBackOnView("email 입력해");
+		}
+
+		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, cellphoneNum,
+				email);
+
+		return rq.jsReplace(modifyRd.getMsg(), "../member/myPage");
+	}
+
 }

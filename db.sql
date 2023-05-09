@@ -3,6 +3,7 @@ DROP DATABASE IF EXISTS 23_05_project;
 CREATE DATABASE 23_05_project;
 USE 23_05_project;
 # 게시물 테이블 생성
+# 게시물 테이블 생성
 CREATE TABLE article(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
