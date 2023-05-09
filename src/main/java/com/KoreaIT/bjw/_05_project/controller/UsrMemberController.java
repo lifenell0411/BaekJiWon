@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.bjw._05_project.service.MemberService;
@@ -62,7 +63,7 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(String loginId, String loginPw) {
+	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {
 
 		if (rq.isLogined()) {
 			return Ut.jsHitoryBack("F-5", "이미 로그인 상태입니다");
@@ -86,21 +87,21 @@ public class UsrMemberController {
 		}
 
 		rq.login(member);
+		
+		// 우리가 갈 수 있는 경로를 경우의 수로 표현 
+		// 인코딩
+		// 그 외에는 처리 불가 -> 메인으로 보내자
 
-		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getName()), "/");
+		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getName()), afterLoginUri);
 	}
 
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
-	public String doLogout() {
-
-		if (!rq.isLogined()) {
-			return Ut.jsHitoryBack("F-1", "이미 로그아웃 상태입니다");
-		}
+	public String doLogout(@RequestParam(defaultValue = "/") String afterLogoutUri) {
 
 		rq.logout();
 
-		return Ut.jsReplace("S-1", "로그아웃 되었습니다", "/");
+		return Ut.jsReplace("S-1", "로그아웃 되었습니다", afterLogoutUri);
 	}
 
 	@RequestMapping("/usr/member/myPage")
