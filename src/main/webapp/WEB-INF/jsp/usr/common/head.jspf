@@ -97,6 +97,13 @@
 							</a>
 						</li>
 					</c:if>
+					<c:if test="${!rq.logined}">
+					<li class="hover:underline">
+						<a class="h-full px-3 flex items-center" href="${rq.joinUri }">
+							<span>JOIN</span>
+						</a>
+					</li>
+				</c:if>
 					<c:if test="${rq.isLogined() }">
 					<li class="hover:underline">
 						<a class="h-full px-3 flex items-center" href="/usr/member/myPage">
@@ -128,9 +135,7 @@ ul ul ul :hover {
 	background: #03e9f4;
 }
 
-body {
-	color: white
-}
+ 
 
 .menu-horizontal>li:hover>a {
 	background-color: #03e9f4;

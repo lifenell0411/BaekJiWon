@@ -59,7 +59,7 @@ public class Rq {
 
 	public void printHitoryBackJs(String msg) throws IOException {
 		resp.setContentType("text/html; charset=UTF-8");
-		print(Ut.jsHitoryBack("F-B", msg));
+		print(Ut.jsHistoryBack("F-B", msg));
 	}
 
 	public void print(String str) {
@@ -89,8 +89,8 @@ public class Rq {
 
 	}
 
-	public String jsHitoryBack(String resultCode, String msg) {
-		return Ut.jsHitoryBack(resultCode, msg);
+	public String jsHistoryBack(String resultCode, String msg) {
+		return Ut.jsHistoryBack(resultCode, msg);
 	}
 
 	public String jsReplace(String msg, String uri) {
@@ -131,6 +131,10 @@ public class Rq {
 		print(Ut.jsReplace(msg, replaceUri));
 	}
 
+	public String getJoinUri() {
+		return "../member/join?afterLoginUri=" + getAfterLoginUri();
+	}
+
 	public String getLoginUri() {
 		return "../member/login?afterLoginUri=" + getAfterLoginUri();
 	}
@@ -166,5 +170,9 @@ public class Rq {
 
 	public String getEncodedCurrentUri() {
 		return Ut.getEncodedCurrentUri(getCurrentUri());
+	}
+
+	public String getArticleDetailUriFromArticleList(Article article) {
+		return "../article/detail?id=" + article.getId() + "&listUri=" + getEncodedCurrentUri();
 	}
 }
