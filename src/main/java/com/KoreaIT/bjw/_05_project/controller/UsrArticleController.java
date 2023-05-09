@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.KoreaIT.bjw._05_project.service.ArticleService;
 import com.KoreaIT.bjw._05_project.service.BoardService;
 import com.KoreaIT.bjw._05_project.service.ReactionPointService;
+import com.KoreaIT.bjw._05_project.service.ReplyService;
 import com.KoreaIT.bjw._05_project.util.Ut;
 import com.KoreaIT.bjw._05_project.vo.Article;
 import com.KoreaIT.bjw._05_project.vo.Board;
+import com.KoreaIT.bjw._05_project.vo.Reply;
 import com.KoreaIT.bjw._05_project.vo.ResultData;
 import com.KoreaIT.bjw._05_project.vo.Rq;
 
@@ -26,6 +28,8 @@ public class UsrArticleController {
 	private ArticleService articleService;
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private ReplyService replyService;
 	@Autowired
 	private Rq rq;
 	@Autowired
@@ -158,6 +162,12 @@ public class UsrArticleController {
 		ResultData actorCanMakeReactionRd = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(),
 				"article", id);
 
+		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id);
+
+		int repliesCount = replies.size();
+
+		model.addAttribute("repliesCount", repliesCount);
+		model.addAttribute("replies", replies);
 		model.addAttribute("article", article);
 		model.addAttribute("actorCanMakeReactionRd", actorCanMakeReactionRd);
 		model.addAttribute("actorCanMakeReaction", actorCanMakeReactionRd.isSuccess());

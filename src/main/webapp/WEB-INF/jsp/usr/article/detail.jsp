@@ -37,26 +37,6 @@
 	})
 </script>
 
-<script type="text/javascript">
-	let ReplyWrite__submitFormDone = false;
-
-	function ReplyWrite__submitForm(form) {
-		if (ReplyWrite__submitFormDone) {
-			return;
-		}
-		form.body.value = form.body.value.trim();
-
-		if (form.body.value.length < 3) {
-			alert('3글자 이상 입력하세요');
-			form.body.focus();
-			return;
-		}
-
-		ReplyWrite__submitFormDone = true;
-		form.submit();
-
-	}
-</script>
 
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
@@ -173,6 +153,29 @@
 	</div>
 </section>
 
+<!-- 댓글 관련 -->
+<script type="text/javascript">
+	let ReplyWrite__submitFormDone = false;
+
+	function ReplyWrite__submitForm(form) {
+		if (ReplyWrite__submitFormDone) {
+			return;
+		}
+		form.body.value = form.body.value.trim();
+
+		if (form.body.value.length < 3) {
+			alert('3글자 이상 입력하세요');
+			form.body.focus();
+			return;
+		}
+
+		ReplyWrite__submitFormDone = true;
+		form.submit();
+
+	}
+</script>
+
+
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
@@ -206,13 +209,65 @@
 				</form>
 			</c:if>
 			<c:if test="${rq.notLogined }">
-				<a class="btn-text-link btn btn-active btn-ghost" href="/usr/member/login">로그인</a> 후 이용해줘
+				<a class="btn-text-link btn btn-active btn-ghost" href="/usr/member/login">로그인</a> 하고 해라
 			</c:if>
 		</div>
 
 	</div>
 </section>
+<section class="mt-5">
+	<div class="container mx-auto px-3">
+		<h1 class="text-3xl">댓글 리스트(${repliesCount })</h1>
+		<table class="table table-zebra w-full">
+			<colgroup>
+				<col width="70" />
+				<col width="100" />
+				<col width="100" />
+				<col width="50" />
+				<col width="140" />
+				<col width="50" />
+				<col width="50" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>날짜</th>
+					<th>작성자</th>
+					<th>추천</th>
+					<th>내용</th>
+					<th>수정</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
 
+			<tbody>
+				<c:forEach var="reply" items="${replies }">
+					<tr class="hover">
+						<td>
+							<div class="badge">${reply.id}</div>
+						</td>
+						<td>${reply.getForPrintRegDateType1()}</td>
+						<td>${reply.extra__writer}</td>
+						<td>${reply.goodReactionPoint}</td>
+						<td align="left">${reply.body}</td>
+						<td>
+							<c:if test="${reply.actorCanModify }">
+								<a class="btn-text-link btn btn-active btn-ghost" href="../reply/modify?id=${reply.id }">수정</a>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${reply.actorCanDelete }">
+								<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
+									href="../reply/doDelete?id=${reply.id }">삭제</a>
+							</c:if>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+
+		</table>
+	</div>
+</section>
 
 
 <%@ include file="../common/foot.jspf"%>

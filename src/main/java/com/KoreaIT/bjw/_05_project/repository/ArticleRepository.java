@@ -83,6 +83,17 @@ public interface ArticleRepository {
 
 	public void deleteArticle(int id);
 
+	@Update("""
+			<script>
+			UPDATE article
+			<set>
+				<if test="title != null and title != ''">title = #{title},</if>
+				<if test="body != null and body != ''">`body` = #{body},</if>
+				updateDate= NOW()
+			</set>
+			WHERE id = #{id}
+			</script>
+			""")
 	public void modifyArticle(int id, String title, String body);
 
 	public int getLastInsertId();
