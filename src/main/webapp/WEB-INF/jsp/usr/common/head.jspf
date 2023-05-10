@@ -21,7 +21,7 @@
 <script src="/resource/common.js" defer="defer"></script>
 </head>
 <body>
-
+ <div class="background">
 	<header>
 		<div class="menu-icon">
 			<span class="menu-icon__line menu-icon__line-left"></span>
@@ -72,22 +72,43 @@
 							</li>
 						</ul>
 					</li>
+					<c:if test="${!rq.isLogined() }">
+						<li class="nav__list-item">
+							<a href="/usr/member/login"> LOGIN </a>
+						</li>
+						
+					
 
+					
+					</c:if>
+					<c:if test="${rq.isLogined() }">
+						<li class="nav__list-item">
+							<a href="/usr/member/myPage"> MYPAGE </a>
+						</li>
+					</c:if>
+					<c:if test="${rq.isLogined() }">
+						<li class="nav__list-item">
+							<a href="/usr/member/doLogout"> LOGOUT </a>
+						</li>
+					</c:if>
 				</ul>
 			</div>
 		</nav>
+		</div>
 	</header>
 
 	<style>
 body {
-	background-color: #1e2023;
+	background: radial-gradient(ellipse farthest-corner at center bottom, #6beace, #2e9aa4);
+   height: 100%;
+  margin: 0;
+  
 	font-family: "Fira Sans", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
- 
- 
+/* 메뉴아이콘 햄버거 */
 .menu-icon {
 	height: 30px;
 	width: 30px;
@@ -129,9 +150,8 @@ body {
 	background: rgba(234, 234, 234, 0.2);
 	z-index: -1;
 	transition: transform cubic-bezier(0.77, 0, 0.175, 1) 0.8s;
-	transform: translateX(0%) translateY(-100%);
+	transform: translateX(0%) translateY(-200%);
 }
- 
 
 .nav:after { /*위에서 내려오는 하얀 바 */
 	background: white;
@@ -162,7 +182,7 @@ body {
 	height: 100%;
 	margin-top: 120px;
 }
-
+/*1차메뉴*/
 .nav__list-item {
 	position: relative; /* 추가 */
 	display: inline-block;
@@ -173,21 +193,16 @@ body {
 	margin-right: 100px;
 	margin-top: 75px;
 }
-
+/*1차메뉴 마우스오버시 2차메뉴 */
 .nav__list-item:hover .nav__sub-menu {
 	opacity: 1;
 	visibility: visible;
 	transform: translateY(0);
 	z-index: 0;
- 
-	 
 	transition: opacity 0.2s ease, transform 0.3s ease;
- 
 	background-color: white;
 }
 
-
- 
 
 
 .nav__sub-menu {
@@ -208,12 +223,15 @@ body {
 	top: 20%;
 	transform: translate(0%, 0%);
 	transition: all 0.3s ease;
-	z-index: -1;
+	z-index: 1; /* 수정된 부분 */
 }
 
-.nav__list-item:hover:before { /* 줄길이 */
+ 
+.nav__list-item:hover:before,
+.nav__sub-menu:hover:before { /* 수정된 부분 */
 	width: 85px;
 }
+
 
 body.nav-active .menu-icon__line {
 	background-color: #000;
@@ -269,8 +287,6 @@ body.nav-active .nav__list-item:nth-child(3) {
 body.nav-active .nav__list-item:nth-child(4) {
 	transition-delay: 0.9s;
 }
-
- 
 </style>
 	<script>console.clear();
 

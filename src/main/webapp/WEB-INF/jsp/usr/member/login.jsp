@@ -4,54 +4,65 @@
 <%@ include file="../common/head.jspf"%>
 <hr />
 
-
-<div class="login-box">
-	<h2>Login</h2>
-	<form action="../member/doLogin" method="POST">
-		<input type="hidden" name="afterLoginUri" value="${param.afterLoginUri }" />
-		<div class="user-box">
-			<input type="text" name="loginId" required="">
-			<label>LoginId</label>
-		</div>
-		<div class="user-box">
-			<input type="password" name="loginPw" required="">
-			<label>Password</label>
-		</div>
-		<button type="submit">Submit</button>
-	</form>
-</div>
-
-</form>
+<div class="container">
+	<div class="login-box">
+		<h2>Login</h2>
+		<form action="../member/doLogin" method="POST">
+			<input type="hidden" name="afterLoginUri" value="${param.afterLoginUri }" />
+			<div class="user-box">
+				<input type="text" name="loginId" required="" autocomplete="off">
+				<label>LoginId</label>
+			</div>
+			<div class="user-box">
+				<input type="password" name="loginPw" required="" autocomplete="off">
+				<label>Password</label>
+			</div>
+			<button type="submit">Login</button>
+		</form>
+	</div>
 </div>
  
-</div>
-</section>
+ 
+
 
 
 <style>
-html {
-	height: 100%;
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
 body {
-	margin: 0;
-	padding: 0;
-	font-family: sans-serif;
-	background: linear-gradient(black, #243b55);
+  height: 100%;
+  margin: 0;
+  font-family: "Fira Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: radial-gradient(ellipse farthest-corner at center bottom, #6beace, #2e9aa4);
+  background-attachment: fixed;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+  position: relative;
+  top: calc(50vh - 150px); /* 로그인박스 높이의 절반인 150px만큼 상위 요소 중앙 위치에서 아래로 이동 */
 }
 
 .login-box {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 400px;
-	padding: 40px;
-	transform: translate(-50%, -50%);
-	background: rgba(0, 0, 0, 0.5);
-	box-sizing: border-box;
-	box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
-	border-radius: 10px;
+
+  width: 400px;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  position: relative;
+  margin: 0 auto; /* 로그인박스 가운데 정렬 */
+  margin-top: 200px;
+  transform: translate(-10%, -30%);
 }
+
 
 .login-box h2 {
 	margin: 0 0 30px;
@@ -88,7 +99,7 @@ body {
 }
 
 .login-box .user-box input:focus ~ label, .login-box .user-box input:valid 
-	~ label {
+	 ~ label {
 	top: -20px;
 	left: 0;
 	color: #03e9f4;
@@ -121,18 +132,8 @@ body {
 		100px #03e9f4;
 }
 
-.login-box button span {
-	position: absolute;
-	display: block;
-}
-
-.login-box button span:nth-child(1) {
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 2px;
-	background: linear-gradient(90deg, transparent, #03e9f4);
-	animation: btn-anim1 1s linear infinite;
+ 
+ 
 }
 </style>
 <%@ include file="../common/foot.jspf"%>

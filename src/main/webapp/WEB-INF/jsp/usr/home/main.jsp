@@ -3,11 +3,11 @@
 <c:set var="pageTitle" value="MAIN" />
 <%@ include file="../common/head.jspf"%>
 <hr />
- <div class = "main"></div>
  
+      
  <style>
-  .main{
-  top: 100px;
-  background-color: black;}
+ body {
+   background: radial-gradient(ellipse farthest-corner at center bottom, #6beace, #2e9aa4);
+    height: 700px; /* 높이 */
  </style>
 <%@ include file="../common/foot.jspf"%>
