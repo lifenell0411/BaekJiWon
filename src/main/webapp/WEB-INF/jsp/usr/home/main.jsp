@@ -3,5 +3,11 @@
 <c:set var="pageTitle" value="MAIN" />
 <%@ include file="../common/head.jspf"%>
 <hr />
+ <div class = "main"></div>
  
+ <style>
+  .main{
+  top: 100px;
+  background-color: black;}
+ </style>
 <%@ include file="../common/foot.jspf"%>
