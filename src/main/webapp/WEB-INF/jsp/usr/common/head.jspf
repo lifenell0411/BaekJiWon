@@ -121,24 +121,19 @@ body {
 	z-index: 1;
 }
 
-.nav:before, .nav:after {
+.nav:before, .nav:after { /*하얀바 높이조정*/
 	content: "";
 	position: fixed;
 	width: 100vw;
-	height: 100px;
+	height: 280px;
 	background: rgba(234, 234, 234, 0.2);
 	z-index: -1;
 	transition: transform cubic-bezier(0.77, 0, 0.175, 1) 0.8s;
 	transform: translateX(0%) translateY(-100%);
 }
+ 
 
-.nav__list-sub > li{
-display: block;
-
-	
-}
-
-.nav:after {
+.nav:after { /*위에서 내려오는 하얀 바 */
 	background: white;
 	transition-delay: 0s;
 }
@@ -184,11 +179,16 @@ display: block;
 	visibility: visible;
 	transform: translateY(0);
 	z-index: 0;
-	background: #ffffff;
-	padding: 0px;
+ 
+	 
 	transition: opacity 0.2s ease, transform 0.3s ease;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+ 
+	background-color: white;
 }
+
+
+ 
+
 
 .nav__sub-menu {
 	opacity: 0;
