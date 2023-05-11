@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.bjw._05_project.service.ArticleService;
 import com.KoreaIT.bjw._05_project.service.BoardService;
+import com.KoreaIT.bjw._05_project.service.DesignService;
+import com.KoreaIT.bjw._05_project.service.LikePointService;
 import com.KoreaIT.bjw._05_project.service.ReactionPointService;
 import com.KoreaIT.bjw._05_project.service.ReplyService;
 import com.KoreaIT.bjw._05_project.util.Ut;
@@ -29,12 +31,16 @@ public class UsrArticleController {
 	@Autowired
 	private BoardService boardService;
 	@Autowired
+	private DesignService designService;
+	@Autowired
 	private ReplyService replyService;
 	@Autowired
 	private Rq rq;
 	@Autowired
 	private ReactionPointService reactionPointService;
-
+	@Autowired
+	private LikePointService likePointService;
+	
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
 			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,

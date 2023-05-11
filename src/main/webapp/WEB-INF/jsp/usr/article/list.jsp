@@ -3,25 +3,7 @@
 <c:set var="pageTitle" value="${board.code}" />
 <%@ include file="../common/head.jspf"%>
 <hr />
-  <div class="background"></div>
-  <style>
-		body {
-				height: 100%;
-				margin: 0;
-			 
-				font-family: "Fira Sans", sans-serif;
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
-				background: radial-gradient(ellipse farthest-corner at center bottom, #6beace, #2e9aa4);
-			}
-.container {
-  max-width: 960px;
-  margin: auto;
-  margin-top: calc(50vh + 150px);
-  transform: translateY(-50%);
-}
- 
-		</style>
+  
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">

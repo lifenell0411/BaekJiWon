@@ -1,4 +1,4 @@
-@font-face {
+ @font-face {
 	font-family: 'LotteMartDream';
 	font-style: normal;
 	font-weight: 400;
@@ -52,6 +52,7 @@ html>body .toastui-editor-contents, html>body .ProseMirror, html>body .toastui-e
 html>body {
 	font-family: 'LotteMartDream', sans-serif;
 }
+
 /* 커스텀 */
 .table-box-type-1 thead th, .table-box-type-1 tbody th,
 	.table-box-type-1 td {

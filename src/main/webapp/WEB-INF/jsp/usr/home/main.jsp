@@ -7,7 +7,7 @@
       
  <style>
  body {
-   background: radial-gradient(ellipse farthest-corner at center bottom, #6beace, #2e9aa4);
-    height: 700px; /* 높이 */
+   background-color: #FDE2F3;
+    height: 705px; /* 높이 */}
  </style>
 <%@ include file="../common/foot.jspf"%>

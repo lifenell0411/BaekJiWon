@@ -6,54 +6,81 @@
 <hr />
 
 <section class="mt-8 text-xl">
-	<div class="container mx-auto px-3">
-		<div class="table-box-type-1">
-			<table border="1">
-				<colgroup>
-					<col width="200" />
-				</colgroup>
+<div class="container mx-auto px-3 d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="table-box-type-1">
+        <table border="1">
+            <colgroup>
+                <col width="200" />
+            </colgroup>
 
-				<tbody>
-					<tr>
-						<th>가입일</th>
-						<td>${rq.loginedMember.regDate }</td>
-					</tr>
-					<tr>
-						<th>아이디</th>
-						<td>${rq.loginedMember.loginId }</td>
-					</tr>
-					<tr>
-						<th>이름</th>
-						<td>${rq.loginedMember.name }</td>
-					</tr>
-					<tr>
-						<th>닉네임</th>
-						<td>${rq.loginedMember.nickname }</td>
-					</tr>
-					<tr>
-						<th>전화번호</th>
-						<td>${rq.loginedMember.cellphoneNum }</td>
-					</tr>
-					<tr>
-						<th>이메일</th>
-						<td>${rq.loginedMember.email }</td>
-					</tr>
-					<tr>
-						<th></th>
-						<td>
-							<a href="../member/checkPw?replaceUri=${Ut.getEncodedUri('../member/modify') }" class="btn btn-active btn-ghost">회원정보
-								수정</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="btns">
-			<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
+            <tbody>
+                <tr>
+                    <th>가입일</th>
+                    <td>${rq.loginedMember.regDate }</td>
+                </tr>
+                <tr>
+                    <th>아이디</th>
+                    <td>${rq.loginedMember.loginId }</td>
+                </tr>
+                <tr>
+                    <th>이름</th>
+                    <td>${rq.loginedMember.name }</td>
+                </tr>
+                <tr>
+                    <th>닉네임</th>
+                    <td>${rq.loginedMember.nickname }</td>
+                </tr>
+                <tr>
+                    <th>전화번호</th>
+                    <td>${rq.loginedMember.cellphoneNum }</td>
+                </tr>
+                <tr>
+                    <th>이메일</th>
+                    <td>${rq.loginedMember.email }</td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <a href="../member/checkPw?replaceUri=${Ut.getEncodedUri('../member/modify') }" class="btn btn-active btn-ghost">회원정보 수정</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-
-		</div>
-	</div>
 </section>
+
+<style>
+
+ table {
+  border-spacing: 0;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border: none;
+}
+
+th, td {
+  border: none;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #917FB3;
+  font-weight: bold;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: white;
+}
+
+tr:nth-child(odd) {
+  background-color: white;
+}
+
+</style>
 
 <%@ include file="../common/foot.jspf"%>

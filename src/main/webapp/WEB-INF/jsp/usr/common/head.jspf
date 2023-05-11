@@ -17,304 +17,591 @@
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
+
+<!-- 부트스트랩 CSS 파일 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!-- 부트스트랩 JavaScript 파일 -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNSfkdB"
+  crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+  crossorigin="anonymous"></script>
+
+
+
 <link rel="stylesheet" href="/resource/common.css" />
 <script src="/resource/common.js" defer="defer"></script>
 </head>
 <body>
- <div class="background">
+
+
 	<header>
-		<div class="menu-icon">
-			<span class="menu-icon__line menu-icon__line-left"></span>
-			<span class="menu-icon__line"></span>
-			<span class="menu-icon__line menu-icon__line-right"></span>
-		</div>
-		<nav class="nav">
-			<div class="nav__content">
-				<ul class="nav__list">
-					<li class="nav__list-item">
-						<a href="/">Home</a>
-					</li>
-					<li class="nav__list-item">
-						<a href="/">About</a>
-					</li>
-					<li class="nav__list-item">
-						<a href="/usr/article/list">Menu</a>
-						<ul class="nav__list-sub">
-							<li>
-								<a class="nav__sub-menu" href="/">레터링</a>
-							</li>
-							<li>
-								<a class="nav__sub-menu" href="/">미니타투</a>
-							</li>
-							<li>
-								<a class="nav__sub-menu" href="/">블랙워크</a>
-							</li>
-							<li>
-								<a class="nav__sub-menu" href="/">ETC</a>
-							</li>
-						</ul>
-					</li>
-
-					<li class="nav__list-item">
-						<a href="/usr/article/list">Notice</a>
-						<ul class="nav__list-sub">
-							<li>
-								<a class="nav__sub-menu" href="/usr/article/list?boardId=1">공지사항</a>
-							</li>
-							<li>
-								<a class="nav__sub-menu" href="/usr/article/list?boardId=2">자유게시판</a>
-							</li>
-							<li>
-								<a class="nav__sub-menu" href="/">타투후기</a>
-							</li>
-							<li>
-								<a class="nav__sub-menu" href="/usr/article/list?boardId=3">QnA</a>
-							</li>
-						</ul>
-					</li>
-					<c:if test="${!rq.isLogined() }">
-						<li class="nav__list-item">
-							<a href="/usr/member/login"> LOGIN </a>
-						</li>
-						
-					
-
-					
-					</c:if>
-					<c:if test="${rq.isLogined() }">
-						<li class="nav__list-item">
-							<a href="/usr/member/myPage"> MYPAGE </a>
-						</li>
-					</c:if>
-					<c:if test="${rq.isLogined() }">
-						<li class="nav__list-item">
-							<a href="/usr/member/doLogout"> LOGOUT </a>
-						</li>
-					</c:if>
-				</ul>
-			</div>
-		</nav>
-		</div>
-	</header>
-
-	<style>
-body {
-	background: radial-gradient(ellipse farthest-corner at center bottom, #6beace, #2e9aa4);
-   height: 100%;
-  margin: 0;
-  
-	font-family: "Fira Sans", sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-/* 메뉴아이콘 햄버거 */
-.menu-icon {
-	height: 30px;
-	width: 30px;
-	position: fixed;
-	z-index: 2;
-	left: 50px;
-	top: 30px;
-	cursor: pointer;
-}
-
-.menu-icon__line {
-	height: 2px;
-	width: 30px;
-	display: block;
-	background-color: #ffffff;
-	margin-bottom: 4px;
-	transition: transform 0.2s ease, background-color 0.5s ease;
-}
-
-.menu-icon__line-left {
-	width: 15px;
-}
-
-.menu-icon__line-right {
-	width: 15px;
-	float: right;
-}
-
-.nav {
-	position: fixed;
-	z-index: 1;
-}
-
-.nav:before, .nav:after { /*하얀바 높이조정*/
-	content: "";
-	position: fixed;
-	width: 100vw;
-	height: 280px;
-	background: rgba(234, 234, 234, 0.2);
-	z-index: -1;
-	transition: transform cubic-bezier(0.77, 0, 0.175, 1) 0.8s;
-	transform: translateX(0%) translateY(-200%);
-}
-
-.nav:after { /*위에서 내려오는 하얀 바 */
-	background: white;
-	transition-delay: 0s;
-}
-
-.nav:before {
-	transition-delay: 0.1s;
-}
-
-.nav__content {
-	position: fixed;
-	top: 5%;
-	transform: translate(0%, -50%);
-	width: 100%;
-	text-align: center;
-	font-size: 30px;
-	font-weight: 200;
-	cursor: pointer;
-}
-
-.nav__list {
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: space-around;
-	left: 100px;
-	height: 100%;
-	margin-top: 120px;
-}
-/*1차메뉴*/
-.nav__list-item {
-	position: relative; /* 추가 */
-	display: inline-block;
-	transition-delay: 0.8s;
-	opacity: 0;
-	transform: translate(0%, 100%);
-	transition: opacity 0.2s ease, transform 0.3s ease;
-	margin-right: 100px;
-	margin-top: 75px;
-}
-/*1차메뉴 마우스오버시 2차메뉴 */
-.nav__list-item:hover .nav__sub-menu {
-	opacity: 1;
-	visibility: visible;
-	transform: translateY(0);
-	z-index: 0;
-	transition: opacity 0.2s ease, transform 0.3s ease;
-	background-color: white;
-}
-
-
-
-.nav__sub-menu {
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 0.2s ease, transform 0.3s ease;
-	left: 100%;
-	width: 100%;
-	padding: 0;
-}
-
-.nav__list-item:before {
-	content: "";
-	position: absolute;
-	background: #000000;
-	width: 20px;
-	height: 1px;
-	top: 20%;
-	transform: translate(0%, 0%);
-	transition: all 0.3s ease;
-	z-index: 1; /* 수정된 부분 */
-}
-
+	<div class="top-bar">
+		<div class="con height-100p flex flex-jc-sa">
+			<a href="/" class="logo flex flex-ai-c">
+			 문신사
+			</a>
  
-.nav__list-item:hover:before,
-.nav__sub-menu:hover:before { /* 수정된 부분 */
-	width: 85px;
+			<nav class="menu-box-1">
+				<div class="bg"></div>
+				<ul class="height-100p flex">
+					<li>
+						<a href="/" class="flex flex-ai-c height-100p">HOME</a>
+
+					</li>
+					<li>
+						<a href="#" class="flex flex-ai-c height-100p">ABOUT</a>
+
+					</li>
+					<li>
+						<a href="article/" class="flex flex-ai-c height-100p">타투도안</a>
+						<ul>
+							<li>
+								<a href="#">레터링</a>
+							</li>
+							<li>
+								<a href="#">미니타투</a>
+							</li>
+							<li>
+								<a href="#">블랙워크</a>
+							</li>
+							<li>
+								<a href="#">ETC</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#" class="flex flex-ai-c height-100p">게시판</a>
+						<ul>
+							<li>
+								<a href="#">NOTICE</a>
+							</li>
+							<li>
+								<a href="#">FREE</a>
+							</li>
+							<li>
+								<a href="#">QnA</a>
+							</li>
+							<li>
+								<a href="#">타투후기</a>
+							</li>
+							 
+						</ul>
+					</li>
+					<li>
+						<a href="/usr/article/write" class="flex flex-ai-c height-100p">WRITE</a>
+						 
+					</li>
+					
+					<c:if test="${!rq.isLogined() }">
+					<li>
+						<a href="/usr/member/login" class="flex flex-ai-c height-100p">
+							<span>LOGIN</span>
+						</a>
+					</li>
+				</c:if>
+				
+				<c:if test="${rq.isLogined() }">
+					<li class="hover:underline">
+						<a class="flex flex-ai-c height-100p"  href="/usr/member/myPage">
+							<span>MYPAGE</span>
+						</a>
+					</li>
+				</c:if>
+				
+				<c:if test="${rq.isLogined() }">
+					<li>
+						<a  href="/usr/member/doLogout" class="flex flex-ai-c height-100p">
+							<span>LOGOUT</span>
+						</a>
+					</li>
+				</c:if>
+				
+				<c:if test="${!rq.logined}">
+					<li >
+						<a class="flex flex-ai-c height-100p" href="${rq.joinUri }">
+							<span>JOIN</span>
+						</a>
+					</li>
+				</c:if>
+				
+				</ul>
+			</nav>
+		</div>
+	</div>
+	</header>
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+html {
+  /* 영문이면 roboto가 적용되고, 한글이면 Noto Sans KR가 적용되도록 아래와 같은 순서로 배치 */
+  font-family: "Roboto", "Noto Sans KR", sans-serif;
+}
+
+/* 노말라이즈 */
+body,
+ul,
+li,
+h1 {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+label[for] {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 라이브러리 */
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.absolute-left {
+  position: absolute;
+  left: 0;
+}
+
+.absolute-right {
+  position: absolute;
+  right: 0;
+}
+
+.absolute-bottom {
+  position: absolute;
+  bottom: 0;
+}
+
+.absolute-top {
+  position: absolute;
+  top: 0;
+}
+
+.absolute-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.absolute-middle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.absolute-middle.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.relative {
+  position: relative;
+}
+
+.cell {
+  float: left;
+  box-sizing: border-box;
+}
+
+.cell-right {
+  float: right;
+  box-sizing: border-box;
+}
+
+.row::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.clear-both {
+  clear: both;
+}
+
+.img-box > img {
+  width: 100%;
+  display: block;
+}
+
+.con {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.margin-0-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.line-height-0 {
+  line-height: 0;
+}
+
+.line-height-0 > * {
+  line-height: normal;
+}
+
+.width-30px {
+  width: 30px;
+}
+
+.width-35px {
+  width: 35px;
+}
+
+.width-40px {
+  width: 35px;
+}
+
+.width-45px {
+  width: 35px;
+}
+
+.width-50px {
+  width: 50px;
+}
+
+.width-80px {
+  width: 80px;
+}
+
+.width-100px {
+  width: 100px;
+}
+
+.width-100p {
+  width: 100%;
+}
+
+.width-60p {
+  width: 60%;
+}
+
+.width-55p {
+  width: 55%;
+}
+
+.width-50p {
+  width: 50%;
+}
+
+.width-45p {
+  width: 45%;
+}
+
+.width-40p {
+  width: 40%;
+}
+
+.width-30p {
+  width: 30%;
+}
+
+.width-35p {
+  width: 35%;
+}
+
+.width-100p-except-30px {
+  width: calc(100% - 30px);
+}
+
+.width-100p-except-35px {
+  width: calc(100% - 35px);
+}
+
+.width-100p-except-40px {
+  width: calc(100% - 40px);
+}
+
+.width-100p-except-50px {
+  width: calc(100% - 50px);
+}
+
+.width-100p-except-80px {
+  width: calc(100% - 80px);
+}
+
+.width-100p-except-100px {
+  width: calc(100% - 100px);
+}
+
+.height-100p {
+  height: 100%;
+}
+
+.height-50p {
+  height: 50%;
+}
+
+.border-box {
+  box-sizing: border-box;
+}
+
+.font-size-dot-8rem {
+  font-size: 0.8rem;
+}
+
+.table-row {
+  display: table;
+}
+
+.table-row.row::after {
+  display: inline;
+  clear: non;
+}
+
+.table-row > .cell {
+  float: none;
+  display: table-cell;
+}
+
+.border-red {
+  border: 10px solid red;
+}
+
+.border-green {
+  border: 10px solid green;
+}
+
+.border-blue {
+  border: 10px solid blue;
+}
+
+.border-gold {
+  border: 10px solid gold;
+}
+
+.border-pink {
+  border: 10px solid pink;
+}
+
+/* 라이브러리 - flex */
+* > .flex {
+  display: flex;
+}
+
+* > .flex-grow-1 {
+  flex-grow: 1;
+}
+
+* > .flex-jc-c {
+  justify-content: center;
+}
+
+* > .flex-jc-s {
+  justify-content: flex-start;
+}
+
+* > .flex-jc-e {
+  justify-content: flex-end;
+}
+
+* > .flex-jc-sb {
+  justify-content: space-between;
+}
+
+* > .flex-jc-sa {
+  justify-content: space-around;
+}
+
+* > .flex-ai-c {
+  align-items: center;
+}
+
+* > .flex-ai-s {
+  align-items: flex-start;
+}
+
+* > .flex-ai-e {
+  align-items: flex-end;
+}
+
+* > .flex-as-s {
+  align-self: stretch;
+}
+
+* > .flex-as-c {
+  align-self: center;
+}
+
+* > .flex-as-s {
+  align-self: flex-start;
+}
+
+* > .flex-as-e {
+  align-self: flex-end;
+}
+
+* > .flex-column-nowrap {
+  flex-flow: column nowrap;
+}
+
+* > .flex-column-wrap {
+  flex-flow: column wrap;
+}
+
+* > .flex-row-wrap {
+  flex-flow: row wrap;
+}
+
+.flex-ch-basis-0 > * {
+  flex-basis: 0;
+}
+
+* > .flex-1-0-0 {
+  flex: 1 0 0;
+}
+
+* > .bg-red {
+  background-color: red;
+}
+
+/* 커스텀 */
+
+ body {
+   background-color: #FDE2F3;
+    height: 705px; /* 높이 */}
+
+.con {
+  max-width: 1140px;
+}
+
+body {
+  height: 10000px;
+}
+
+/* 탑바 */
+.top-bar {
+  height: 72px;
+  border-bottom: 1px solid #f4f4f4;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+    z-index: 1;
+}
+
+.top-bar > .con > .menu-box-1 > ul > li > a {
+  font-weight: bold;
+  color: #1e1e1e;
+  font-size: 17px;
+  padding: 0 15px;
+  position: relative;
+}
+
+.top-bar > .con > .menu-box-1 > ul > li > a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  background-color: black;
+  left: 0;
+  width: 0;
+  transition: width 0.3s;
+  height: 3px;
+}
+
+.top-bar > .con > .menu-box-1 > ul > li:hover > a::after {
+  width: 100%;
+}
+
+/* 2차메뉴 */
+.top-bar > .con > .menu-box-1 > ul > li {
+  position: relative;
+}
+
+.top-bar > .con > .menu-box-1 > ul > li > ul {
+  position: absolute;
+  left: 12px;
+  padding: 17px 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s;
+}
+
+.top-bar > .con > .menu-box-1 > ul > li:hover > ul {
+  visibility: visible;
+  opacity: 1;
+}
+
+.top-bar > .con > .menu-box-1 > ul > li > ul > li > a {
+  font-size: 17px;
+  color: #666666;
+  display: block;
+  padding: 10px 0;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.top-bar > .con > .menu-box-1 > ul > li > ul > li:hover > a {
+  color: #1e1e1e;
+}
+
+.top-bar > .con > .menu-box-1 > .bg {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  width: 100%;
+  height: 0;
+  transition: height 0.2s;
+}
+
+.page-1 {
+  margin-top: 72px;
 }
 
 
-body.nav-active .menu-icon__line {
-	background-color: #000;
-	transform: translateX(0px) rotate(-45deg);
-}
-
-body.nav-active .menu-icon__line-left {
-	transform: translateX(1px) rotate(45deg);
-}
-
-body.nav-active .menu-icon__line-right {
-	transform: translateX(-2px) rotate(45deg);
-}
-
-body.nav-active .nav {
-	visibility: visible;
-}
-
-body.nav-active .nav:before, body.nav-active .nav:after {
-	transform: translateX(0%) translateY(0%);
-}
-
-body.nav-active .nav:after {
-	transition-delay: 0.1s;
-}
-
-body.nav-active .nav:before {
-	transition-delay: 0s;
-}
-
-body.nav-active .nav__list-item {
-	opacity: 1;
-	transform: translateX(0%);
-	transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
-}
-
-body.nav-active .nav__list-item:nth-child(0) {
-	transition-delay: 0.5s;
-}
-
-body.nav-active .nav__list-item:nth-child(1) {
-	transition-delay: 0.6s;
-}
-
-body.nav-active .nav__list-item:nth-child(2) {
-	transition-delay: 0.7s;
-}
-
-body.nav-active .nav__list-item:nth-child(3) {
-	transition-delay: 0.8s;
-}
-
-body.nav-active .nav__list-item:nth-child(4) {
-	transition-delay: 0.9s;
-}
 </style>
-	<script>console.clear();
+	 
+	 
+	 <script>
+	 
+	 console.clear();
 
-const app = (() => {
-	let body;
-	let menu;
-	let menuItems;
-	
-	const init = () => {
-		body = document.querySelector('body');
-		menu = document.querySelector('.menu-icon');
-		menuItems = document.querySelectorAll('.nav__list-item');
+	 function TopBar__init() {
+	   $(".top-bar .menu-box-1 > ul > li").mouseenter(function () {
+	     var height = $(this).find("> ul").height();
 
-		applyListeners();
-	}
-	
-	const applyListeners = () => {
-		menu.addEventListener('click', () => toggleClass(body, 'nav-active'));
-	}
-	
-	const toggleClass = (element, stringClass) => {
-		if(element.classList.contains(stringClass))
-			element.classList.remove(stringClass);
-		else
-			element.classList.add(stringClass);
-	}
-	
-	init();
-})();
+	     $(".top-bar .menu-box-1 > .bg").css("height", height + 40 + "px");
+	   });
 
+	   $(".top-bar .menu-box-1 > ul > li").mouseleave(function () {
+	     $(".top-bar .menu-box-1 > .bg").css("height", 0 + "px");
+	   });
+	 }
+
+	 TopBar__init();
+
+	 // var onClickBtn = function () {
+	 //   var height = $(this).find(" > div").height();
+	 //   $(".box-2").css("height", height + "px");
+	 // };
+
+	 // $(".box-1 > .btns > li").mouseenter(onClickBtn);
 </script>

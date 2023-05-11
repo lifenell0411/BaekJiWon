@@ -60,7 +60,7 @@
 							<td>
 								<select class="select select-ghost w-full max-w-xs" name="boardId">
 									<!-- 									<option selected="selected" disabled>게시판을 선택해주세요</option> -->
-									<option value="1">공지사항</option>
+									<option value="4">타투후기</option>
 									<option value="2">자유</option>
 									<option value="3">QNA</option>
 								</select>

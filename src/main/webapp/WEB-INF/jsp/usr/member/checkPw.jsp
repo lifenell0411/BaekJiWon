@@ -5,44 +5,64 @@
 <hr />
 
 
-<section class="mt-8 text-xl">
-	<div class="container mx-auto px-3">
-		<div class="table-box-type-1">
-			<form action="../member/doCheckPw" method="POST">
-				<input type="hidden" name="replaceUri" value="${param.replaceUri }" />
-				<table border="1">
-					<colgroup>
-						<col width="200" />
-					</colgroup>
-
-					<tbody>
-						<tr>
-							<th>아이디</th>
-							<td>${rq.loginedMember.loginId }</td>
-						</tr>
-						<tr>
-							<th>비밀번호</th>
-							<td>
-								<input required="required" class="input input-bordered w-full max-w-xs" autocomplete="off" type="text"
-									placeholder="비밀번호를 입력해주세요" name="loginPw" />
-							</td>
-						</tr>
-						<tr>
-							<th></th>
-							<td>
-								<button type="submit">확인</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
-		</div>
-		<div class="btns">
-			<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
-
-
-		</div>
-	</div>
+<section>
+  <div class="container">
+    <div class="table-box-type-1">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">비밀번호 확인</h4>
+        </div>
+        <div class="card-body">
+          <form action="../member/doCheckPw" method="POST">
+            <input type="hidden" name="replaceUri" value="${param.replaceUri }" />
+            <div class="form-group">
+              <label for="loginPw" class="form-label">비밀번호</label>
+              <input required="required" class="form-control" autocomplete="off" type="text"
+                placeholder="비밀번호를 입력해주세요" name="loginPw" />
+            </div>
+            <button type="submit" class="btn-custom">확인</button>
+          </form>
+        </div>
+        <div class="card-footer text-muted">
+          <button class="btn-custom" type="button" onclick="history.back();">뒤로가기</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+
+<style>
+
+.btn-custom {
+  background-color: #917FB3;
+  color: white;
+  border: 2px solid #917FB3;
+  border-radius: 4px;
+  padding: 6px 12px;
+}
+
+.btn-custom:hover{
+}
+
+.card-header{
+ background-color: #917FB3;}
+ 
+ .card-footer{
+  background-color: #917FB3;
+ }
+.card-title{
+color: white;}
+     .table-box-type-1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+     
+    }
+ body {
+   background-color: #FDE2F3;
+    height: 705px; /* 높이 */}
+    
+</style>
 <%@ include file="../common/foot.jspf"%>

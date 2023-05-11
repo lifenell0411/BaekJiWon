@@ -27,6 +27,10 @@
 
 
 <style>
+
+ body {
+   background-color: #FDE2F3;
+    height: 705px; /* 높이 */}
 html, body {
   height: 100%;
   margin: 0;
@@ -38,7 +42,7 @@ body {
   font-family: "Fira Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: radial-gradient(ellipse farthest-corner at center bottom, #6beace, #2e9aa4);
+   
   background-attachment: fixed;
 }
 
@@ -59,7 +63,7 @@ body {
   border-radius: 10px;
   position: relative;
   margin: 0 auto; /* 로그인박스 가운데 정렬 */
-  margin-top: 200px;
+  margin-top: 100px;
   transform: translate(-10%, -30%);
 }
 
@@ -93,7 +97,7 @@ body {
 	left: 0;
 	padding: 10px 0;
 	font-size: 16px;
-	color: #fff;
+	color: #FDE2F3;
 	pointer-events: none;
 	transition: 0.5s;
 }
@@ -102,7 +106,7 @@ body {
 	 ~ label {
 	top: -20px;
 	left: 0;
-	color: #03e9f4;
+	color: #FDE2F3;
 	font-size: 12px;
 }
 
@@ -110,7 +114,7 @@ body {
 	position: relative;
 	display: inline-block;
 	padding: 10px 20px;
-	color: #03e9f4;
+	color: #FDE2F3;
 	font-size: 16px;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -119,17 +123,17 @@ body {
 	margin-top: 40px;
 	letter-spacing: 4px;
 	background: transparent;
-	border: 2px solid #03e9f4;
+	border: 2px solid #FDE2F3;
 	border-radius: 5px;
-	box-shadow: 0 0 5px #03e9f4;
+	box-shadow: 0 0 5px #FDE2F3;
 	cursor: pointer;
 }
 
 .login-box button:hover {
-	background: #03e9f4;
+	background: #FDE2F3;
 	color: #fff;
-	box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0
-		100px #03e9f4;
+	box-shadow: 0 0 5px #FDE2F3, 0 0 25px #FDE2F3, 0 0 50px #FDE2F3, 0 0
+		100px #FDE2F3;
 }
 
  

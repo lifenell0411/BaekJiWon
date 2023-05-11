@@ -102,68 +102,151 @@
 				<colgroup>
 					<col width="200" />
 				</colgroup>
-
 				<tbody>
 					<tr>
-						<th>아이디</th>
-						<td>
-							<input  name="loginId" class="w-full input input-bordered  max-w-xs"
-								placeholder="아이디를 입력해주세요"  autocomplete="off"  onblur="checkLoginIdDup(this)"/>
-						 
-							<div class="checkDup-msg" ></div>
+						<th style="background-color: #917FB3;">아이디</th>
+						<td style="background-color: white;">
+							<input name="loginId" class="w-full input input-bordered max-w-xs"
+								placeholder="아이디를 입력해주세요" autocomplete="off" onblur="checkLoginIdDup(this)" />
+							<div class="checkDup-msg"></div>
 						</td>
 					</tr>
 					<tr>
-						<th>비밀번호</th>
-						<td>
-							<input name="loginPw" class="w-full input input-bordered  max-w-xs" placeholder="비밀번호를 입력해주세요" />
+						<th style="background-color: #917FB3;">비밀번호</th>
+						<td style="background-color: white;">
+							<input name="loginPw" class="w-full input input-bordered max-w-xs"
+								placeholder="비밀번호를 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
-						<th>비밀번호 확인</th>
-						<td>
-							<input name="loginPwConfirm" class="w-full input input-bordered  max-w-xs" placeholder="비밀번호 확인을 입력해주세요" />
+						<th style="background-color: #917FB3;">비밀번호 확인</th>
+						<td style="background-color: white;">
+							<input name="loginPwConfirm" class="w-full input input-bordered max-w-xs"
+								placeholder="비밀번호 확인을 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
-						<th>이름</th>
-						<td>
-							<input name="name" class="w-full input input-bordered  max-w-xs" placeholder="이름을 입력해주세요" />
+						<th style="background-color: #917FB3;">이름</th>
+						<td style="background-color: white;">
+							<input name="name" class="w-full input input-bordered max-w-xs"
+								placeholder="이름을 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
-						<th>닉네임</th>
+						<th style="background-color: #917FB3;">닉네임</th>
 						<td>
-							<input name="nickname" class="w-full input input-bordered  max-w-xs" placeholder="닉네임을 입력해주세요" />
+							<input name="nickname" class="w-full input input-bordered max-w-xs"
+								placeholder="닉네임을 입력해주세요" />
+						</td>
+					</tr>
+					<tr >
+						<th style="background-color: #917FB3;">전화번호</th>
+						<td style="background-color: white;" >
+							<input name="cellphoneNum" class="w-full input input-bordered max-w-xs"
+								placeholder="전화번호를 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
-						<th>전화번호</th>
+						<th style="background-color: #917FB3;">이메일</th>
 						<td>
-							<input name="cellphoneNum" class="w-full input input-bordered  max-w-xs" placeholder="전화번호를 입력해주세요" />
+							<input name="email" class="w-full input input-bordered max-w-xs"
+								placeholder="이메일을 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
-						<th>이메일</th>
-						<td>
-							<input name="email" class="w-full input input-bordered  max-w-xs" placeholder="이메일을 입력해주세요" />
-						</td>
-					</tr>
-					<tr>
-						<th></th>
-						<td>
+						<th style="background-color: #917FB3;"></th>
+						<td style="background-color: white;">
 							<button class="btn btn-active btn-ghost" type="submit" value="회원가입">회원가입</button>
 						</td>
 					</tr>
 				</tbody>
-
 			</table>
+	 
 		</form>
 	</div>
 
-	<div class="container mx-auto btns">
-		<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
-	</div>
+ 
 
+<style>
+
+ body {
+  background-color: #FDE2F3;
+  height: 705px; /* 높이 */
+}
+
+.table-box-type-1 {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.table-box-type-1 table {
+  border-collapse: collapse;
+  width: 100%;
+  top: 100px;
+}
+
+.table-box-type-1 th,
+.table-box-type-1 td {
+  border: none;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+th {
+  background-color: #917FB3;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.table-box-type-1 input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.checkDup-msg {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #d64040;
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #f2f2f2;
+}
+
+.btn-active {
+  background-color: #917FB3;
+  color: #fff;
+  border-color: #917FB3;
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: #917FB3;
+}
+
+.btn-ghost:hover {
+  background-color: #f2f2f2;
+}
+ 
+
+</style>
 </section>
 <%@ include file="../common/foot.jspf"%>

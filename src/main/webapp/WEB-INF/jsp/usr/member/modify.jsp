@@ -62,8 +62,8 @@
 	}
 </script>
 
-<section class="mt-8 text-xl">
-	<div class="container mx-auto px-3">
+<section>
+	<div class="container">
 		<div class="table-box-type-1">
 			<form action="../member/doModify" method="POST" onsubmit="MemberModify__submit(this); return false;">
 				<table border="1">
@@ -141,4 +141,65 @@
 	</div>
 </section>
 
+
+<style>
+/* 테이블 전체 스타일 */
+table {
+
+
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px; /* 테이블의 최대 너비를 지정합니다 */
+  margin: 0 auto; /* 가운데 정렬 */
+  
+  margin-top: 100px;
+}
+
+/* 테이블 헤더 스타일 */
+th {
+  background-color: #917FB3; /* 배경색 추가 */
+  font-weight: bold; /* 굵은 글씨체로 설정 */
+  text-align: center; /* 가운데 정렬 */
+  padding: 10px; /* 셀 안의 내용과 경계선 사이의 간격을 지정합니다 */
+    color: white;
+}
+
+/* 테이블 셀 스타일 */
+td {
+  text-align: center; /* 가운데 정렬 */
+  padding: 10px; /* 셀 안의 내용과 경계선 사이의 간격을 지정합니다 */
+}
+
+/* 짝수 번째 행의 배경색을 변경합니다 */
+tr:nth-child(even) {
+  background-color: white;
+}
+
+/* 버튼 스타일 */
+button {
+  padding: 10px;
+  background-color: #FDE2F3;
+  color: black;
+  border: 1px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+   
+}
+
+btns{
+l200}
+
+/* 버튼 호버 스타일 */
+button:hover {
+  background-color: #FDE2F3;
+}
+table tr:nth-child(odd) {
+  background-color: white;
+}
+ body {
+   background-color: #FDE2F3;
+    height: 705px; /* 높이 */}
+
+
+</style>
 <%@ include file="../common/foot.jspf"%>
