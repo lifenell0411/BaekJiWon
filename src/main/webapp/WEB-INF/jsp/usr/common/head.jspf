@@ -63,33 +63,33 @@
 						<a href="article/" class="flex flex-ai-c height-100p">타투도안</a>
 						<ul>
 							<li>
-								<a href="#">레터링</a>
+								<a href="/usr/article/list?boardId=1">레터링</a>
 							</li>
 							<li>
-								<a href="#">미니타투</a>
+								<a href="/usr/article/list?boardId=2">미니타투</a>
 							</li>
 							<li>
-								<a href="#">블랙워크</a>
+								<a href="/usr/article/list?boardId=3">블랙워크</a>
 							</li>
 							<li>
-								<a href="#">ETC</a>
+								<a href="/usr/article/list?boardId=4">ETC</a>
 							</li>
 						</ul>
 					</li>
 					<li>
-						<a href="#" class="flex flex-ai-c height-100p">게시판</a>
+						<a href="/usr/article/list?boardId=5" class="flex flex-ai-c height-100p">게시판</a>
 						<ul>
 							<li>
-								<a href="#">NOTICE</a>
+								<a href="/usr/article/list?boardId=5">NOTICE</a>
 							</li>
 							<li>
-								<a href="#">FREE</a>
+								<a href="/usr/article/list?boardId=6">FREE</a>
 							</li>
 							<li>
-								<a href="#">QnA</a>
+								<a href="/usr/article/list?boardId=7">QnA</a>
 							</li>
 							<li>
-								<a href="#">타투후기</a>
+								<a href="/usr/article/list?boardId=8">타투후기</a>
 							</li>
 							 
 						</ul>

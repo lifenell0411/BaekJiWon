@@ -13,8 +13,9 @@ public class LikePointService {
 	private LikePointRepository likePointRepository;
 	@Autowired
 	private ArticleService articleService;
-
-	public ResultData actorCanMakeReaction(int actorId, String relTypeCode, int relId) {
+////////////////////////////////////////////////////////////////////////////////
+	
+	public ResultData actorCanMakeLike(int actorId, String relTypeCode, int relId) {
 		if (actorId == 0) {
 			return ResultData.from("F-1", "로그인 하고 오렴");
 		}

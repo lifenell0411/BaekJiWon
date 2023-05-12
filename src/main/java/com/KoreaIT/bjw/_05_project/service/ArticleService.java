@@ -9,7 +9,6 @@ import com.KoreaIT.bjw._05_project.repository.ArticleRepository;
 import com.KoreaIT.bjw._05_project.util.Ut;
 import com.KoreaIT.bjw._05_project.vo.Article;
 import com.KoreaIT.bjw._05_project.vo.ResultData;
-
 @Service
 public class ArticleService {
 
@@ -117,29 +116,7 @@ public class ArticleService {
 	public int getArticleHitCount(int id) {
 		return articleRepository.getArticleHitCount(id);
 	}
-///////////////찜하기
-	
-	public ResultData increaseLikePoint(int relId) {
-		int affectedRow = articleRepository.increaseLikePoint(relId);
 
-		if (affectedRow == 0) {
-			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
-		}
-		return ResultData.from("S-1", "찜하기 증가", "affectedRow", affectedRow);
-	}
-
-	
-	public ResultData decreaseLikePoint(int relId) {
-		int affectedRow = articleRepository.decreaseLikePoint(relId);
-
-		if (affectedRow == 0) {
-			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
-		}
-		return ResultData.from("S-1", "좋아요 감소", "affectedRow", affectedRow);
-	}
-	
-	//////////////////////////// 좋아요 싫어요
-	
 	public ResultData increaseGoodReationPoint(int relId) {
 		int affectedRow = articleRepository.increaseGoodReationPoint(relId);
 
@@ -178,4 +155,29 @@ public class ArticleService {
 
 	}
 
+	
+	////////////////////////////
+	
+	
+
+	public ResultData increaseLikePoint(int relId) {
+		int affectedRow = articleRepository.increaseLikePoint(relId);
+
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
+		}
+		return ResultData.from("S-1", "찜하기 증가", "affectedRow", affectedRow);
+	}
+	
+	
+	public ResultData decreaseLikePoint(int relId) {
+		int affectedRow = articleRepository.decreaseLikePoint(relId);
+
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
+		}
+		return ResultData.from("S-1", "찜하기 감소", "affectedRow", affectedRow);
+	}
+	
+	
 }

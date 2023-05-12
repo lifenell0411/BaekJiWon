@@ -20,7 +20,7 @@ public class UsrLikePointController {
 	@ResponseBody
 	public String doLikePoint(String relTypeCode, int relId, String replaceUri) {
 
-		ResultData actorCanMakeReactionRd = likePointService.actorCanMakeReaction(rq.getLoginedMemberId(),
+		ResultData actorCanMakeReactionRd = likePointService.actorCanMakeLike(rq.getLoginedMemberId(),
 				relTypeCode, relId);
 
 		if (actorCanMakeReactionRd.isFail()) {
@@ -40,13 +40,13 @@ public class UsrLikePointController {
 
 	@RequestMapping("/usr/likePoint/doCancelLikePoint")
 	@ResponseBody
-	public String doCancelGoodReaction(String relTypeCode, int relId, String replaceUri) {
+	public String doCancelLikePoint(String relTypeCode, int relId, String replaceUri) {
 
-		ResultData actorCanMakeReactionRd = likePointService.actorCanMakeReaction(rq.getLoginedMemberId(),
+		ResultData actorCanMakeLikePoint = likePointService.actorCanMakeLike(rq.getLoginedMemberId(),
 				relTypeCode, relId);
 
-		if (actorCanMakeReactionRd.isSuccess()) {
-			return rq.jsHitoryBackOnView(actorCanMakeReactionRd.getMsg());
+		if (actorCanMakeLikePoint.isSuccess()) {
+			return rq.jsHitoryBackOnView(actorCanMakeLikePoint.getMsg());
 		}
 
 		ResultData rd = likePointService.deleteLikePoint(rq.getLoginedMemberId(), relTypeCode, relId);

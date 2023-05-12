@@ -57,7 +57,7 @@ loginPw = 'admin',
 `name` = '관리자',
 `nickname` = '관리자',
 cellphoneNum = '01012341234',
-email = 'abcdef@gmail.com';
+email = 'lifenell4407@gmail.com';
 
 # 회원 테스트데이터 생성 (일반)
 INSERT INTO `member` 
@@ -102,6 +102,33 @@ CREATE TABLE board (
     delDate DATETIME COMMENT '삭제 날짜'
 );
 
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'LETTERRING',
+`name` = '레터링';
+
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'MINITATTOO',
+`name` = '미니타투';
+
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'BLACKWORK',
+`name` = '블랙워크';
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'ETC',
+`name` = 'ETC';
+
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -114,11 +141,26 @@ updateDate = NOW(),
 `code` = 'FREE',
 `name` = '자유';
 
+
+
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'QNA',
 `name` = '질의응답';
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'QNA',
+`name` = '질의응답';
+
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'REVIEW',
+`name` = '타투후기';
+
 
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER `memberId`;
 
@@ -129,6 +171,28 @@ WHERE id IN (1,2);
 UPDATE article
 SET boardId = 2
 WHERE id = 3;
+
+
+UPDATE article
+SET boardId = 4
+WHERE id = 3;
+
+UPDATE article
+SET boardId = 5
+WHERE id = 3;
+
+
+UPDATE article
+SET boardId = 6
+WHERE id = 3;
+
+
+UPDATE article
+SET boardId = 7
+WHERE id = 3;
+
+
+
 
 ALTER TABLE article ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
@@ -142,6 +206,20 @@ CREATE TABLE reactionPoint (
     relId INT(10) NOT NULL COMMENT '관련 데이터 번호',
     `point` INT(10) NOT NULL
 );
+
+
+
+# likePoint 테이블 생성
+CREATE TABLE likePoint (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    relTypeCode CHAR(50) NOT NULL COMMENT '관련 데이터 타입 코드',
+    relId INT(10) NOT NULL COMMENT '관련 데이터 번호',
+    `point` INT(10) NOT NULL
+);
+
 
 # reactionPoint 테스트 데이터
 # 1번 회원이 1번 글에 싫어요
@@ -189,9 +267,41 @@ relTypeCode = 'article',
 relId = 1,
 `point` = 1;
 
+#########################################################################
+
+## likePoint test
+
+INSERT INTO likePoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypeCode = 'article',
+relId = 1,
+`point` = 1;
+
+
+INSERT INTO likePoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypeCode = 'article',
+relId = 1,
+`point` = 1;
+
+INSERT INTO likePoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypeCode = 'article',
+relId = 1,
+`point` = 1;
+
+
 # 게시물 테이블에 추천 관련 컬럼 추가
 ALTER TABLE article ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 ALTER TABLE article ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+ALTER TABLE article ADD COLUMN likePoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
 # 기존 게시물의 good,bad ReactionPoint 필드의 값을 채운다
 UPDATE article AS A
@@ -266,6 +376,7 @@ SELECT * FROM article;
 SELECT * FROM `member`;
 SELECT * FROM board;
 SELECT * FROM reactionPoint;
+SELECT * FROM likePoint;
 SELECT * FROM `reply`;
 
 SELECT R.*, M.nickname AS extra__writer

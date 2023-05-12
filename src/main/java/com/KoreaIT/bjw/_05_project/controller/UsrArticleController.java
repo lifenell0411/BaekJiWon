@@ -168,6 +168,9 @@ public class UsrArticleController {
 		ResultData actorCanMakeReactionRd = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(),
 				"article", id);
 
+		ResultData actorCanMakeLikeRd = likePointService.actorCanMakeLike(rq.getLoginedMemberId(),
+				"article", id);
+		
 		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id);
 
 		int repliesCount = replies.size();
@@ -177,7 +180,9 @@ public class UsrArticleController {
 		model.addAttribute("article", article);
 		model.addAttribute("actorCanMakeReactionRd", actorCanMakeReactionRd);
 		model.addAttribute("actorCanMakeReaction", actorCanMakeReactionRd.isSuccess());
-
+		model.addAttribute("actorCanMakeLikeRd", actorCanMakeLikeRd);
+		model.addAttribute("actorCanMakeLike", actorCanMakeLikeRd.isSuccess());
+		
 		if (actorCanMakeReactionRd.getResultCode().equals("F-2")) {
 			int sumReactionPointByMemberId = (int) actorCanMakeReactionRd.getData1();
 
@@ -188,6 +193,18 @@ public class UsrArticleController {
 			}
 		}
 
+		
+		if (actorCanMakeLikeRd.getResultCode().equals("F-2")) {
+			int sumLikePointByMemberId = (int) actorCanMakeLikeRd.getData1();
+
+			if (sumLikePointByMemberId > 0) {
+				model.addAttribute("actorCanCancelLike", true);
+			
+			}
+		}
+
+		
+		
 		return "usr/article/detail";
 	}
 

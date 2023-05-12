@@ -74,59 +74,99 @@
 					</tr>
 
 					<tr>
-						<th>추천</th>
-						<td>
-							<span>&nbsp;좋아요 : ${article.goodReactionPoint }&nbsp;</span>
-							<span>&nbsp;싫어요 : ${article.badReactionPoint }&nbsp;</span>
-							<c:if test="${actorCanMakeReaction }">
-								<div>
-									<span>
-										<span>&nbsp;</span>
-										<a
-											href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-											class="btn btn-xs">좋아요 👍</a>
-									</span>
-									<span>
-										<span>&nbsp;</span>
-										<a
-											href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-											class="btn btn-xs">싫어요 👎</a>
-									</span>
-								</div>
-							</c:if>
-							<c:if test="${actorCanCancelGoodReaction }">
-								<div>
-									<span>
-										<span>&nbsp;</span>
-										<a
-											href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-											class="btn btn-xs">좋아요 👍</a>
-									</span>
-									<span>
-										<span>&nbsp;</span>
-										<a onclick="alert(this.title); return false;" title="좋아요를 먼저 취소해" class="btn btn-xs">싫어요 👎</a>
-									</span>
-								</div>
-							</c:if>
-
-
-							<c:if test="${actorCanCancelBadReaction }">
-								<div>
-									<span>
-										<span>&nbsp;</span>
-										<a onclick="alert(this.title); return false;" title="싫어요를 먼저 취소해" class="btn btn-xs">좋아요 👍</a>
-									</span>
-									<span>
-										<span>&nbsp;</span>
-										<a
-											href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-											class="btn btn-xs">싫어요 👎</a>
-									</span>
-								</div>
-							</c:if>
-						</td>
-					</tr>
-
+						<c:if test="${article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
+							<tr>
+								<th>추천</th>
+								<td>
+									<span>&nbsp;좋아요 : ${article.goodReactionPoint }&nbsp;</span>
+									<span>&nbsp;싫어요 : ${article.badReactionPoint }&nbsp;</span>
+									<c:if test="${actorCanMakeReaction }">
+										<div>
+											<span>
+												<span>&nbsp;</span>
+												<a
+													href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+													class="btn btn-xs">좋아요 👍</a>
+											</span>
+											<span>
+												<span>&nbsp;</span>
+												<a
+													href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+													class="btn btn-xs">싫어요 👎</a>
+											</span>
+										</div>
+									</c:if>
+									<c:if test="${actorCanCancelGoodReaction }">
+										<div>
+											<span>
+												<span>&nbsp;</span>
+												<a
+													href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+													class="btn btn-xs">좋아요 취소 👍</a>
+											</span>
+											<span>
+												<span>&nbsp;</span>
+												<a onclick="alert(this.title); return false;" title="좋아요를 먼저 취소해" class="btn btn-xs">싫어요 👎</a>
+											</span>
+										</div>
+									</c:if>
+									<c:if test="${actorCanCancelBadReaction }">
+										<div>
+											<span>
+												<span>&nbsp;</span>
+												<a onclick="alert(this.title); return false;" title="싫어요를 먼저 취소해" class="btn btn-xs">좋아요 👍</a>
+											</span>
+											<span>
+												<span>&nbsp;</span>
+												<a
+													href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+													class="btn btn-xs">싫어요 취소 👎</a>
+											</span>
+										</div>
+									</c:if>
+								</td>
+							</tr>
+						</c:if>
+					
+					
+					
+					
+					
+					<c:if test="${article.boardId eq 1 || article.boardId eq 2 || article.boardId eq 3 || article.boardId eq 4}">
+							<tr>
+								<th>찜하기</th>
+								<td>
+									<span>&nbsp;찜하기 : ${article.likePoint }&nbsp;</span>
+								 
+									<c:if test="${actorCanMakeLike}">
+										<div>
+											<span>
+												<span>&nbsp;</span>
+												<a
+													href="/usr/likePoint/doLikePoint?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+													class="btn btn-xs">찜하기❤</a>
+											</span>
+											 
+										</div>
+									</c:if>
+									<c:if test="${actorCanCancelLike }">
+										<div>
+											<span>
+												<span>&nbsp;</span>
+												<a
+													href="/usr/likePoint/doCancelLikePoint?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+													class="btn btn-xs">찜하기❤ 취소</a>
+											</span>
+											
+										</div>
+									</c:if>
+									
+								</td>
+							</tr>
+						</c:if>
+						
+						
+						
 					<tr>
 						<th>제목</th>
 						<td>${article.title }</td>

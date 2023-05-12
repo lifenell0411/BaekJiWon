@@ -12,8 +12,8 @@ public interface LikePointRepository {
 				SELECT IFNULL(SUM(LP.point),0)
 				FROM likePoint AS LP
 				WHERE LP.relTypeCode = #{relTypeCode}
-				AND RP.relId = #{id}
-				AND RP.memberId = #{actorId}
+				AND LP.relId = #{id}
+				AND LP.memberId = #{actorId}
 			</script>
 			""")
 	public int getSumLikePointByMemberId(int actorId, String relTypeCode, int id);

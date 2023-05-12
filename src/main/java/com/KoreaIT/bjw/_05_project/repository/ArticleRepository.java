@@ -142,6 +142,16 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getArticleHitCount(int id);
+
+	@Update("""
+			<script>
+				UPDATE article
+				SET goodReactionPoint = goodReactionPoint + 1
+				WHERE id = #{relId}
+			</script>
+			""")
+	public int increaseGoodReationPoint(int relId);
+//////////////////////////////
 	
 	@Update("""
 			<script>
@@ -151,18 +161,8 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int increaseLikePoint(int relId);
-
-
-	@Update("""
-			<script>
-				UPDATE article
-				SET likePoint = likePoint + 1
-				WHERE id = #{relId}
-			</script>
-			""")
-	public int increaseGoodReationPoint(int relId);
 	
-
+	
 	@Update("""
 			<script>
 				UPDATE article
@@ -173,7 +173,9 @@ public interface ArticleRepository {
 	public int decreaseLikePoint(int relId);
 
 	
-
+	
+	
+/////////////////////////////
 	@Update("""
 			<script>
 				UPDATE article

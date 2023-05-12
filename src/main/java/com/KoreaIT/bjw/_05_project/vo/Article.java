@@ -16,6 +16,8 @@ public class Article {
 	private int hitCount;
 	private int goodReactionPoint;
 	private int badReactionPoint;
+	private int boardId;
+	private int likePoint;
 
 	private String extra__writer;
 
