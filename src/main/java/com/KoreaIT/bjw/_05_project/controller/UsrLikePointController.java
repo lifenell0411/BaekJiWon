@@ -15,6 +15,8 @@ public class UsrLikePointController {
 	private Rq rq;
 	@Autowired
 	private LikePointService likePointService;
+	
+	
 
 	@RequestMapping("/usr/likePoint/doLikePoint")
 	@ResponseBody

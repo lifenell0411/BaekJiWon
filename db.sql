@@ -132,8 +132,8 @@ updateDate = NOW(),
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'NOTICE',
-`name` = '공지사항';
+`code` = 'TATTOO',
+`name` = '타투문의';
 
 INSERT INTO board
 SET regDate = NOW(),
@@ -149,11 +149,6 @@ updateDate = NOW(),
 `code` = 'QNA',
 `name` = '질의응답';
 
-INSERT INTO board
-SET regDate = NOW(),
-updateDate = NOW(),
-`code` = 'QNA',
-`name` = '질의응답';
 
 INSERT INTO board
 SET regDate = NOW(),
@@ -191,6 +186,9 @@ UPDATE article
 SET boardId = 7
 WHERE id = 3;
 
+UPDATE article
+SET boardId = 8
+WHERE id = 3;
 
 
 
@@ -434,7 +432,7 @@ INSERT INTO article
 ( 
     regDate, updateDate, memberId, boardId, title, `body`
 )
-SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 2, FLOOR(RAND() * 2) + 1, CONCAT('제목_',RAND()), CONCAT('내용_',RAND())
+SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 8, FLOOR(RAND() * 2) + 1, CONCAT('제목_',RAND()), CONCAT('내용_',RAND())
 FROM article;
 
 SELECT COUNT(*) FROM article;

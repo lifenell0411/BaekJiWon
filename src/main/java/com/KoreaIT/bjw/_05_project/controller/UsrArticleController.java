@@ -224,5 +224,4 @@ public class UsrArticleController {
 
 		return rd;
 	}
-
 }

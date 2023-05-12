@@ -80,7 +80,7 @@
 						<a href="/usr/article/list?boardId=5" class="flex flex-ai-c height-100p">게시판</a>
 						<ul>
 							<li>
-								<a href="/usr/article/list?boardId=5">NOTICE</a>
+								<a href="/usr/article/list?boardId=5">타투문의</a>
 							</li>
 							<li>
 								<a href="/usr/article/list?boardId=6">FREE</a>
