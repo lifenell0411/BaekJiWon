@@ -38,8 +38,8 @@
 </script>
 
 
-<section class="mt-8 text-xl">
-	<div class="container mx-auto px-3">
+<section class="text-xl">
+	<div class="container">
 		<div class="table-box-type-1">
 			<table border="1">
 				<colgroup>
@@ -47,28 +47,28 @@
 				</colgroup>
 
 				<tbody>
-					<tr>
-						<th>번호</th>
-						<td>
+					<tr >
+						<th class="table-header">번호</th>
+						<td class="table-cell">
 							<div class="badge">${article.id}</div>
 						</td>
 
 					</tr>
 					<tr>
-						<th>작성날짜</th>
-						<td>${article.regDate }</td>
+						<th class="table-header">작성날짜</th>
+						<td class="table-cell">${article.regDate }</td>
 					</tr>
 					<tr>
-						<th>수정날짜</th>
-						<td>${article.updateDate }</td>
+						<th class="table-header">수정날짜</th>
+						<td class="table-cell">${article.updateDate }</td>
 					</tr>
 					<tr>
-						<th>작성자</th>
-						<td>${article.extra__writer }</td>
+						<th class="table-header">작성자</th>
+						<td class="table-cell">${article.extra__writer }</td>
 					</tr>
 					<tr>
-						<th>조회수</th>
-						<td>
+						<th class="table-header">조회수</th>
+						<td class="table-cell">
 							<span class="article-detail__hit-count">${article.hitCount }</span>
 						</td>
 					</tr>
@@ -76,8 +76,8 @@
 					<tr>
 						<c:if test="${article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
 							<tr>
-								<th>추천</th>
-								<td>
+								<th class="table-header">추천</th>
+								<td class="table-cell">
 									<span>&nbsp;좋아요 : ${article.goodReactionPoint }&nbsp;</span>
 									<span>&nbsp;싫어요 : ${article.badReactionPoint }&nbsp;</span>
 									<c:if test="${actorCanMakeReaction }">
@@ -134,8 +134,8 @@
 					
 					<c:if test="${article.boardId eq 1 || article.boardId eq 2 || article.boardId eq 3 || article.boardId eq 4}">
 							<tr>
-								<th>찜하기</th>
-								<td>
+								<th class="table-header">찜하기</th>
+								<td class="table-cell">
 									<span>&nbsp;찜하기 : ${article.likePoint }&nbsp;</span>
 								 
 									<c:if test="${actorCanMakeLike}">
@@ -144,7 +144,7 @@
 												<span>&nbsp;</span>
 												<a
 													href="/usr/likePoint/doLikePoint?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs">찜하기❤</a>
+													class="btn btn-xs btn-error">찜하기❤</a>
 											</span>
 											 
 										</div>
@@ -155,7 +155,7 @@
 												<span>&nbsp;</span>
 												<a
 													href="/usr/likePoint/doCancelLikePoint?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs">찜하기❤ 취소</a>
+													class="btn btn-xs btn-error">찜하기❤ 취소</a>
 											</span>
 											
 										</div>
@@ -168,12 +168,12 @@
 						
 						
 					<tr>
-						<th>제목</th>
-						<td>${article.title }</td>
+						<th class="table-header">제목</th>
+						<td class="table-cell">${article.title }</td>
 					</tr>
 					<tr>
-						<th>내용</th>
-						<td>${article.body }</td>
+						<th class="table-header">내용</th>
+						<td class="table-cell">${article.body }</td>
 					</tr>
 				</tbody>
 
@@ -215,7 +215,7 @@
 	}
 </script>
 
-
+<c:if test="${article.boardId eq 5 || article.boardId eq 6 || article.boardId eq 7 }">
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
@@ -230,21 +230,19 @@
 						</colgroup>
 
 						<tbody>
-							<tr>
-								<th>댓글</th>
-								<td>
-									<textarea class="input input-bordered w-full max-w-xs" type="text" name="body" placeholder="내용을 입력해주세요" /></textarea>
-								</td>
-							</tr>
-							<tr>
-								<th></th>
-								<td>
-									<button type="submit" value="작성" />
-									댓글 작성
-									</button>
-								</td>
-							</tr>
-						</tbody>
+  <tr>
+    <th>댓글</th>
+    <td>
+      <div class="input-group">
+        <textarea class="input input-bordered" type="text" name="body" placeholder="내용을 입력해주세요"></textarea>
+        <button type="submit" value="작성" class="btn btn-active btn-ghost">
+          댓글 작성
+        </button>
+      </div>
+    </td>
+  </tr>
+</tbody>
+
 
 					</table>
 				</form>
@@ -255,8 +253,13 @@
 		</div>
 
 	</div>
+	
+	</c:if>
 </section>
+
+
 <section class="mt-5">
+<c:if test="${article.boardId eq 5 || article.boardId eq 6 || article.boardId eq 7 }">
 	<div class="container mx-auto px-3">
 		<h1 class="text-3xl">댓글 리스트(${repliesCount })</h1>
 		<table class="table table-zebra w-full">
@@ -271,13 +274,13 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>날짜</th>
-					<th>작성자</th>
-					<th>추천</th>
-					<th>내용</th>
-					<th>수정</th>
-					<th>삭제</th>
+					<th class ="replyHD">번호</th>
+					<th class ="replyHD">날짜</th>
+					<th class ="replyHD">작성자</th>
+					<th class ="replyHD">추천</th>
+					<th class ="replyHD">내용</th>
+					<th class ="replyHD">수정</th>
+					<th class ="replyHD">삭제</th>
 				</tr>
 			</thead>
 
@@ -309,7 +312,93 @@
 
 		</table>
 	</div>
+	</c:if>
 </section>
 
+
+<style>
+.container{
+
+margin-top: 200px;
+}
+ 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-header, .table-cell {
+ 
+  padding: 8px;
+  text-align: center;
+}
+
+ 
+
+.table-cell:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+th, td {
+  border: none;
+  padding: 10px;
+  text-align: center;
+}
+
+.table-header {
+  background-color: #917FB3;
+  font-weight: bold;
+  color: white;
+}
+.table-cell {
+background-color: white;
+}
+
+.replyHD {
+ background-color: #917FB3;
+  font-weight: bold;
+  color: white;
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  max-width: 900px; /* 원하는 최대 너비값으로 변경 가능 */
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group .input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.input-group .btn {
+  white-space: nowrap;
+}
+
+.btn-error.active {
+  background-color: red;
+  color: white;
+}
+</style>
+
+
+<script>
+
+$(document).ready(function() {
+	  // 찜하기 버튼 클릭 이벤트
+	  $(".btn-error").click(function() {
+	    // 버튼 클릭 시, 효과를 추가
+	    $(this).addClass("active");
+	    // 1초 후, 효과를 제거
+	    setTimeout(function() {
+	      $(".btn-error").removeClass("active");
+	    }, 1000);
+	  });
+	});
+</script>
 
 <%@ include file="../common/foot.jspf"%>

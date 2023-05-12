@@ -4,8 +4,8 @@
 <%@ include file="../common/head.jspf"%>
 <hr />
   
-<section class="mt-8 text-xl">
-	<div class="container mx-auto px-3">
+<section class="text-xl">
+	<div class="container ">
 		<div class="table-box-type-1">
 			<div class="flex mb-4">
 				<div>
@@ -26,50 +26,52 @@
 					<button class="btn btn-ghost" type=submit>검색</button>
 				</form>
 			</div>
-			<table class="table table-zebra w-full">
-				<colgroup>
-					<col width="140" />
-					<col width="140" />
-					<col width="140" />
-					<col width="140" />
-					<col width="140" />
-					<col width="140" />
-					<col width="140" />
-				</colgroup>
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>날짜</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>조회수</th>
-						<th>좋아요</th>
-						<th>싫어요</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<c:forEach var="article" items="${articles }">
-						<tr class="hover">
-							<td>
-								<div class="badge">${article.id}</div>
-							</td>
-							<td>${article.regDate.substring(2,16)}</td>
-							<td>
-								<a class="hover:underline" href="${rq.getArticleDetailUriFromArticleList(article) }">${article.title}</a>
-							</td>
-							<td>${article.extra__writer}</td>
-							<td>${article.hitCount}</td>
-							<td>${article.goodReactionPoint}</td>
-							<td>${article.badReactionPoint}</td>
-
+			<div class="table-wrapper">
+				<table class="table table-zebra">
+					<colgroup>
+						<col width="140" />
+						<col width="140" />
+						<col width="140" />
+						<col width="140" />
+						<col width="140" />
+						<col width="140" />
+						<col width="140" />
+					</colgroup>
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>날짜</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>조회수</th>
+							<th>좋아요</th>
+							<th>싫어요</th>
 						</tr>
-					</c:forEach>
-				</tbody>
+					</thead>
 
-			</table>
+					<tbody>
+						<c:forEach var="article" items="${articles }">
+							<tr class="hover">
+								<td>
+									<div class="badge">${article.id}</div>
+								</td>
+								<td>${article.regDate.substring(2,16)}</td>
+								<td>
+									<a class="hover:underline" href="${rq.getArticleDetailUriFromArticleList(article) }">${article.title}</a>
+								</td>
+								<td>${article.extra__writer}</td>
+								<td>${article.hitCount}</td>
+								<td>${article.goodReactionPoint}</td>
+								<td>${article.badReactionPoint}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+
+				</table>
+			</div>
 		</div>
-
+	</div>
+</section>
 
 		<div class="pagination flex justify-center mt-3">
 			<div class="btn-group ">
@@ -100,5 +102,32 @@
 	</div>
 </section>
 
+
+<style>
+.container{
+margin-top: 200px;
+}
+
+ body {
+   background-color: #FDE2F3;
+    }
+    
+ html  {
+      height: 100%;
+       
+    }
+ body {
+      margin: 0;
+      padding: 0;
+      overflow: auto;  
+       background-color: #FDE2F3;
+       height: 100%; 
+    }
+html, body {
+  height: 100%;
+  min-height: 100%;
+}
+
+</style>
  
 <%@ include file="../common/foot.jspf"%>
