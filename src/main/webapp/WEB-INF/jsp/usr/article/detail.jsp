@@ -5,6 +5,84 @@
 <hr />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- <iframe src="http://localhost:8081/usr/article/doIncreaseHitCountRd?id=2" frameborder="0"></iframe> -->
+
+
+<script>
+$(document).on('click', '.like-btn', function() {
+	  var $this = $(this);
+	  var relTypeCode = $this.attr('data-rel-type-code');
+	  var relId = $this.attr('data-rel-id');
+	  var replaceUri = $this.attr('data-replace-uri');
+	  
+	  $.post('/usr/likePoint/doLikePoint', {
+	    relTypeCode: relTypeCode,
+	    relId: relId
+	  }, function(data) {
+	    if (data.success) {
+	      console.log('찜하기 완료!');
+	      $('#like-count').text(data.newPoint);
+	      $this.text('❤찜하기취소').removeClass('like-btn').addClass('cancel-like-btn');
+	    } else {
+	      console.log('찜하기 실패!');
+	    }
+	  });
+	});
+
+	$(document).on('click', '.cancel-like-btn', function() {
+	  var $this = $(this);
+	  var relTypeCode = $this.attr('data-rel-type-code');
+	  var relId = $this.attr('data-rel-id');
+	  var replaceUri = $this.attr('data-replace-uri');
+	  
+	  $.post('/usr/likePoint/doCancelLikePoint', {
+	    relTypeCode: relTypeCode,
+	    relId: relId
+	  }, function(data) {
+	    if (data.success) {
+	      console.log('찜하기 취소 완료!');
+	      $('#like-count').text(data.newPoint);
+	      $this.text('♡찜하기').removeClass('cancel-like-btn').addClass('like-btn');
+	    } else {
+	      console.log('찜하기 취소 실패!');
+	    }
+	  });
+	});
+
+	
+	
+	// 좋아요 버튼 클릭 이벤트 처리
+	document.querySelector("#good-reaction-btn").addEventListener("click", function() {
+	  const relTypeCode = "article";
+	  const relId = ${param.id };
+	  const xhr = new XMLHttpRequest();
+	  xhr.onreadystatechange = function() {
+	    if (xhr.readyState === xhr.DONE) {
+	      if (xhr.status === 200) {
+	        // 요청 성공시 처리
+	        const response = JSON.parse(xhr.responseText);
+	        if (response.resultCode === "S-1") {
+	          // 좋아요 처리 성공시 UI 업데이트
+	          const goodReactionPointEl = document.querySelector("#good-reaction-point");
+	          goodReactionPointEl.innerText = response.goodReactionPoint;
+	        } else {
+	          // 처리 실패시 처리
+	          alert(response.msg);
+	        }
+	      } else {
+	        // 요청 실패시 처리
+	        alert("요청 실패");
+	      }
+	    }
+	  };
+	  xhr.open("POST", "/usr/reactionPoint/doGoodReaction");
+	  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	  xhr.send(`relTypeCode=${relTypeCode}&relId=${relId}`);
+	});
+	
+	
+</script>
+
+
 <script>
 	const params = {}
 	params.id = parseInt('${param.id}');
@@ -80,54 +158,50 @@
 					<tr>
 						<c:if test="${article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
 							<tr>
-								<th class="table-header">추천</th>
-								<td class="table-cell">
-									<span>&nbsp;좋아요 : ${article.goodReactionPoint }&nbsp;</span>
-									<span>&nbsp;싫어요 : ${article.badReactionPoint }&nbsp;</span>
-									<c:if test="${actorCanMakeReaction }">
-										<div>
-											<span>
-												<span>&nbsp;</span>
-												<a
-													href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs ">좋아요 👍</a>
-											</span>
-											<span>
-												<span>&nbsp;</span>
-												<a
-													href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs">싫어요 👎</a>
-											</span>
-										</div>
-									</c:if>
-									<c:if test="${actorCanCancelGoodReaction }">
-										<div>
-											<span>
-												<span>&nbsp;</span>
-												<a
-													href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs">좋아요 취소 👍</a>
-											</span>
-											<span>
-												<span>&nbsp;</span>
-												<a onclick="alert(this.title); return false;" title="좋아요를 먼저 취소해" class="btn btn-xs">싫어요 👎</a>
-											</span>
-										</div>
-									</c:if>
-									<c:if test="${actorCanCancelBadReaction }">
-										<div>
-											<span>
-												<span>&nbsp;</span>
-												<a onclick="alert(this.title); return false;" title="싫어요를 먼저 취소해" class="btn btn-xs">좋아요 👍</a>
-											</span>
-											<span>
-												<span>&nbsp;</span>
-												<a
-													href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs">싫어요 취소 👎</a>
-											</span>
-										</div>
-									</c:if>
+							<th class="table-header">추천</th>
+<td class="table-cell">
+	<span>&nbsp;좋아요 : ${article.goodReactionPoint }&nbsp;</span>
+	<span>&nbsp;싫어요 : ${article.badReactionPoint }&nbsp;</span>
+	<c:if test="${actorCanMakeReaction }">
+		<div>
+			<span>
+				<span>&nbsp;</span>
+				<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+				class="btn btn-xs ">좋아요 👍</a>
+			</span>
+			<span>
+				<span>&nbsp;</span>
+				<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+				class="btn btn-xs">싫어요 👎</a>
+			</span>
+		</div>
+	</c:if>
+	<c:if test="${actorCanCancelGoodReaction }">
+		<div>
+			<span>
+				<span>&nbsp;</span>
+				<a href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+				class="btn btn-xs">좋아요 취소 👍</a>
+			</span>
+			<span>
+				<span>&nbsp;</span>
+				<a class="btn btn-xs">싫어요 👎</a>
+			</span>
+		</div>
+	</c:if>
+	<c:if test="${actorCanCancelBadReaction }">
+		<div>
+			<span>
+				<span>&nbsp;</span>
+				<a class="btn btn-xs">좋아요 👍</a>
+			</span>
+			<span>
+				<span>&nbsp;</span>
+				<a href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+				class="btn btn-xs">싫어요 취소 👎</a>
+			</span>
+		</div>
+	</c:if>
 								</td>
 							</tr>
 						</c:if>
@@ -148,7 +222,7 @@
 												<span>&nbsp;</span>
 												<a
 													href="/usr/likePoint/doLikePoint?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs btn-error">찜하기❤</a>
+													class="btn btn-xs btn-error">♡찜하기</a>
 											</span>
 											 
 										</div>
@@ -159,7 +233,7 @@
 												<span>&nbsp;</span>
 												<a
 													href="/usr/likePoint/doCancelLikePoint?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs btn-error">찜하기❤ 취소</a>
+													class="btn btn-xs btn-error">❤찜하기취소</a>
 											</span>
 											
 										</div>
@@ -390,19 +464,6 @@ input[type="text"], textarea {
 </style>
 
 
-<script>
 
-$(document).ready(function() {
-	  // 찜하기 버튼 클릭 이벤트
-	  $(".btn-error").click(function() {
-	    // 버튼 클릭 시, 효과를 추가
-	    $(this).addClass("active");
-	    // 1초 후, 효과를 제거
-	    setTimeout(function() {
-	      $(".btn-error").removeClass("active");
-	    }, 1000);
-	  });
-	});
-</script>
 
 <%@ include file="../common/foot.jspf"%>

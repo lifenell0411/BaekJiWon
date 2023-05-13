@@ -38,6 +38,7 @@ public class UsrLikePointController {
 		return rq.jsReplace(rd.getMsg(), replaceUri);
 	}
 
+	
 	 
 
 	@RequestMapping("/usr/likePoint/doCancelLikePoint")
