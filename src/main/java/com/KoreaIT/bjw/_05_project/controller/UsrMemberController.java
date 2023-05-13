@@ -1,4 +1,6 @@
 package com.KoreaIT.bjw._05_project.controller;
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,6 @@ public class UsrMemberController {
 	public String showJoin() {
 		return "usr/member/join";
 	}
-
 	@RequestMapping("/usr/member/getLoginIdDup")
 	@ResponseBody
 	public ResultData getLoginIdDup(String loginId) {
@@ -37,12 +38,34 @@ public class UsrMemberController {
 		Member existsMember = memberService.getMemberByLoginId(loginId);
 
 		if (existsMember != null) {
-			return ResultData.from("F-2", "해당 아이디는 이미 사용중입니다", "loginId", loginId);
+			return ResultData.from("F-2", "해당 아이디는 이미 사용중입니다.", "loginId", loginId);
 		}
 
-		return ResultData.from("S-1", "사용 가능한 아이디입니다", "loginId", loginId);
+		return ResultData.from("S-1", "사용 가능한 아이디입니다.", "loginId", loginId);
 	}
 
+	
+	@RequestMapping("/usr/member/getLoginEmailDup")
+	@ResponseBody
+	public ResultData getLoginEmailDup(String email) {
+		if (Ut.empty(email)) {
+		    System.out.println("이메일이 입력되지 않았습니다.");
+		    return ResultData.from("F-1", "이메일을 입력해주세요");
+		}
+	    if (!Pattern.matches("^([\\w-]+(?:\\.[\\w-]+)*)@([\\w-]+\\.)*\\w[\\w-]{0,66}\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$", email)) {
+	        return ResultData.from("F-2", "이메일 형식이 올바르지 않습니다.", "email", email);
+	    }
+
+	    Member existsMember = memberService.getMemberByEmail(email);
+	    if (existsMember != null) {
+	        return ResultData.from("F-3", "해당 이메일은 이미 사용중입니다.", "email", email);
+	    }
+
+	    return ResultData.from("S-1", "사용 가능한 이메일입니다.", "email", email);
+	}
+
+
+	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,

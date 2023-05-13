@@ -76,4 +76,13 @@ public interface MemberRepository {
 			""")
 	void modify(int id, String loginPw, String name, String nickname, String cellphoneNum, String email);
 
+	
+	@Select("""
+			SELECT *
+			FROM `member`
+			WHERE email = #{email}
+			""")
+	
+	Member getMemberByEmail(String email);
+
 }

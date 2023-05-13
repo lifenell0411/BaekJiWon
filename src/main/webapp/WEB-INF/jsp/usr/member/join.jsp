@@ -2,10 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="JOIN" />
 <%@ include file="../common/head.jspf"%>
-
+<!-- 제이쿼리 불러오기 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
 	let submitJoinFormDone = false;
 	let validLoginId = "";
+	let validEmail = "";
 
 	function submitJoinForm(form) {
 		if (submitJoinFormDone) {
@@ -64,34 +66,75 @@
 	}
 
 	function checkLoginIdDup(el) {
-	    $('.checkDup-msg').empty();
-	    const form = $(el).closest('form').get(0);
+		$('.checkDup-msg').empty();
+		const form = $(el).closest('form').get(0);
 
-	    const regExp = /^[a-zA-Z0-9]+$/; // 영어와 숫자로만 이루어져 있는지 확인하는 정규식
+		const regExp = /^[a-zA-Z0-9]+$/; // 영어와 숫자로만 이루어져 있는지 확인하는 정규식
 
-	    if (form.loginId.value.length < 5) {
-	        $('.checkDup-msg').html('<div class="mt-2">아이디를 5글자 이상 입력해주세요.</div>');
-	        validLoginId = '';
-	        return;
-	    } else if (!regExp.test(form.loginId.value)) { // 입력된 아이디가 영어와 숫자로만 이루어져 있는지 확인
-	        $('.checkDup-msg').html('<div class="mt-2">아이디는 영어와 숫자로만 구성될 수 있습니다.</div>');
-	        validLoginId = '';
-	        return;
-	    }
+		if (form.loginId.value.length < 5) {
+			$('.checkDup-msg').html(
+					'<div class="mt-2">아이디를 5글자 이상 입력해주세요.</div>');
+			validLoginId = '';
+			return;
+		} else if (!regExp.test(form.loginId.value)) { // 입력된 아이디가 영어와 숫자로만 이루어져 있는지 확인
+			$('.checkDup-msg').html(
+					'<div class="mt-2">아이디는 영어와 숫자로만 구성될 수 있습니다.</div>');
+			validLoginId = '';
+			return;
+		}
 
-	    $.get('../member/getLoginIdDup', {
-	        isAjax : 'Y',
-	        loginId : form.loginId.value
-	    }, function(data) {
-	        $('.checkDup-msg').html('<div class="mt-2">' + data.msg + '</div>')
-	        if (data.success) {
-	            validLoginId = data.data1;
-	        } else {
-	            validLoginId = '';
-	        }
-	    }, 'json');
+		$.get('../member/getLoginIdDup', {
+			isAjax : 'Y',
+			loginId : form.loginId.value
+		}, function(data) {
+			$('.checkDup-msg').html('<div class="mt-2">' + data.msg + '</div>')
+			if (data.success) {
+				validLoginId = data.data1;
+			} else {
+				validLoginId = '';
+			}
+		}, 'json');
+
+		
+
 	}
+	function getLoginEmailDup(el) {
+		$('.checkDup-msg1').empty();
+		const form = $(el).closest('form').get(0);
 
+		if (form.email.value.length === 0) {
+			$('.checkDup-msg1')
+					.html('<div class="mt-2">이메일을 입력해주세요!</div>');
+			validEmail = '';
+			return;
+		}
+
+		// 이메일 형식이 유효한지 확인하는 함수
+		function isValidEmail(email) {
+			const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+			return emailPattern.test(email);
+		}
+
+		if (!isValidEmail(form.email.value)) {
+			$('.checkDup-msg1').html(
+					'<div class="mt-2">올바른 이메일 형식을 입력해주세요.</div>');
+			validEmail = '';
+			return;
+		}
+
+		$.get('../member/getLoginEmailDup', {
+			isAjax : 'Y',
+			email : form.email.value
+		}, function(data) {
+			$('.checkDup-msg1').html(
+					'<div class="mt-2">' + data.msg + '</div>')
+			if (data.success) {
+				validEmail = data.data1;
+			} else {
+				validEmail = '';
+			}
+		}, 'json');
+	}
 </script>
 
 <section class="mt-8 text-xl">
@@ -106,51 +149,47 @@
 					<tr>
 						<th style="background-color: #917FB3;">아이디</th>
 						<td style="background-color: white;">
-							<input name="loginId" class="w-full input input-bordered max-w-xs"
-								placeholder="아이디를 입력해주세요" autocomplete="off" onblur="checkLoginIdDup(this)" />
+							<input onblur="checkLoginIdDup(this);" name="loginId" class="w-full input input-bordered  max-w-xs"
+								placeholder="아이디를 입력해주세요" autocomplete="off" />
 							<div class="checkDup-msg"></div>
 						</td>
 					</tr>
 					<tr>
 						<th style="background-color: #917FB3;">비밀번호</th>
 						<td style="background-color: white;">
-							<input name="loginPw" class="w-full input input-bordered max-w-xs"
-								placeholder="비밀번호를 입력해주세요" />
+							<input name="loginPw" class="w-full input input-bordered max-w-xs" placeholder="비밀번호를 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
 						<th style="background-color: #917FB3;">비밀번호 확인</th>
 						<td style="background-color: white;">
-							<input name="loginPwConfirm" class="w-full input input-bordered max-w-xs"
-								placeholder="비밀번호 확인을 입력해주세요" />
+							<input name="loginPwConfirm" class="w-full input input-bordered max-w-xs" placeholder="비밀번호 확인을 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
 						<th style="background-color: #917FB3;">이름</th>
 						<td style="background-color: white;">
-							<input name="name" class="w-full input input-bordered max-w-xs"
-								placeholder="이름을 입력해주세요" />
+							<input name="name" class="w-full input input-bordered max-w-xs" placeholder="이름을 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
 						<th style="background-color: #917FB3;">닉네임</th>
 						<td>
-							<input name="nickname" class="w-full input input-bordered max-w-xs"
-								placeholder="닉네임을 입력해주세요" />
+							<input name="nickname" class="w-full input input-bordered max-w-xs" placeholder="닉네임을 입력해주세요" />
 						</td>
 					</tr>
-					<tr >
+					<tr>
 						<th style="background-color: #917FB3;">전화번호</th>
-						<td style="background-color: white;" >
-							<input name="cellphoneNum" class="w-full input input-bordered max-w-xs"
-								placeholder="전화번호를 입력해주세요" />
+						<td style="background-color: white;">
+							<input name="cellphoneNum" class="w-full input input-bordered max-w-xs" placeholder="전화번호를 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
 						<th style="background-color: #917FB3;">이메일</th>
 						<td>
-							<input name="email" class="w-full input input-bordered max-w-xs"
-								placeholder="이메일을 입력해주세요" />
+							<input onblur="getLoginEmailDup(this);" name="email" class="w-full input input-bordered  max-w-xs"
+								placeholder="이메일을 입력해주세요" autocomplete="off" />
+							<div class="checkDup-msg1"></div>
 						</td>
 					</tr>
 					<tr>
@@ -161,92 +200,88 @@
 					</tr>
 				</tbody>
 			</table>
-	 
+
 		</form>
 	</div>
 
- 
 
-<style>
 
- body {
-  background-color: #FDE2F3;
-  height: 705px; /* 높이 */
+	<style>
+body {
+	background-color: #FDE2F3;
+	height: 705px; /* 높이 */
 }
 
 .table-box-type-1 {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
 .table-box-type-1 table {
-  border-collapse: collapse;
-  width: 100%;
-  top: 100px;
+	border-collapse: collapse;
+	width: 100%;
+	top: 100px;
 }
 
-.table-box-type-1 th,
-.table-box-type-1 td {
-  border: none;
-  padding: 0.5rem;
-  text-align: left;
+.table-box-type-1 th, .table-box-type-1 td {
+	border: none;
+	padding: 0.5rem;
+	text-align: left;
 }
 
 th {
-  background-color: #917FB3;
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
+	background-color: #917FB3;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
 }
 
 .table-box-type-1 input {
-  display: block;
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
-  margin-bottom: 0.5rem;
+	display: block;
+	width: 100%;
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 0.25rem;
+	margin-bottom: 0.5rem;
 }
 
 .checkDup-msg {
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
-  color: #d64040;
+	margin-top: 0.5rem;
+	font-size: 0.875rem;
+	color: #d64040;
 }
 
 .btn {
-  display: inline-block;
-  border: 1px solid #ccc;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  text-align: center;
-  font-size: 1rem;
-  line-height: 1.5;
-  cursor: pointer;
-  transition: all 0.2s ease;
+	display: inline-block;
+	border: 1px solid #ccc;
+	padding: 0.5rem 1rem;
+	border-radius: 0.25rem;
+	text-align: center;
+	font-size: 1rem;
+	line-height: 1.5;
+	cursor: pointer;
+	transition: all 0.2s ease;
 }
 
 .btn:hover {
-  background-color: #f2f2f2;
+	background-color: #f2f2f2;
 }
 
 .btn-active {
-  background-color: #917FB3;
-  color: #fff;
-  border-color: #917FB3;
+	background-color: #917FB3;
+	color: #fff;
+	border-color: #917FB3;
 }
 
 .btn-ghost {
-  background-color: transparent;
-  color: #917FB3;
+	background-color: transparent;
+	color: #917FB3;
 }
 
 .btn-ghost:hover {
-  background-color: #f2f2f2;
+	background-color: #f2f2f2;
 }
- 
-
 </style>
 </section>
 <%@ include file="../common/foot.jspf"%>

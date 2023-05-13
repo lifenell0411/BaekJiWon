@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.KoreaIT.bjw._05_project.interceptor.BeforeActionInterceptor;
 import com.KoreaIT.bjw._05_project.interceptor.NeedLoginInterceptor;
 import com.KoreaIT.bjw._05_project.interceptor.NeedLogoutInterceptor;
-
 @Configuration
 public class MyWebMvcConfigurer implements WebMvcConfigurer {
 	// BeforeActionInterceptor 불러오기
@@ -73,4 +72,3 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 	}
 
 }
- 
