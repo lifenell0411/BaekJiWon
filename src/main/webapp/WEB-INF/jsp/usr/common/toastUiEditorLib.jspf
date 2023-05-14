@@ -319,53 +319,94 @@ function getUriParams(uri) {
 	};
 
 	function ToastEditor__init() {
-	  $(".toast-ui-editor").each(function (index, node) {
-	    const $node = $(node);
-	    const $initialValueEl = $node.find(" > script");
-	    const initialValue =
-	      $initialValueEl.length == 0 ? "" : $initialValueEl.html().trim();
+		  $(".toast-ui-editor").each(function (index, node) {
+		    const $node = $(node);
+		    const $initialValueEl = $node.find(" > script");
+		    const initialValue =
+		      $initialValueEl.length == 0 ? "" : $initialValueEl.html().trim();
 
-	    const editor = new toastui.Editor({
-	      el: node,
-	      previewStyle: "vertical",
-	      initialValue: initialValue,
-	      height: "600px",
-	      plugins: [
-	        [toastui.Editor.plugin.chart, ToastEditor__chartOptions],
-	        [toastui.Editor.plugin.codeSyntaxHighlight, { highlighter: Prism }],
-	        toastui.Editor.plugin.colorSyntax,
-	        toastui.Editor.plugin.tableMergedCell,
-	        toastui.Editor.plugin.uml,
-	        katexPlugin,
-	        youtubePlugin,
-	        codepenPlugin,
-	        replPlugin
-	      ],
-	      customHTMLSanitizer: (html) => {
-	        return (
-	          DOMPurify.sanitize(html, {
-	            ADD_TAGS: ["iframe"],
-	            ADD_ATTR: [
-	              "width",
-	              "height",
-	              "allow",
-	              "allowfullscreen",
-	              "frameborder",
-	              "scrolling",
-	              "style",
-	              "title",
-	              "loading",
-	              "allowtransparency"
-	            ]
-	          }) || ""
-	        );
-	      }
-	    });
+		    const editor = new toastui.Editor({
+		      el: node,
+		      previewStyle: "vertical",
+		      initialValue: initialValue,
+		      height: "600px",
+		      placeholder: "내용을 입력해주세요",
+		      plugins: [
+		        [toastui.Editor.plugin.chart, ToastEditor__chartOptions],
+		        [toastui.Editor.plugin.codeSyntaxHighlight, { highlighter: Prism }],
+		        toastui.Editor.plugin.colorSyntax,
+		        toastui.Editor.plugin.tableMergedCell,
+		        toastui.Editor.plugin.uml,
+		        katexPlugin,
+		        youtubePlugin,
+		        codepenPlugin,
+		        replPlugin
+		      ],
+		      customHTMLSanitizer: (html) => {
+		        return (
+		          DOMPurify.sanitize(html, {
+		            ADD_TAGS: ["iframe"],
+		            ADD_ATTR: [
+		              "width",
+		              "height",
+		              "allow",
+		              "allowfullscreen",
+		              "frameborder",
+		              "scrolling",
+		              "style",
+		              "title",
+		              "loading",
+		              "allowtransparency"
+		            ]
+		          }) || ""
+		        );
+		      },
+		      hooks: {
+			    	addImageBlobHook: (blob, callback) => {
+			    		// blob : Java Script 파일 객체
+			    		//console.log(blob);
+			    		
+			    		const formData = new FormData();
+			        	formData.append('image', blob);
+			        	
+			        	let url = '/images/';
+			   			$.ajax({
+			           		type: 'POST',
+			           		enctype: 'multipart/form-data',
+			           		url: '/writeTest.do',
+			           		data: formData,
+			           		dataType: 'json',
+			           		processData: false,
+			           		contentType: false,
+			           		cache: false,
+			           		timeout: 600000,
+			           		success: function(data) {
+			           			//console.log('ajax 이미지 업로드 성공');
+			           			url += data.filename;
+			           			
+			           			// callback : 에디터(마크다운 편집기)에 표시할 텍스트, 뷰어에는 imageUrl 주소에 저장된 사진으로 나옴
+			        			// 형식 : ![대체 텍스트](주소)
+			           			callback(url, '사진 대체 텍스트 입력');
+			           		},
+			           		error: function(e) {
+			           			//console.log('ajax 이미지 업로드 실패');
+			           			//console.log(e.abort([statusText]));
+			           			
+			           			callback('Fuck', '사진 대체 텍스트 입력');
+			           		}
+			           	});
+			    	}
+			    }
+			});
 
-	    $node.data("data-toast-editor", editor);
-	  });
-	}
+		    $node.data("data-toast-editor", editor);
+		  });
+		}
 
+ 
+
+	
+	
 	function ToastEditorView__init() {
 	  $(".toast-ui-viewer").each(function (index, node) {
 	    const $node = $(node);
@@ -419,3 +460,5 @@ function getUriParams(uri) {
 	});
 
 </script>
+
+ 
