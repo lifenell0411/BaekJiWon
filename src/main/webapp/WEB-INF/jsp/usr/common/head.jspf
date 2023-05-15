@@ -20,584 +20,562 @@
 
 <!-- 부트스트랩 CSS 파일 -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <!-- 부트스트랩 JavaScript 파일 -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-  crossorigin="anonymous"></script>
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNSfkdB"
-  crossorigin="anonymous"></script>
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNSfkdB" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-  crossorigin="anonymous"></script>
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
 
 <link rel="stylesheet" href="/resource/common.css" />
-<script src="/resource/common.js" defer="defer"></script>
+
 </head>
 <body>
 
 
 	<header>
-	<div class="top-bar">
-		<div class="con height-100p flex flex-jc-sa">
-			<a href="/" class="logo flex flex-ai-c">
-			 문신사
-			</a>
- 
-			<nav class="menu-box-1">
-				<div class="bg"></div>
-				<ul class="height-100p flex">
-					<li>
-						<a href="/" class="flex flex-ai-c height-100p">HOME</a>
+		<div class="top-bar">
+			<div class="con height-100p flex flex-jc-sa">
+				<a href="/" class="logo flex flex-ai-c"> 문신사 </a>
 
-					</li>
-					<li>
-						<a href="#" class="flex flex-ai-c height-100p">ABOUT</a>
+				<nav class="menu-box-1">
+					<div class="bg"></div>
+					<ul class="height-100p flex">
+						<li>
+							<a href="/" class="flex flex-ai-c height-100p">HOME</a>
 
-					</li>
-					<li>
-						<a href="article/" class="flex flex-ai-c height-100p">타투도안</a>
-						<ul>
+						</li>
+						<li>
+							<a href="#" class="flex flex-ai-c height-100p">ABOUT</a>
+
+						</li>
+						<li>
+							<a href="/usr/article/list?boardId=1" class="flex flex-ai-c height-100p">타투도안</a>
+							<ul>
+								<li>
+									<a href="/usr/article/list?boardId=1">레터링</a>
+								</li>
+								<li>
+									<a href="/usr/article/list?boardId=2">미니타투</a>
+								</li>
+								<li>
+									<a href="/usr/article/list?boardId=3">블랙워크</a>
+								</li>
+								<li>
+									<a href="/usr/article/list?boardId=4">ETC</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="/usr/article/list?boardId=5" class="flex flex-ai-c height-100p">게시판</a>
+							<ul>
+								<li>
+									<a href="/usr/article/list?boardId=5">타투문의</a>
+								</li>
+								<li>
+									<a href="/usr/article/list?boardId=6">FREE</a>
+								</li>
+								<li>
+									<a href="/usr/article/list?boardId=7">QnA</a>
+								</li>
+								<li>
+									<a href="/usr/article/list?boardId=8">타투후기</a>
+								</li>
+
+							</ul>
+						</li>
+						<li>
+							<a href="/usr/article/write" class="flex flex-ai-c height-100p">WRITE</a>
+
+						</li>
+
+						<c:if test="${!rq.isLogined() }">
 							<li>
-								<a href="/usr/article/list?boardId=1">레터링</a>
+								<a href="/usr/member/login" class="flex flex-ai-c height-100p">
+									<span>LOGIN</span>
+								</a>
 							</li>
+						</c:if>
+
+						<c:if test="${rq.isLogined() }">
+							<li class="hover:underline">
+								<a class="flex flex-ai-c height-100p" href="/usr/member/myPage">
+									<span>MYPAGE</span>
+								</a>
+							</li>
+						</c:if>
+
+						<c:if test="${rq.isLogined() }">
 							<li>
-								<a href="/usr/article/list?boardId=2">미니타투</a>
+								<a href="/usr/member/doLogout" class="flex flex-ai-c height-100p">
+									<span>LOGOUT</span>
+								</a>
 							</li>
+						</c:if>
+
+						<c:if test="${!rq.logined}">
 							<li>
-								<a href="/usr/article/list?boardId=3">블랙워크</a>
+								<a class="flex flex-ai-c height-100p" href="${rq.joinUri }">
+									<span>JOIN</span>
+								</a>
 							</li>
-							<li>
-								<a href="/usr/article/list?boardId=4">ETC</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="/usr/article/list?boardId=5" class="flex flex-ai-c height-100p">게시판</a>
-						<ul>
-							<li>
-								<a href="/usr/article/list?boardId=5">타투문의</a>
-							</li>
-							<li>
-								<a href="/usr/article/list?boardId=6">FREE</a>
-							</li>
-							<li>
-								<a href="/usr/article/list?boardId=7">QnA</a>
-							</li>
-							<li>
-								<a href="/usr/article/list?boardId=8">타투후기</a>
-							</li>
-							 
-						</ul>
-					</li>
-					<li>
-						<a href="/usr/article/write" class="flex flex-ai-c height-100p">WRITE</a>
-						 
-					</li>
-					
-					<c:if test="${!rq.isLogined() }">
-					<li>
-						<a href="/usr/member/login" class="flex flex-ai-c height-100p">
-							<span>LOGIN</span>
-						</a>
-					</li>
-				</c:if>
-				
-				<c:if test="${rq.isLogined() }">
-					<li class="hover:underline">
-						<a class="flex flex-ai-c height-100p"  href="/usr/member/myPage">
-							<span>MYPAGE</span>
-						</a>
-					</li>
-				</c:if>
-				
-				<c:if test="${rq.isLogined() }">
-					<li>
-						<a  href="/usr/member/doLogout" class="flex flex-ai-c height-100p">
-							<span>LOGOUT</span>
-						</a>
-					</li>
-				</c:if>
-				
-				<c:if test="${!rq.logined}">
-					<li >
-						<a class="flex flex-ai-c height-100p" href="${rq.joinUri }">
-							<span>JOIN</span>
-						</a>
-					</li>
-				</c:if>
-				
-				</ul>
-			</nav>
+						</c:if>
+
+					</ul>
+				</nav>
+			</div>
 		</div>
-	</div>
 	</header>
-<style>
+	<style>
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 html {
-  /* 영문이면 roboto가 적용되고, 한글이면 Noto Sans KR가 적용되도록 아래와 같은 순서로 배치 */
-  font-family: "Roboto", "Noto Sans KR", sans-serif;
+	/* 영문이면 roboto가 적용되고, 한글이면 Noto Sans KR가 적용되도록 아래와 같은 순서로 배치 */
+	font-family: "Roboto", "Noto Sans KR", sans-serif;
 }
-
-/* 노말라이즈 */
-body,
-ul,
-li,
-h1 {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-    
- 
-     
- html  {
-      height: 100%;
-       
-    }
- body {
-      margin: 0;
-      padding: 0;
-      overflow: auto;  
-       background-color: #FDE2F3;
-       height: 100%; 
-    }
-html, body {
-  min-height: 100%;
-}
-    
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 label[for] {
-  cursor: pointer;
-  user-select: none;
+	cursor: pointer;
+	user-select: none;
 }
 
 /* 라이브러리 */
 .block {
-  display: block;
+	display: block;
 }
 
 .inline-block {
-  display: inline-block;
+	display: inline-block;
 }
 
 .absolute-left {
-  position: absolute;
-  left: 0;
+	position: absolute;
+	left: 0;
 }
 
 .absolute-right {
-  position: absolute;
-  right: 0;
+	position: absolute;
+	right: 0;
 }
 
 .absolute-bottom {
-  position: absolute;
-  bottom: 0;
+	position: absolute;
+	bottom: 0;
 }
 
 .absolute-top {
-  position: absolute;
-  top: 0;
+	position: absolute;
+	top: 0;
 }
 
 .absolute-center {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .absolute-middle {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .absolute-middle.absolute-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
 }
 
 .relative {
-  position: relative;
+	position: relative;
 }
 
 .cell {
-  float: left;
-  box-sizing: border-box;
+	float: left;
+	box-sizing: border-box;
 }
 
 .cell-right {
-  float: right;
-  box-sizing: border-box;
+	float: right;
+	box-sizing: border-box;
 }
 
 .row::after {
-  content: "";
-  display: block;
-  clear: both;
+	content: "";
+	display: block;
+	clear: both;
 }
 
 .clear-both {
-  clear: both;
+	clear: both;
 }
 
-.img-box > img {
-  width: 100%;
-  display: block;
+.img-box>img {
+	width: 100%;
+	display: block;
 }
 
 .con {
-  margin-left: auto;
-  margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .margin-0-auto {
-  margin-left: auto;
-  margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .text-align-center {
-  text-align: center;
+	text-align: center;
 }
 
 .text-align-right {
-  text-align: right;
+	text-align: right;
 }
 
 .line-height-0 {
-  line-height: 0;
+	line-height: 0;
 }
 
-.line-height-0 > * {
-  line-height: normal;
+.line-height-0>* {
+	line-height: normal;
 }
 
 .width-30px {
-  width: 30px;
+	width: 30px;
 }
 
 .width-35px {
-  width: 35px;
+	width: 35px;
 }
 
 .width-40px {
-  width: 35px;
+	width: 35px;
 }
 
 .width-45px {
-  width: 35px;
+	width: 35px;
 }
 
 .width-50px {
-  width: 50px;
+	width: 50px;
 }
 
 .width-80px {
-  width: 80px;
+	width: 80px;
 }
 
 .width-100px {
-  width: 100px;
+	width: 100px;
 }
 
 .width-100p {
-  width: 100%;
+	width: 100%;
 }
 
 .width-60p {
-  width: 60%;
+	width: 60%;
 }
 
 .width-55p {
-  width: 55%;
+	width: 55%;
 }
 
 .width-50p {
-  width: 50%;
+	width: 50%;
 }
 
 .width-45p {
-  width: 45%;
+	width: 45%;
 }
 
 .width-40p {
-  width: 40%;
+	width: 40%;
 }
 
 .width-30p {
-  width: 30%;
+	width: 30%;
 }
 
 .width-35p {
-  width: 35%;
+	width: 35%;
 }
 
 .width-100p-except-30px {
-  width: calc(100% - 30px);
+	width: calc(100% - 30px);
 }
 
 .width-100p-except-35px {
-  width: calc(100% - 35px);
+	width: calc(100% - 35px);
 }
 
 .width-100p-except-40px {
-  width: calc(100% - 40px);
+	width: calc(100% - 40px);
 }
 
 .width-100p-except-50px {
-  width: calc(100% - 50px);
+	width: calc(100% - 50px);
 }
 
 .width-100p-except-80px {
-  width: calc(100% - 80px);
+	width: calc(100% - 80px);
 }
 
 .width-100p-except-100px {
-  width: calc(100% - 100px);
+	width: calc(100% - 100px);
 }
 
 .height-100p {
-  height: 100%;
+	height: 100%;
 }
 
 .height-50p {
-  height: 50%;
+	height: 50%;
 }
 
 .border-box {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .font-size-dot-8rem {
-  font-size: 0.8rem;
+	font-size: 0.8rem;
 }
 
 .table-row {
-  display: table;
+	display: table;
 }
 
 .table-row.row::after {
-  display: inline;
-  clear: non;
+	display: inline;
+	clear: non;
 }
 
-.table-row > .cell {
-  float: none;
-  display: table-cell;
+.table-row>.cell {
+	float: none;
+	display: table-cell;
 }
-
 
 /* 라이브러리 - flex */
-* > .flex {
-  display: flex;
+*>.flex {
+	display: flex;
 }
 
-* > .flex-grow-1 {
-  flex-grow: 1;
+*>.flex-grow-1 {
+	flex-grow: 1;
 }
 
-* > .flex-jc-c {
-  justify-content: center;
+*>.flex-jc-c {
+	justify-content: center;
 }
 
-* > .flex-jc-s {
-  justify-content: flex-start;
+*>.flex-jc-s {
+	justify-content: flex-start;
 }
 
-* > .flex-jc-e {
-  justify-content: flex-end;
+*>.flex-jc-e {
+	justify-content: flex-end;
 }
 
-* > .flex-jc-sb {
-  justify-content: space-between;
+*>.flex-jc-sb {
+	justify-content: space-between;
 }
 
-* > .flex-jc-sa {
-  justify-content: space-around;
+*>.flex-jc-sa {
+	justify-content: space-around;
 }
 
-* > .flex-ai-c {
-  align-items: center;
+*>.flex-ai-c {
+	align-items: center;
 }
 
-* > .flex-ai-s {
-  align-items: flex-start;
+*>.flex-ai-s {
+	align-items: flex-start;
 }
 
-* > .flex-ai-e {
-  align-items: flex-end;
+*>.flex-ai-e {
+	align-items: flex-end;
 }
 
-* > .flex-as-s {
-  align-self: stretch;
+*>.flex-as-s {
+	align-self: stretch;
 }
 
-* > .flex-as-c {
-  align-self: center;
+*>.flex-as-c {
+	align-self: center;
 }
 
-* > .flex-as-s {
-  align-self: flex-start;
+*>.flex-as-s {
+	align-self: flex-start;
 }
 
-* > .flex-as-e {
-  align-self: flex-end;
+*>.flex-as-e {
+	align-self: flex-end;
 }
 
-* > .flex-column-nowrap {
-  flex-flow: column nowrap;
+*>.flex-column-nowrap {
+	flex-flow: column nowrap;
 }
 
-* > .flex-column-wrap {
-  flex-flow: column wrap;
+*>.flex-column-wrap {
+	flex-flow: column wrap;
 }
 
-* > .flex-row-wrap {
-  flex-flow: row wrap;
+*>.flex-row-wrap {
+	flex-flow: row wrap;
 }
 
-.flex-ch-basis-0 > * {
-  flex-basis: 0;
+.flex-ch-basis-0>* {
+	flex-basis: 0;
 }
 
-* > .flex-1-0-0 {
-  flex: 1 0 0;
+*>.flex-1-0-0 {
+	flex: 1 0 0;
 }
 
-* > .bg-red {
-  background-color: red;
+*>.bg-red {
+	background-color: red;
 }
 
 /* 커스텀 */
-
-
-
 .con {
-  max-width: 1140px;
+	max-width: 1140px;
+}
+
+/* 탑바 */
+.top-bar {
+	height: 72px;
+	border-bottom: 1px solid #f4f4f4;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: white;
+	z-index: 9999;
+}
+
+.top-bar>.con>.menu-box-1>ul>li>a {
+	font-weight: bold;
+	color: #1e1e1e;
+	font-size: 17px;
+	padding: 0 15px;
+	position: relative;
+}
+
+.top-bar>.con>.menu-box-1>ul>li>a::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	background-color: black;
+	left: 0;
+	width: 0;
+	transition: width 0.3s;
+	height: 3px;
+}
+
+.top-bar>.con>.menu-box-1>ul>li:hover>a::after {
+	width: 100%;
+}
+
+/* 2차메뉴 */
+.top-bar>.con>.menu-box-1>ul>li {
+	position: relative;
+}
+
+.top-bar>.con>.menu-box-1>ul>li>ul {
+	position: absolute;
+	left: 12px;
+	padding: 17px 0;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0.3s, opacity 0.3s;
+}
+
+.top-bar>.con>.menu-box-1>ul>li:hover>ul {
+	visibility: visible;
+	opacity: 1;
+}
+
+.top-bar>.con>.menu-box-1>ul>li>ul>li>a {
+	font-size: 17px;
+	color: #666666;
+	display: block;
+	padding: 10px 0;
+	white-space: nowrap;
+	font-weight: bold;
+}
+
+.top-bar>.con>.menu-box-1>ul>li>ul>li:hover>a {
+	color: #1e1e1e;
+}
+
+.top-bar>.con>.menu-box-1>.bg {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background-color: white;
+	width: 100%;
+	height: 0;
+	transition: height 0.2s;
+}
+
+.page-1 {
+	margin-top: 72px;
+}
+
+/* 노말라이즈 */
+body, ul, li, h1 {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #FDE2F3;
 }
 
  
 
-/* 탑바 */
-.top-bar {
-  height: 72px;
-  border-bottom: 1px solid #f4f4f4;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: white;
-    z-index: 9999;
-}
-
-.top-bar > .con > .menu-box-1 > ul > li > a {
-  font-weight: bold;
-  color: #1e1e1e;
-  font-size: 17px;
-  padding: 0 15px;
-  position: relative;
-}
-
-.top-bar > .con > .menu-box-1 > ul > li > a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  background-color: black;
-  left: 0;
-  width: 0;
-  transition: width 0.3s;
-  height: 3px;
-}
-
-.top-bar > .con > .menu-box-1 > ul > li:hover > a::after {
-  width: 100%;
-}
-
-/* 2차메뉴 */
-.top-bar > .con > .menu-box-1 > ul > li {
-  position: relative;
-}
-
-.top-bar > .con > .menu-box-1 > ul > li > ul {
-  position: absolute;
-  left: 12px;
-  padding: 17px 0;
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.3s, opacity 0.3s;
-}
-
-.top-bar > .con > .menu-box-1 > ul > li:hover > ul {
-  visibility: visible;
-  opacity: 1;
-}
-
-.top-bar > .con > .menu-box-1 > ul > li > ul > li > a {
-  font-size: 17px;
-  color: #666666;
-  display: block;
-  padding: 10px 0;
-  white-space: nowrap;
-  font-weight: bold;
-}
-
-.top-bar > .con > .menu-box-1 > ul > li > ul > li:hover > a {
-  color: #1e1e1e;
-}
-
-.top-bar > .con > .menu-box-1 > .bg {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
-  width: 100%;
-  height: 0;
-  transition: height 0.2s;
-}
-
-.page-1 {
-  margin-top: 72px;
-}
-
-
 </style>
-	 
-	 
-	 <script>
-	 
-	 console.clear();
 
-	 function TopBar__init() {
-	   $(".top-bar .menu-box-1 > ul > li").mouseenter(function () {
-	     var height = $(this).find("> ul").height();
 
-	     $(".top-bar .menu-box-1 > .bg").css("height", height + 40 + "px");
-	   });
+	<script>
+		function TopBar__init() {
+			$(".top-bar .menu-box-1 > ul > li").mouseenter(
+					function() {
+						var height = $(this).find("> ul").height();
 
-	   $(".top-bar .menu-box-1 > ul > li").mouseleave(function () {
-	     $(".top-bar .menu-box-1 > .bg").css("height", 0 + "px");
-	   });
-	 }
+						$(".top-bar .menu-box-1 > .bg").css("height",
+								height + 40 + "px");
+					});
 
-	 TopBar__init();
+			$(".top-bar .menu-box-1 > ul > li").mouseleave(function() {
+				$(".top-bar .menu-box-1 > .bg").css("height", 0 + "px");
+			});
+		}
 
-	 // var onClickBtn = function () {
-	 //   var height = $(this).find(" > div").height();
-	 //   $(".box-2").css("height", height + "px");
-	 // };
+		TopBar__init();
 
-	 // $(".box-1 > .btns > li").mouseenter(onClickBtn);
-</script>
+		// var onClickBtn = function () {
+		//   var height = $(this).find(" > div").height();
+		//   $(".box-2").css("height", height + "px");
+		// };
+
+		// $(".box-1 > .btns > li").mouseenter(onClickBtn);
+	</script>

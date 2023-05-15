@@ -3,6 +3,7 @@
 <c:set var="pageTitle" value="JOIN" />
 <%@ include file="../common/head.jspf"%>
 <!-- 제이쿼리 불러오기 -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
 	let submitJoinFormDone = false;
@@ -210,6 +211,9 @@
 body {
 	background-color: #FDE2F3;
 	height: 705px; /* 높이 */
+ 
+  overflow: hidden;
+ 
 }
 
 .table-box-type-1 {

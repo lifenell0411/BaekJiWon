@@ -51,7 +51,7 @@ public class UsrReplyController {
 
 	@RequestMapping("/usr/reply/doDelete")
 	@ResponseBody
-	public String doDelete(int id, String replaceUri) {
+	public String doDelete( Integer id, String replaceUri) {
 
 		Reply reply = replyService.getReply(id);
 
@@ -77,7 +77,7 @@ public class UsrReplyController {
 	}
 
 	@RequestMapping("/usr/reply/modify")
-	public String showModify(Model model, int id, String replaceUri) {
+	public String showModify(Model model,  Integer id, String replaceUri) {
 
 		Reply reply = replyService.getForPrintReply(rq.getLoginedMemberId(), id);
 

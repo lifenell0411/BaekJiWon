@@ -52,7 +52,9 @@
 </section>
 
 <style>
-
+body {
+  overflow: hidden;
+}
  table {
   border-spacing: 0;
   width: 100%;

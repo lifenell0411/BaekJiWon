@@ -89,16 +89,16 @@ body {
   transition: transform calc(var(--d) * 2) var(--e);
 }
 .card:nth-child(1):before {
-  background-image: url(https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
+  background-image: url(https://github.com/lifenell0411/23_05_project/assets/113515172/d96f582d-78ed-4df6-8e15-ef2ce57fb2b3);
 }
 .card:nth-child(2):before {
-  background-image: url(https://images.unsplash.com/photo-1533903345306-15d1c30952de?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
+  background-image: url(https://github.com/lifenell0411/23_05_project/assets/113515172/bcc04f40-2db3-40ee-a294-0000c7bcc949);
 }
 .card:nth-child(3):before {
-  background-image: url(https://images.unsplash.com/photo-1545243424-0ce743321e11?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
+  background-image: url(https://github.com/lifenell0411/23_05_project/assets/113515172/55aee187-e99a-4f05-a097-d3f386987b1c);
 }
 .card:nth-child(4):before {
-  background-image: url(https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
+  background-image: url(https://github.com/lifenell0411/23_05_project/assets/113515172/674ce1f5-947f-44ae-893d-d8f4095a14a3);
 }
 
 .content {
@@ -197,33 +197,33 @@ body {
  
  </script>
  
- <main class="page-content">
+<main class="page-content">
   <div class="card">
     <div class="content">
       <h2 class="title">LETTERRING</h2>
       <p class="copy">Check out all of these gorgeous mountain trips with beautiful views of, you guessed it, the mountains</p>
-      <button class="btn">View Trips</button>
+      <a href="/usr/article/list?boardId=1" class="btn">View Trips</a>
     </div>
   </div>
   <div class="card">
     <div class="content">
       <h2 class="title">MINITATTOO</h2>
       <p class="copy">Plan your next beach trip with these fabulous destinations</p>
-      <button class="btn">View Trips</button>
+      <a href="/usr/article/list?boardId=2" class="btn">View Trips</a>
     </div>
   </div>
   <div class="card">
     <div class="content">
       <h2 class="title">BLACKWORK</h2>
       <p class="copy">It's the desert you've always dreamed of</p>
-      <button class="btn">Book Now</button>
+      <a href="/usr/article/list?boardId=3" class="btn">Book Now</a>
     </div>
   </div>
   <div class="card">
     <div class="content">
       <h2 class="title">ETC</h2>
       <p class="copy">Seriously, straight up, just blast off into outer space today</p>
-      <button class="btn">Book Now</button>
+      <a href="/usr/article/list?boardId=4" class="btn">Book Now</a>
     </div>
   </div>
 </main>

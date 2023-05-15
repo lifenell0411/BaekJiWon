@@ -144,6 +144,11 @@
 
 <style>
 /* 테이블 전체 스타일 */
+
+body {
+  overflow: hidden;
+}
+
 table {
 
 

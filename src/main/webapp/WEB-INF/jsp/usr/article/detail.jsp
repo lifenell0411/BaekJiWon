@@ -3,8 +3,8 @@
 <c:set var="pageTitle" value="ARTICLE DETAIL" />
 <%@ include file="../common/head.jspf"%>
 <hr />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <iframe src="http://localhost:8081/usr/article/doIncreaseHitCountRd?id=2" frameborder="0"></iframe> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 
 
 <script>
@@ -41,7 +41,7 @@ $(document).on('click', '.like-btn', function() {
 	    if (data.success) {
 	      console.log('찜하기 취소 완료!');
 	      $('#like-count').text(data.newPoint);
-	      $this.text('♡찜하기').removeClass('cancel-like-btn').addClass('like-btn');
+	      $this.text('🤍찜하기').removeClass('cancel-like-btn').addClass('like-btn');
 	    } else {
 	      console.log('찜하기 취소 실패!');
 	    }
@@ -50,34 +50,7 @@ $(document).on('click', '.like-btn', function() {
 
 	
 	
-	// 좋아요 버튼 클릭 이벤트 처리
-	document.querySelector("#good-reaction-btn").addEventListener("click", function() {
-	  const relTypeCode = "article";
-	  const relId = ${param.id };
-	  const xhr = new XMLHttpRequest();
-	  xhr.onreadystatechange = function() {
-	    if (xhr.readyState === xhr.DONE) {
-	      if (xhr.status === 200) {
-	        // 요청 성공시 처리
-	        const response = JSON.parse(xhr.responseText);
-	        if (response.resultCode === "S-1") {
-	          // 좋아요 처리 성공시 UI 업데이트
-	          const goodReactionPointEl = document.querySelector("#good-reaction-point");
-	          goodReactionPointEl.innerText = response.goodReactionPoint;
-	        } else {
-	          // 처리 실패시 처리
-	          alert(response.msg);
-	        }
-	      } else {
-	        // 요청 실패시 처리
-	        alert("요청 실패");
-	      }
-	    }
-	  };
-	  xhr.open("POST", "/usr/reactionPoint/doGoodReaction");
-	  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	  xhr.send(`relTypeCode=${relTypeCode}&relId=${relId}`);
-	});
+	
 	
 	
 </script>
@@ -222,7 +195,7 @@ $(document).on('click', '.like-btn', function() {
 												<span>&nbsp;</span>
 												<a
 													href="/usr/likePoint/doLikePoint?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs btn-error">♡찜하기</a>
+													class="btn btn-xs btn-error">🤍찜하기</a>
 											</span>
 											 
 										</div>
@@ -337,61 +310,71 @@ $(document).on('click', '.like-btn', function() {
 
 
 <section class="mt-5">
-<c:if test="${article.boardId eq 5 || article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
-	<div class="container mx-auto px-3">
-		<h1 class="text-3xl">댓글 리스트(${repliesCount })</h1>
-		<table class="table table-zebra w-full">
-			<colgroup>
-				<col width="70" />
-				<col width="100" />
-				<col width="100" />
-				<col width="50" />
-				<col width="140" />
-				<col width="50" />
-				<col width="50" />
-			</colgroup>
-			<thead>
-				<tr>
-					<th class ="replyHD">번호</th>
-					<th class ="replyHD">날짜</th>
-					<th class ="replyHD">작성자</th>
-					<th class ="replyHD">추천</th>
-					<th class ="replyHD">내용</th>
-					<th class ="replyHD">수정</th>
-					<th class ="replyHD">삭제</th>
-				</tr>
-			</thead>
+  <c:if test="${article.boardId eq 5 || article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
+    <div class="container mx-auto px-3">
+      <h1 class="text-3xl">댓글 리스트(${repliesCount})</h1>
+      <table class="table table-zebra w-full">
+        <colgroup>
+          <col width="70" />
+          <col width="100" />
+          <col width="100" />
+          <col width="50" />
+          <col width="140" />
+          <col width="50" />
+          <col width="50" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="replyHD">번호</th>
+            <th class="replyHD">날짜</th>
+            <th class="replyHD">작성자</th>
+            <th class="replyHD">추천</th>
+            <th class="replyHD">내용</th>
+            <th class="replyHD">수정</th>
+            <th class="replyHD">삭제</th>
+          </tr>
+        </thead>
 
-			<tbody>
-				<c:forEach var="reply" items="${replies }">
-					<tr class="hover">
-						<td>
-							<div class="badge">${reply.id}</div>
-						</td>
-						<td>${reply.getForPrintRegDateType1()}</td>
-						<td>${reply.extra__writer}</td>
-						<td>${reply.goodReactionPoint}</td>
-						<td align="left">${reply.body}</td>
-						<td>
-							<c:if test="${reply.actorCanModify }">
-								<a class="btn-text-link btn btn-active btn-ghost"
-									href="../reply/modify?id=${reply.id }&replaceUri=${rq.encodedCurrentUri}">수정</a>
-							</c:if>
-						</td>
-						<td>
-							<c:if test="${reply.actorCanDelete }">
-								<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
-									href="../reply/doDelete?id=${reply.id }&replaceUri=${rq.encodedCurrentUri}">삭제</a>
-							</c:if>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
+        <tbody>
+          <c:forEach var="reply" items="${replies}" varStatus="loop">
+            <c:if test="${loop.index < 5}">
+              <tr class="hover">
+                <td>
+                  <div class="badge">${reply.id}</div>
+                </td>
+                <td>${reply.getForPrintRegDateType1()}</td>
+                <td>${reply.extra__writer}</td>
+                <td>${reply.goodReactionPoint}</td>
+                <td align="left">${reply.body}</td>
+                <td>
+                  <c:if test="${reply.actorCanModify}">
+                    <a class="btn-text-link btn btn-active btn-ghost" href="../reply/modify?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">수정</a>
+                  </c:if>
+                </td>
+                <td>
+                  <c:if test="${reply.actorCanDelete}">
+                    <a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;" href="../reply/doDelete?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">삭제</a>
+                  </c:if>
+                </td>
+              </tr>
+            </c:if>
+          </c:forEach>
+        </tbody>
+      </table>
 
-		</table>
-	</div>
-	</c:if>
+      <div class="pagination">
+        <c:if test="${page > 1}">
+          <a href="?page=${page - 1}" class="btn btn-active">이전</a>
+        </c:if>
+
+        <c:if test="${page * 5 < repliesCount}">
+          <a href="?page=${page + 1}" class="btn btn-active">다음</a>
+        </c:if>
+      </div>
+    </div>
+  </c:if>
 </section>
+
 
 
 <style>

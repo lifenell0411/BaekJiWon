@@ -33,7 +33,9 @@
 
 
 <style>
-
+body {
+  overflow: hidden;
+}
 .btn-custom {
   background-color: #917FB3;
   color: white;
