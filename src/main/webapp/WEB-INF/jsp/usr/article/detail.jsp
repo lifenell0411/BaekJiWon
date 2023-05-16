@@ -362,15 +362,16 @@ $(document).on('click', '.like-btn', function() {
         </tbody>
       </table>
 
-      <div class="pagination">
-        <c:if test="${page > 1}">
-          <a href="?page=${page - 1}" class="btn btn-active">이전</a>
-        </c:if>
+    <div class="pagination">
+  <c:if test="${page > 1}">
+    <a href="?page=${page - 1}" class="btn btn-active">이전</a>
+  </c:if>
 
-        <c:if test="${page * 5 < repliesCount}">
-          <a href="?page=${page + 1}" class="btn btn-active">다음</a>
-        </c:if>
-      </div>
+  <c:if test="${page * 5 < repliesCount}">
+    <a href="?page=${page + 1}" class="btn btn-active">다음</a>
+  </c:if>
+</div>
+
     </div>
   </c:if>
 </section>

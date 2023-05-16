@@ -222,4 +222,11 @@ public class UsrArticleController {
 
 		return rd;
 	}
+	
+	@RequestMapping("/usr/article/about")
+	public String showAbout() {
+
+		return "usr/article/about";
+	}
+
 }

@@ -36,6 +36,9 @@
 		form.submit();
 
 	}
+	
+	
+	
 </script>
 
 <section class="mt-8 text-xl">
@@ -104,6 +107,43 @@
 
 		</div>
 	</div>
+	
+	<form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <button type="submit">Upload</button>
+</form>
+	<div id="imageContainer"></div>
 </section>
+
+<script>const form = document.getElementById('uploadForm');
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    fetch('/photos/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())  // JSON 형식으로 응답 받음
+    .then(data => {
+        // 이미지 URL을 받아와서 처리하는 로직 구현
+        const imageUrl = data.imageUrl;  // 수정: imageUrl 필드를 사용
+
+        // 이미지를 표시할 <img> 태그 생성
+        const imageElement = document.createElement('img');
+        imageElement.src = imageUrl;
+
+        // 이미지를 표시할 컨테이너 요소에 이미지 추가
+        const imageContainer = document.getElementById('imageContainer');
+        imageContainer.appendChild(imageElement);
+    })
+    .catch(error => {
+        // 오류 처리
+        console.error('Upload error:', error);
+    });
+});
+
+</script>
 
 <%@ include file="../common/foot.jspf"%>

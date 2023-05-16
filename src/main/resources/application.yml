@@ -1,6 +1,13 @@
 server:
   port: 8083
+
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
   mvc:
     view:
       prefix: /WEB-INF/jsp/
@@ -13,4 +20,7 @@ spring:
     password: 
 mybatis:
   type-aliases-package: com.KoreaIT.bjw._05_project.vo
-  
+
+photo:
+  upload:
+    directory: C:/Users/lifen/Documents/photo
