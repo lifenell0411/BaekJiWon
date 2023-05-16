@@ -60,7 +60,7 @@ body {
 }
 @media (min-width: 600px) {
   .card {
-    height: 350px;
+    height: 550px;
   }
 }
 .card:before {
@@ -69,7 +69,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 110%;
+  height: 120%;
   background-size: cover;
   background-position: 0 0;
   transition: transform calc(var(--d) * 1.5) var(--e);
