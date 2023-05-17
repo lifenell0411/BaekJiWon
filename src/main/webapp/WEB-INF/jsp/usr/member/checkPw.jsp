@@ -62,9 +62,6 @@ color: white;}
       height: 100vh;
      
     }
- body {
-   background-color: #FDE2F3;
-    height: 705px; /* 높이 */}
-    
+
 </style>
 <%@ include file="../common/foot.jspf"%>

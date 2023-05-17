@@ -8,7 +8,7 @@
 </head>
 <body>
  
-<a href="/"">
+<a href="/usr/home/main"">
   <span class="left">다 문신사랑 해</span>
 </a>
 </body>
@@ -28,8 +28,8 @@ body {
   padding: 50px 0;
   min-height: 100vh;
   margin: 0;  
-  background: radial-gradient(ellipse farthest-corner at center bottom, #6beace, #2e9aa4);
-  color: #8b9095;
+  background: radial-gradient(ellipse farthest-corner at center bottom, #917FB3, #917FB3);
+  color: #917FB3;
   font-size: 14px;
   font-family: 'Roboto', sans-serif;
   font-weight: 900;

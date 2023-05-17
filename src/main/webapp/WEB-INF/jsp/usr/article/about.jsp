@@ -34,6 +34,17 @@
 </div>
 
 <style>
+@font-face {
+	font-family: 'SUITE-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
+}
+
+body {
+}
 .container {
 	height: 800px;
 	width: 100vw;
@@ -47,9 +58,11 @@
 	justify-content: center;
 	align-items: flex-start;
 	position: relative;
+	font-family: 'SUITE-Regular', sans-serif;
 }
 
 .text, .text1 {
+font-size: 20px;
 	display: none;
 	position: absolute;
 	top: 50%;
@@ -89,6 +102,7 @@
 	align-items: center;
 	position: relative;
 	margin-bottom: 40px;
+	
 }
 
 .card0 {
@@ -138,11 +152,13 @@
 }
 
 h2 {
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	 
 	color: white;
 	margin: 20px;
 	opacity: 0;
 	transition: opacity 1s;
+		font-size: 24px;
+		font-weight: bold;
 }
 
 .fa {
@@ -157,7 +173,7 @@ h2 {
 	transform: translateY(-50%);
 	width: 10px;
 	height: 360px;
-	background-color: rgba(128, 128, 128, 0.5);
+	background-color: rgba(255, 255, 255, 0.1);
 	transition: width 1s ease-in-out;
 	box-shadow: 0 70px 63px -60px #000000;
 	border-radius: 10px;
@@ -174,7 +190,7 @@ h2 {
 	transform: translateY(-50%);
 	width: 10px;
 	height: 360px;
-	background-color: rgba(128, 128, 128, 0.5);
+	background-color: rgba(255, 255, 255, 0.1);
 	transition: width 1s ease-in-out;
 	box-shadow: 0 70px 63px -60px #000000;
 	border-radius: 10px;
@@ -222,7 +238,7 @@ h2 {
 	font-size: 70px;
 	left: 1200px;
 	top: 440px;
-	 transform: translateY(-50%);
+	transform: translateY(-50%);
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;

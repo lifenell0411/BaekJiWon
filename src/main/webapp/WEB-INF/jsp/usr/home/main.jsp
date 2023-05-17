@@ -47,6 +47,7 @@ body {
 }
 
 .card {
+margin-top: 100px;
   position: relative;
   display: flex;
   align-items: flex-end;

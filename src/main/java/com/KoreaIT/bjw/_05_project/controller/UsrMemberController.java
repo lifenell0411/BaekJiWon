@@ -110,7 +110,7 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {
+	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/usr/home/main") String afterLoginUri) {
 
 		if (rq.isLogined()) {
 			return Ut.jsHistoryBack("F-5", "이미 로그인 상태입니다");
@@ -144,7 +144,7 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
-	public String doLogout(@RequestParam(defaultValue = "/") String afterLogoutUri) {
+	public String doLogout(@RequestParam(defaultValue = "/usr/home/main") String afterLogoutUri) {
 
 		rq.logout();
 

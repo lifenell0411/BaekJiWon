@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 
 import com.KoreaIT.bjw._05_project.repository.ReactionPointRepository;
 import com.KoreaIT.bjw._05_project.vo.ResultData;
+import com.KoreaIT.bjw._05_project.vo.Rq;
 
 @Service
 public class ReactionPointService {
-
+	@Autowired
+	Rq rq;
 	@Autowired
 	private ReactionPointRepository reactionPointRepository;
 	@Autowired
@@ -83,5 +85,21 @@ public class ReactionPointService {
 
 		return ResultData.from("S-1", "싫어요 취소 처리 됨");
 	}
+	public boolean isAlreadyAddGoodRp(int relId, String relTypeCode) {
+		int getPointTypeCodeByMemberId = reactionPointRepository.getSumReactionPointByMemberId(rq.getLoginedMemberId(), relTypeCode, relId);
 
+		if (getPointTypeCodeByMemberId > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isAlreadyAddBadRp(int relId, String relTypeCode) {
+		int getPointTypeCodeByMemberId = reactionPointRepository.getSumReactionPointByMemberId(rq.getLoginedMemberId(), relTypeCode, relId);
+
+		if (getPointTypeCodeByMemberId < 0) {
+			return true;
+		}
+		return false;
+	}
 }

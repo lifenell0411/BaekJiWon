@@ -59,4 +59,7 @@ public interface ReactionPointRepository {
 			AND memberId = #{actorId}
 			""")
 	public void deleteBadReactionPoint(int actorId, String relTypeCode, int relId);
+	
+	
+	
 }

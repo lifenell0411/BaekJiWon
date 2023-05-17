@@ -3,59 +3,8 @@
 <c:set var="pageTitle" value="ARTICLE DETAIL" />
 <%@ include file="../common/head.jspf"%>
 <hr />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-
-
-<script>
-$(document).on('click', '.like-btn', function() {
-	  var $this = $(this);
-	  var relTypeCode = $this.attr('data-rel-type-code');
-	  var relId = $this.attr('data-rel-id');
-	  var replaceUri = $this.attr('data-replace-uri');
-	  
-	  $.post('/usr/likePoint/doLikePoint', {
-	    relTypeCode: relTypeCode,
-	    relId: relId
-	  }, function(data) {
-	    if (data.success) {
-	      console.log('찜하기 완료!');
-	      $('#like-count').text(data.newPoint);
-	      $this.text('❤찜하기취소').removeClass('like-btn').addClass('cancel-like-btn');
-	    } else {
-	      console.log('찜하기 실패!');
-	    }
-	  });
-	});
-
-	$(document).on('click', '.cancel-like-btn', function() {
-	  var $this = $(this);
-	  var relTypeCode = $this.attr('data-rel-type-code');
-	  var relId = $this.attr('data-rel-id');
-	  var replaceUri = $this.attr('data-replace-uri');
-	  
-	  $.post('/usr/likePoint/doCancelLikePoint', {
-	    relTypeCode: relTypeCode,
-	    relId: relId
-	  }, function(data) {
-	    if (data.success) {
-	      console.log('찜하기 취소 완료!');
-	      $('#like-count').text(data.newPoint);
-	      $this.text('🤍찜하기').removeClass('cancel-like-btn').addClass('like-btn');
-	    } else {
-	      console.log('찜하기 취소 실패!');
-	    }
-	  });
-	});
-
-	
-	
-	
-	
-	
-</script>
-
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <iframe src="http://localhost:8081/usr/article/doIncreaseHitCountRd?id=2" frameborder="0"></iframe> -->
 <script>
 	const params = {}
 	params.id = parseInt('${param.id}');
@@ -131,50 +80,54 @@ $(document).on('click', '.like-btn', function() {
 					<tr>
 						<c:if test="${article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
 							<tr>
-							<th class="table-header">추천</th>
-<td class="table-cell">
-	<span>&nbsp;좋아요 : ${article.goodReactionPoint }&nbsp;</span>
-	<span>&nbsp;싫어요 : ${article.badReactionPoint }&nbsp;</span>
-	<c:if test="${actorCanMakeReaction }">
-		<div>
-			<span>
-				<span>&nbsp;</span>
-				<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-				class="btn btn-xs ">좋아요 👍</a>
-			</span>
-			<span>
-				<span>&nbsp;</span>
-				<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-				class="btn btn-xs">싫어요 👎</a>
-			</span>
-		</div>
-	</c:if>
-	<c:if test="${actorCanCancelGoodReaction }">
-		<div>
-			<span>
-				<span>&nbsp;</span>
-				<a href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-				class="btn btn-xs">좋아요 취소 👍</a>
-			</span>
-			<span>
-				<span>&nbsp;</span>
-				<a class="btn btn-xs">싫어요 👎</a>
-			</span>
-		</div>
-	</c:if>
-	<c:if test="${actorCanCancelBadReaction }">
-		<div>
-			<span>
-				<span>&nbsp;</span>
-				<a class="btn btn-xs">좋아요 👍</a>
-			</span>
-			<span>
-				<span>&nbsp;</span>
-				<a href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-				class="btn btn-xs">싫어요 취소 👎</a>
-			</span>
-		</div>
-	</c:if>
+								<th class="table-header">추천</th>
+								<td class="table-cell">
+									<span>&nbsp;좋아요 : ${article.goodReactionPoint }&nbsp;</span>
+									<span>&nbsp;싫어요 : ${article.badReactionPoint }&nbsp;</span>
+									<c:if test="${actorCanMakeReaction }">
+										<div>
+											<span>
+												<span>&nbsp;</span>
+												<a
+													href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+													class="btn btn-xs ">좋아요 👍</a>
+											</span>
+											<span>
+												<span>&nbsp;</span>
+												<a
+													href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+													class="btn btn-xs">싫어요 👎</a>
+											</span>
+										</div>
+									</c:if>
+									<c:if test="${actorCanCancelGoodReaction }">
+										<div>
+											<span>
+												<span>&nbsp;</span>
+												<a
+													href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+													class="btn btn-xs">좋아요 취소 👍</a>
+											</span>
+											<span>
+												<span>&nbsp;</span>
+												<a onclick="alert(this.title); return false;" title="좋아요를 먼저 취소해" class="btn btn-xs">싫어요 👎</a>
+											</span>
+										</div>
+									</c:if>
+									<c:if test="${actorCanCancelBadReaction }">
+										<div>
+											<span>
+												<span>&nbsp;</span>
+												<a onclick="alert(this.title); return false;" title="싫어요를 먼저 취소해" class="btn btn-xs">좋아요 👍</a>
+											</span>
+											<span>
+												<span>&nbsp;</span>
+												<a
+													href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+													class="btn btn-xs">싫어요 취소 👎</a>
+											</span>
+										</div>
+									</c:if>
 								</td>
 							</tr>
 						</c:if>
@@ -195,7 +148,7 @@ $(document).on('click', '.like-btn', function() {
 												<span>&nbsp;</span>
 												<a
 													href="/usr/likePoint/doLikePoint?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs btn-error">🤍찜하기</a>
+													class="btn btn-xs btn-error">찜하기❤</a>
 											</span>
 											 
 										</div>
@@ -206,7 +159,7 @@ $(document).on('click', '.like-btn', function() {
 												<span>&nbsp;</span>
 												<a
 													href="/usr/likePoint/doCancelLikePoint?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs btn-error">❤찜하기취소</a>
+													class="btn btn-xs btn-error">찜하기❤ 취소</a>
 											</span>
 											
 										</div>
@@ -310,72 +263,61 @@ $(document).on('click', '.like-btn', function() {
 
 
 <section class="mt-5">
-  <c:if test="${article.boardId eq 5 || article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
-    <div class="container mx-auto px-3">
-      <h1 class="text-3xl">댓글 리스트(${repliesCount})</h1>
-      <table class="table table-zebra w-full">
-        <colgroup>
-          <col width="70" />
-          <col width="100" />
-          <col width="100" />
-          <col width="50" />
-          <col width="140" />
-          <col width="50" />
-          <col width="50" />
-        </colgroup>
-        <thead>
-          <tr>
-            <th class="replyHD">번호</th>
-            <th class="replyHD">날짜</th>
-            <th class="replyHD">작성자</th>
-            <th class="replyHD">추천</th>
-            <th class="replyHD">내용</th>
-            <th class="replyHD">수정</th>
-            <th class="replyHD">삭제</th>
-          </tr>
-        </thead>
+<c:if test="${article.boardId eq 5 || article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
+	<div class="container mx-auto px-3">
+		<h1 class="text-3xl">댓글 리스트(${repliesCount })</h1>
+		<table class="table table-zebra w-full">
+			<colgroup>
+				<col width="70" />
+				<col width="100" />
+				<col width="100" />
+				<col width="50" />
+				<col width="140" />
+				<col width="50" />
+				<col width="50" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th class ="replyHD">번호</th>
+					<th class ="replyHD">날짜</th>
+					<th class ="replyHD">작성자</th>
+					<th class ="replyHD">추천</th>
+					<th class ="replyHD">내용</th>
+					<th class ="replyHD">수정</th>
+					<th class ="replyHD">삭제</th>
+				</tr>
+			</thead>
 
-        <tbody>
-          <c:forEach var="reply" items="${replies}" varStatus="loop">
-            <c:if test="${loop.index < 5}">
-              <tr class="hover">
-                <td>
-                  <div class="badge">${reply.id}</div>
-                </td>
-                <td>${reply.getForPrintRegDateType1()}</td>
-                <td>${reply.extra__writer}</td>
-                <td>${reply.goodReactionPoint}</td>
-                <td align="left">${reply.body}</td>
-                <td>
-                  <c:if test="${reply.actorCanModify}">
-                    <a class="btn-text-link btn btn-active btn-ghost" href="../reply/modify?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">수정</a>
-                  </c:if>
-                </td>
-                <td>
-                  <c:if test="${reply.actorCanDelete}">
-                    <a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;" href="../reply/doDelete?id=${reply.id}&replaceUri=${rq.encodedCurrentUri}">삭제</a>
-                  </c:if>
-                </td>
-              </tr>
-            </c:if>
-          </c:forEach>
-        </tbody>
-      </table>
+			<tbody>
+				<c:forEach var="reply" items="${replies }">
+					<tr class="hover">
+						<td>
+							<div class="badge">${reply.id}</div>
+						</td>
+						<td>${reply.getForPrintRegDateType1()}</td>
+						<td>${reply.extra__writer}</td>
+						<td>${reply.goodReactionPoint}</td>
+						<td align="left">${reply.body}</td>
+						<td>
+							<c:if test="${reply.actorCanModify }">
+								<a class="btn-text-link btn btn-active btn-ghost"
+									href="../reply/modify?id=${reply.id }&replaceUri=${rq.encodedCurrentUri}">수정</a>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${reply.actorCanDelete }">
+								<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
+									href="../reply/doDelete?id=${reply.id }&replaceUri=${rq.encodedCurrentUri}">삭제</a>
+							</c:if>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
 
-    <div class="pagination">
-  <c:if test="${page > 1}">
-    <a href="?page=${page - 1}" class="btn btn-active">이전</a>
-  </c:if>
-
-  <c:if test="${page * 5 < repliesCount}">
-    <a href="?page=${page + 1}" class="btn btn-active">다음</a>
-  </c:if>
-</div>
-
-    </div>
-  </c:if>
+		</table>
+	</div>
+	</c:if>
 </section>
-
 
 
 <style>
@@ -448,6 +390,19 @@ input[type="text"], textarea {
 </style>
 
 
+<script>
 
+$(document).ready(function() {
+	  // 찜하기 버튼 클릭 이벤트
+	  $(".btn-error").click(function() {
+	    // 버튼 클릭 시, 효과를 추가
+	    $(this).addClass("active");
+	    // 1초 후, 효과를 제거
+	    setTimeout(function() {
+	      $(".btn-error").removeClass("active");
+	    }, 1000);
+	  });
+	});
+</script>
 
 <%@ include file="../common/foot.jspf"%>

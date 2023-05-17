@@ -47,7 +47,7 @@
 					<div class="bg"></div>
 					<ul class="height-100p flex">
 						<li>
-							<a href="/" class="flex flex-ai-c height-100p">HOME</a>
+							<a href="/usr/home/main" class="flex flex-ai-c height-100p">HOME</a>
 
 						</li>
 						<li>
@@ -125,6 +125,13 @@
 								</a>
 							</li>
 						</c:if>
+							<c:if test="${rq.admin}">
+					<li class="hover:underline">
+						<a class="h-full px-3 flex items-center" href="/adm/memberAndArticle/list">
+							<span>관리자</span>
+						</a>
+					</li>
+				</c:if>
 
 					</ul>
 				</nav>
@@ -148,88 +155,7 @@ label[for] {
 	cursor: pointer;
 	user-select: none;
 }
-
-/* 라이브러리 */
-.block {
-	display: block;
-}
-
-.inline-block {
-	display: inline-block;
-}
-
-.absolute-left {
-	position: absolute;
-	left: 0;
-}
-
-.absolute-right {
-	position: absolute;
-	right: 0;
-}
-
-.absolute-bottom {
-	position: absolute;
-	bottom: 0;
-}
-
-.absolute-top {
-	position: absolute;
-	top: 0;
-}
-
-.absolute-center {
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-}
-
-.absolute-middle {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-}
-
-.absolute-middle.absolute-center {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translateX(-50%) translateY(-50%);
-}
-
-.relative {
-	position: relative;
-}
-
-.cell {
-	float: left;
-	box-sizing: border-box;
-}
-
-.cell-right {
-	float: right;
-	box-sizing: border-box;
-}
-
-.row::after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-.clear-both {
-	clear: both;
-}
-
-.img-box>img {
-	width: 100%;
-	display: block;
-}
-
-.con {
-	margin-left: auto;
-	margin-right: auto;
-}
+ 
 
 .margin-0-auto {
 	margin-left: auto;
@@ -251,107 +177,11 @@ label[for] {
 .line-height-0>* {
 	line-height: normal;
 }
-
-.width-30px {
-	width: 30px;
-}
-
-.width-35px {
-	width: 35px;
-}
-
-.width-40px {
-	width: 35px;
-}
-
-.width-45px {
-	width: 35px;
-}
-
-.width-50px {
-	width: 50px;
-}
-
-.width-80px {
-	width: 80px;
-}
-
-.width-100px {
-	width: 100px;
-}
-
-.width-100p {
-	width: 100%;
-}
-
-.width-60p {
-	width: 60%;
-}
-
-.width-55p {
-	width: 55%;
-}
-
-.width-50p {
-	width: 50%;
-}
-
-.width-45p {
-	width: 45%;
-}
-
-.width-40p {
-	width: 40%;
-}
-
-.width-30p {
-	width: 30%;
-}
-
-.width-35p {
-	width: 35%;
-}
-
-.width-100p-except-30px {
-	width: calc(100% - 30px);
-}
-
-.width-100p-except-35px {
-	width: calc(100% - 35px);
-}
-
-.width-100p-except-40px {
-	width: calc(100% - 40px);
-}
-
-.width-100p-except-50px {
-	width: calc(100% - 50px);
-}
-
-.width-100p-except-80px {
-	width: calc(100% - 80px);
-}
-
-.width-100p-except-100px {
-	width: calc(100% - 100px);
-}
-
+ 
 .height-100p {
 	height: 100%;
 }
-
-.height-50p {
-	height: 50%;
-}
-
-.border-box {
-	box-sizing: border-box;
-}
-
-.font-size-dot-8rem {
-	font-size: 0.8rem;
-}
-
+   
 .table-row {
 	display: table;
 }
@@ -434,22 +264,10 @@ label[for] {
 *>.flex-row-wrap {
 	flex-flow: row wrap;
 }
-
-.flex-ch-basis-0>* {
-	flex-basis: 0;
-}
-
-*>.flex-1-0-0 {
-	flex: 1 0 0;
-}
-
-*>.bg-red {
-	background-color: red;
-}
-
+ 
 /* 커스텀 */
 .con {
-	max-width: 1140px;
+	max-width: none;
 }
 
 /* 탑바 */
@@ -462,6 +280,7 @@ label[for] {
 	width: 100%;
 	background-color: white;
 	z-index: 9999;
+	max-width: auto;
 }
 
 .top-bar>.con>.menu-box-1>ul>li>a {
@@ -530,7 +349,7 @@ label[for] {
 }
 
 .page-1 {
-	margin-top: 72px;
+ 
 }
 
 /* 노말라이즈 */
@@ -542,6 +361,7 @@ body, ul, li, h1 {
 
 html, body {
   height: 100%;
+   overflow: auto; 
 }
 
 body {

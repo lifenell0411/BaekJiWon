@@ -77,7 +77,7 @@
 					'<div class="mt-2">아이디를 5글자 이상 입력해주세요.</div>');
 			validLoginId = '';
 			return;
-		} else if (!regExp.test(form.loginId.value)) { // 입력된 아이디가 영어와 숫자로만 이루어져 있는지 확인
+		} if (!regExp.test(form.loginId.value)) { // 입력된 아이디가 영어와 숫자로만 이루어져 있는지 확인
 			$('.checkDup-msg').html(
 					'<div class="mt-2">아이디는 영어와 숫자로만 구성될 수 있습니다.</div>');
 			validLoginId = '';
@@ -140,6 +140,7 @@
 
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
+	  <div class="table-container">
 		<form class="table-box-type-1" method="POST" action="../member/doJoin" onsubmit="submitJoinForm(this); return false;">
 			<input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}" />
 			<table class="table table-zebra w-full">
@@ -203,29 +204,40 @@
 			</table>
 
 		</form>
+		</div>
 	</div>
 
 
 
+
+</section>
+<%@ include file="../common/foot.jspf"%>
+
 	<style>
 body {
 	background-color: #FDE2F3;
-	height: 705px; /* 높이 */
+	 
+  
  
-  overflow: hidden;
- 
+}
+
+.table-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 변경된 부분 */
+  min-height: 100vh;
+  padding: 100px 0;
+  box-sizing: border-box;
 }
 
 .table-box-type-1 {
-	width: 100%;
-	max-width: 800px;
-	margin: 0 auto;
+  margin: 0 auto; /* 중앙 정렬을 위해 추가 */
+  width: 500px;
 }
 
 .table-box-type-1 table {
-	border-collapse: collapse;
-	width: 100%;
-	top: 100px;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 .table-box-type-1 th, .table-box-type-1 td {
@@ -287,5 +299,3 @@ th {
 	background-color: #f2f2f2;
 }
 </style>
-</section>
-<%@ include file="../common/foot.jspf"%>

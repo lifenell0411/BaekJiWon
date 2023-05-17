@@ -1,5 +1,7 @@
 package com.KoreaIT.bjw._05_project.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.KoreaIT.bjw._05_project.repository.MemberRepository;
@@ -13,6 +15,20 @@ public class MemberService {
 
 	public MemberService(MemberRepository memberRepository) {
 		this.memberRepository = memberRepository;
+	}
+	public int getMembersCount(String authLevel, String searchKeywordTypeCode, String searchKeyword) {
+		return memberRepository.getMembersCount(authLevel, searchKeywordTypeCode, searchKeyword);
+	}
+
+	public List<Member> getForPrintMembers(String authLevel, String searchKeywordTypeCode, String searchKeyword,
+			int itemsInAPage, int page) {
+
+		int limitStart = (page - 1) * itemsInAPage;
+		int limitTake = itemsInAPage;
+		List<Member> members = memberRepository.getForPrintMembers(authLevel, searchKeywordTypeCode, searchKeyword,
+				limitStart, limitTake);
+
+		return members;
 	}
 
 	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
