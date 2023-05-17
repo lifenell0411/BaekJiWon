@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.KoreaIT.bjw._05_project.repository.LikePointRepository;
 import com.KoreaIT.bjw._05_project.vo.ResultData;
+import com.KoreaIT.bjw._05_project.vo.Rq;
 
 @Service
 public class LikePointService {
@@ -13,6 +14,8 @@ public class LikePointService {
 	private LikePointRepository likePointRepository;
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	Rq rq;
 ////////////////////////////////////////////////////////////////////////////////
 	
 	public ResultData actorCanMakeLike(int actorId, String relTypeCode, int relId) {
@@ -59,6 +62,14 @@ public class LikePointService {
 		return ResultData.from("S-1", "찜 취소 처리 됨");
 	}
 
+	public Object isAlreadyAddLikeRp(int relId, String relTypeCode) {
+		int getPointTypeCodeByMemberId = likePointRepository.getSumLikePointByMemberId(rq.getLoginedMemberId(), relTypeCode, relId);
+
+		if (getPointTypeCodeByMemberId > 0) {
+			return true;
+		}
+		return false;
+	}
 	 
 
 }

@@ -20,26 +20,24 @@ public class UsrLikePointController {
 
 	@RequestMapping("/usr/likePoint/doLikePoint")
 	@ResponseBody
-	public String doLikePoint(String relTypeCode, int relId, String replaceUri) {
-
-		ResultData actorCanMakeReactionRd = likePointService.actorCanMakeLike(rq.getLoginedMemberId(),
-				relTypeCode, relId);
-
-		if (actorCanMakeReactionRd.isFail()) {
-			return rq.jsHistoryBack("F-1", "이미 했음");
+	public ResultData doLikePoint(String relTypeCode, int relId, String replaceUri) {
+		ResultData actorCanMakeLikeRd = likePointService.actorCanMakeLike(rq.getLoginedMemberId(), relTypeCode, relId);
+		
+		int actorCanMakeLike = (int) actorCanMakeLikeRd.getData1();
+		
+		if (actorCanMakeLike == 1) {
+			ResultData rd = likePointService.deleteLikePoint(rq.getLoginedMemberId(), relTypeCode, relId);
+			return ResultData.from("S-1", "찜하기 취소");
 		}
-
+	 
 		ResultData rd = likePointService.addLikePoint(rq.getLoginedMemberId(), relTypeCode, relId);
 
 		if (rd.isFail()) {
-			rq.jsHistoryBack(rd.getMsg(), "찜하기 실패");
+			ResultData.from("F-1", rd.getMsg());
 		}
 
-		return rq.jsReplace(rd.getMsg(), replaceUri);
+		return ResultData.from("S-3", "좋아요");
 	}
-
-	
-	 
 
 	@RequestMapping("/usr/likePoint/doCancelLikePoint")
 	@ResponseBody

@@ -184,7 +184,7 @@ public class UsrArticleController {
 		model.addAttribute("article", article);
 		model.addAttribute("isAlreadyAddGoodRp", reactionPointService.isAlreadyAddGoodRp(id, "article"));
 		model.addAttribute("isAlreadyAddBadRp", reactionPointService.isAlreadyAddBadRp(id, "article"));
-
+		model.addAttribute("isAlreadyAddLikeRp", likePointService.isAlreadyAddLikeRp(id, "article"));
 	 
 		model.addAttribute("actorCanMakeLikeRd", actorCanMakeLikeRd);
 		model.addAttribute("actorCanMakeLike", actorCanMakeLikeRd.isSuccess());
@@ -214,19 +214,23 @@ public class UsrArticleController {
 		return "usr/article/detail";
 	}
 
-	@RequestMapping("usr/article/doIncreaseHitCount")
+	@RequestMapping("/usr/article/doIncreaseHitCountRd")
 	@ResponseBody
-	public ResultData doIncreaseHitCount(int id) {
+	public ResultData doIncreaseHitCountRd(int id) {
+
 		ResultData increaseHitCountRd = articleService.increaseHitCount(id);
-		
-		if(increaseHitCountRd.isFail()) {
+
+		if (increaseHitCountRd.isFail()) {
 			return increaseHitCountRd;
 		}
-		
-		ResultData rd =  ResultData.newData(increaseHitCountRd, articleService.getArticleHitCount(id));
-		
+
+		ResultData rd = ResultData.newData(increaseHitCountRd, "hitCount", articleService.getArticleHitCount(id));
+
+		rd.setData2("id", id);
+
 		return rd;
 	}
+
 	
 	@RequestMapping("/usr/article/about")
 	public String showAbout() {
