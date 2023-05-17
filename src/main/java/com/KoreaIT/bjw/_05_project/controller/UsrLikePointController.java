@@ -49,7 +49,7 @@ public class UsrLikePointController {
 				relTypeCode, relId);
 
 		if (actorCanMakeLikePoint.isSuccess()) {
-			return rq.jsHitoryBackOnView(actorCanMakeLikePoint.getMsg());
+			return rq.jsHistoryBackOnView(actorCanMakeLikePoint.getMsg());
 		}
 
 		ResultData rd = likePointService.deleteLikePoint(rq.getLoginedMemberId(), relTypeCode, relId);

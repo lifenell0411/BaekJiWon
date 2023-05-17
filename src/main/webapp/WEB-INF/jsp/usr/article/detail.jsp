@@ -1,46 +1,140 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="ARTICLE DETAIL" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="pageTitle" value="${article.title }" />
 <%@ include file="../common/head.jspf"%>
-<hr />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <iframe src="http://localhost:8081/usr/article/doIncreaseHitCountRd?id=2" frameborder="0"></iframe> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- 변수 생성 -->
 <script>
-	const params = {}
+	const params = {};
 	params.id = parseInt('${param.id}');
+	params.memberId = parseInt('${loginedMemberId}');
+	
+	var isAlreadyAddGoodRp = ${isAlreadyAddGoodRp};
+	var isAlreadyAddBadRp = ${isAlreadyAddBadRp};
 </script>
 
 <!-- 조회수 관련 -->
-<!-- <iframe src="http://localhost:8081/usr/article/doIncreaseHitCountRd?id=2" frameborder="0"></iframe> -->
-
-<script>
-	const params = {}
-	params.id = parseInt('${param.id}');
-</script>
 <script>
 	function ArticleDetail__increaseHitCount() {
-		
 		const localStorageKey = 'article__' + params.id + '__alreadyView';
+
 		if (localStorage.getItem(localStorageKey)) {
 			return;
 		}
+
 		localStorage.setItem(localStorageKey, true);
-				
-		$.get('../article/doIncreaseHitCountRd', {
+		$.get('../article/doIncreaseHitCount', {
 			id : params.id,
 			ajaxMode : 'Y'
 		}, function(data) {
 			$('.article-detail__hit-count').empty().html(data.data1);
 		}, 'json');
 	}
-	$(function() {
-		 // 실전코드
-		  		ArticleDetail__increaseHitCount();
-		 // 연습코드
-		  // setTimeout(ArticleDetail__increaseHitCount, 1000);
-	})
+	
 </script>
 
+<!-- 변수 값에 따라 각 id가 부여된 버튼에 클래스 추가(이미 눌려있다는 색상 표시) -->
+<script>
+	function checkAddRpBefore() {
+		if (isAlreadyAddGoodRp == true) {
+			$('#likeButton').removeClass('btn-outline').addClass('btn-danger');
+		} else if (isAlreadyAddBadRp == true) {
+			$('#DislikeButton').removeClass('btn-outline').addClass('btn-danger');
+		} else {
+			return;
+		}
+	};
+</script>
+
+<!-- 리액션 실행 코드 -->
+<script>
+	$(function() {
+		ArticleDetail__increaseHitCount();
+	});
+	
+	$(function() {
+		checkAddRpBefore();
+		});
+</script>
+
+<!-- 좋아요, 싫어요 관련 -->
+<script>
+	function doGoodReaction(articleId) {
+		$.ajax({
+            url: '/usr/reactionPoint/doGoodReaction',
+            type: 'POST',
+            data: {relTypeCode: 'article', relId: articleId},
+            dataType: 'json',
+            success: function(data) {
+                if (data.resultCode.startsWith('S-')) {
+                    var likeButton = $('#likeButton');
+                    var likeCount = $('#likeCount');
+                    var DislikeButton = $('#DislikeButton');
+                    var DislikeCount = $('#DislikeCount');
+
+                    if (data.resultCode == 'S-1') {
+                        likeButton.removeClass('btn-danger').addClass('btn-outline');
+                        likeCount.text(parseInt(likeCount.text()) - 1);
+                    } 
+                    else if (data.resultCode == 'S-2') {
+                    	DislikeButton.removeClass('btn-danger').addClass('btn-outline');
+                        DislikeCount.text(parseInt(DislikeCount.text()) - 1);
+                        likeButton.removeClass('btn-outline').addClass('btn-danger');
+                        likeCount.text(parseInt(likeCount.text()) + 1);
+                    }
+                    else {
+                        likeButton.removeClass('btn-outline').addClass('btn-danger');
+                        likeCount.text(parseInt(likeCount.text()) + 1);
+                    }
+                  
+                } 
+                else {
+                    alert(data.msg);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('오류가 발생했습니다: ' + textStatus);
+            }
+        });
+	}
+	
+	function doBadReaction(articleId) {
+		$.ajax({
+            url: '/usr/reactionPoint/doBadReaction',
+            type: 'POST',
+            data: {relTypeCode: 'article', relId: articleId},
+            dataType: 'json',
+            success: function(data) {
+                if (data.resultCode.startsWith('S-')) {
+                	var likeButton = $('#likeButton');
+                    var likeCount = $('#likeCount');                	
+                    var DislikeButton = $('#DislikeButton');
+                    var DislikeCount = $('#DislikeCount');
+
+                    if (data.resultCode == 'S-1') {
+                    	DislikeButton.removeClass('btn-danger').addClass('btn-outline');
+                    	DislikeCount.text(parseInt(DislikeCount.text()) - 1);
+                    } else if (data.resultCode == 'S-2') {
+                    	likeButton.removeClass('btn-danger').addClass('btn-outline');
+                    	likeCount.text(parseInt(likeCount.text()) - 1);
+                    	DislikeButton.removeClass('btn-outline').addClass('btn-danger');
+                        DislikeCount.text(parseInt(DislikeCount.text()) + 1);
+                    } else {
+                    	DislikeButton.removeClass('btn-outline').addClass('btn-danger');
+                        DislikeCount.text(parseInt(DislikeCount.text()) + 1);
+                    }
+                } 
+                else {
+                    alert(data.msg);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('오류가 발생했습니다: ' + textStatus);
+            }
+        });
+	}
+</script>
 
 <section class="text-xl">
 	<div class="container">
@@ -82,61 +176,22 @@
 							<tr>
 								<th class="table-header">추천</th>
 								<td class="table-cell">
-									<span>&nbsp;좋아요 : ${article.goodReactionPoint }&nbsp;</span>
-									<span>&nbsp;싫어요 : ${article.badReactionPoint }&nbsp;</span>
-									<c:if test="${actorCanMakeReaction }">
-										<div>
-											<span>
-												<span>&nbsp;</span>
-												<a
-													href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs ">좋아요 👍</a>
-											</span>
-											<span>
-												<span>&nbsp;</span>
-												<a
-													href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs">싫어요 👎</a>
-											</span>
-										</div>
+									 
+									 
+								 
+										<div class="btn_box">
+				<button id="likeButton" class="btn btn-outline" type="button" onclick="doGoodReaction(${param.id})">
+				    좋아요 👍
+				  <span id="likeCount">${article.goodReactionPoint}</span>
+				</button>
+				
+				<button id="DislikeButton" class="btn btn-outline" type="button" onclick="doBadReaction(${param.id})">
+				    싫어요 👎
+					<span id="DislikeCount">${article.badReactionPoint}</span>
+				</button>
+			</div> 
 									</c:if>
-									<c:if test="${actorCanCancelGoodReaction }">
-										<div>
-											<span>
-												<span>&nbsp;</span>
-												<a
-													href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs">좋아요 취소 👍</a>
-											</span>
-											<span>
-												<span>&nbsp;</span>
-												<a onclick="alert(this.title); return false;" title="좋아요를 먼저 취소해" class="btn btn-xs">싫어요 👎</a>
-											</span>
-										</div>
-									</c:if>
-									<c:if test="${actorCanCancelBadReaction }">
-										<div>
-											<span>
-												<span>&nbsp;</span>
-												<a onclick="alert(this.title); return false;" title="싫어요를 먼저 취소해" class="btn btn-xs">좋아요 👍</a>
-											</span>
-											<span>
-												<span>&nbsp;</span>
-												<a
-													href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
-													class="btn btn-xs">싫어요 취소 👎</a>
-											</span>
-										</div>
-									</c:if>
-								</td>
-							</tr>
-						</c:if>
-					
-					
-					
-					
-					
-					<c:if test="${article.boardId eq 1 || article.boardId eq 2 || article.boardId eq 3 || article.boardId eq 4}">
+									<c:if test="${article.boardId eq 1 || article.boardId eq 2 || article.boardId eq 3 || article.boardId eq 4}">
 							<tr>
 								<th class="table-header">찜하기</th>
 								<td class="table-cell">
@@ -183,226 +238,18 @@
 
 			</table>
 		</div>
-		<div class="btns">
-			<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
+	 
 
-			<c:if test="${article.actorCanModify }">
-				<a class="btn-text-link btn btn-active btn-ghost" href="../article/modify?id=${article.id }">수정</a>
-			</c:if>
-			<c:if test="${article.actorCanDelete }">
-				<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
-					href="../article/doDelete?id=${article.id }">삭제</a>
-			</c:if>
+		<br />
+		 
+			
+				<c:if test="${rq.getLoginedMemberId()==article.memberId }">
+						<a class="btn btn-outline" href="../article/modify?id=${article.id }">수정</a>
+						<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
+								href="doDelete?id=${article.id }">삭제</a>
+				</c:if>
+				<button class="btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
 		</div>
-	</div>
-</section>
-
-<!-- 댓글 관련 -->
-<script type="text/javascript">
-	let ReplyWrite__submitFormDone = false;
-
-	function ReplyWrite__submitForm(form) {
-		if (ReplyWrite__submitFormDone) {
-			return;
-		}
-		form.body.value = form.body.value.trim();
-
-		if (form.body.value.length < 3) {
-			alert('3글자 이상 입력하세요');
-			form.body.focus();
-			return;
-		}
-
-		ReplyWrite__submitFormDone = true;
-		form.submit();
-
-	}
-</script>
-
-<c:if test="${article.boardId eq 5 || article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
-<section class="mt-8 text-xl">
-	<div class="container mx-auto px-3">
-		<div class="table-box-type-1">
-			<c:if test="${rq.logined }">
-				<form action="../reply/doWrite" method="POST" onsubmit="ReplyWrite__submitForm(this); return false;">
-					<input type="hidden" name="relTypeCode" value="article" />
-					<input type="hidden" name="relId" value="${article.id }" />
-					<input type="hidden" name="replaceUri" value="${rq.currentUri }" />
-					<table>
-						<colgroup>
-							<col width="200" />
-						</colgroup>
-
-						<tbody>
-  <tr>
-    <th>댓글</th>
-    <td>
-      <div class="input-group">
-        <textarea class="input input-bordered" type="text" name="body" placeholder="내용을 입력해주세요"></textarea>
-        <button type="submit" value="작성" class="btn btn-active btn-ghost">
-          댓글 작성
-        </button>
-      </div>
-    </td>
-  </tr>
-</tbody>
-
-
-					</table>
-				</form>
-			</c:if>
-			<c:if test="${rq.notLogined }">
-				<a class="btn-text-link btn btn-active btn-ghost" href="${rq.loginUri }">로그인</a> 하고 해라
-			</c:if>
-		</div>
-
-	</div>
-	
-	</c:if>
-</section>
-
-
-<section class="mt-5">
-<c:if test="${article.boardId eq 5 || article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
-	<div class="container mx-auto px-3">
-		<h1 class="text-3xl">댓글 리스트(${repliesCount })</h1>
-		<table class="table table-zebra w-full">
-			<colgroup>
-				<col width="70" />
-				<col width="100" />
-				<col width="100" />
-				<col width="50" />
-				<col width="140" />
-				<col width="50" />
-				<col width="50" />
-			</colgroup>
-			<thead>
-				<tr>
-					<th class ="replyHD">번호</th>
-					<th class ="replyHD">날짜</th>
-					<th class ="replyHD">작성자</th>
-					<th class ="replyHD">추천</th>
-					<th class ="replyHD">내용</th>
-					<th class ="replyHD">수정</th>
-					<th class ="replyHD">삭제</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<c:forEach var="reply" items="${replies }">
-					<tr class="hover">
-						<td>
-							<div class="badge">${reply.id}</div>
-						</td>
-						<td>${reply.getForPrintRegDateType1()}</td>
-						<td>${reply.extra__writer}</td>
-						<td>${reply.goodReactionPoint}</td>
-						<td align="left">${reply.body}</td>
-						<td>
-							<c:if test="${reply.actorCanModify }">
-								<a class="btn-text-link btn btn-active btn-ghost"
-									href="../reply/modify?id=${reply.id }&replaceUri=${rq.encodedCurrentUri}">수정</a>
-							</c:if>
-						</td>
-						<td>
-							<c:if test="${reply.actorCanDelete }">
-								<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
-									href="../reply/doDelete?id=${reply.id }&replaceUri=${rq.encodedCurrentUri}">삭제</a>
-							</c:if>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-
-		</table>
-	</div>
-	</c:if>
-</section>
-
-
-<style>
-.container{
-
-margin-top: 200px;
-}
- 
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.table-header, .table-cell {
- 
-  padding: 8px;
-  text-align: center;
-}
-
- 
-
-.table-cell:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-th, td {
-  border: none;
-  padding: 10px;
-  text-align: center;
-}
-
-.table-header {
-  background-color: #917FB3;
-  font-weight: bold;
-  color: white;
-}
-.table-cell {
-background-color: white;
-}
-
-.replyHD {
- background-color: #917FB3;
-  font-weight: bold;
-  color: white;
-}
-
-input[type="text"], textarea {
-  width: 100%;
-  max-width: 900px; /* 원하는 최대 너비값으로 변경 가능 */
-}
-
-.input-group {
-  display: flex;
-  align-items: center;
-}
-
-.input-group .input {
-  flex: 1;
-  margin-right: 10px;
-}
-
-.input-group .btn {
-  white-space: nowrap;
-}
-
-.btn-error.active {
-  background-color: red;
-  color: white;
-}
-</style>
-
-
-<script>
-
-$(document).ready(function() {
-	  // 찜하기 버튼 클릭 이벤트
-	  $(".btn-error").click(function() {
-	    // 버튼 클릭 시, 효과를 추가
-	    $(this).addClass("active");
-	    // 1초 후, 효과를 제거
-	    setTimeout(function() {
-	      $(".btn-error").removeClass("active");
-	    }, 1000);
-	  });
-	});
-</script>
+</div>
 
 <%@ include file="../common/foot.jspf"%>

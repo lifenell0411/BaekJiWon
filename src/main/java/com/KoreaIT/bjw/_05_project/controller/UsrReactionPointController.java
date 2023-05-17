@@ -12,9 +12,10 @@ import com.KoreaIT.bjw._05_project.vo.Rq;
 @Controller
 public class UsrReactionPointController {
 	@Autowired
-	private Rq rq;
-	@Autowired
 	private ReactionPointService reactionPointService;
+
+	@Autowired
+	private Rq rq;
 
 	@RequestMapping("usr/reactionPoint/doGoodReaction")
 	@ResponseBody

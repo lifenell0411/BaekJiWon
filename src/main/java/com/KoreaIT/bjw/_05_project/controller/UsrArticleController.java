@@ -47,7 +47,7 @@ public class UsrArticleController {
 		Board board = boardService.getBoardById(boardId);
 
 		if (board == null) {
-			return rq.jsHitoryBackOnView("없는 게시판이야");
+			return rq.jsHistoryBackOnView("없는 게시판이야");
 		}
 
 		int articlesCount = articleService.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
@@ -77,13 +77,13 @@ public class UsrArticleController {
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		if (article == null) {
-			return rq.jsHitoryBackOnView(Ut.f("%d번 글은 존재하지 않습니다!", id));
+			return rq.jsHistoryBackOnView(Ut.f("%d번 글은 존재하지 않습니다!", id));
 		}
 
 		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
 
 		if (actorCanModifyRd.isFail()) {
-			return rq.jsHitoryBackOnView(actorCanModifyRd.getMsg());
+			return rq.jsHistoryBackOnView(actorCanModifyRd.getMsg());
 		}
 
 		model.addAttribute("article", article);
@@ -185,8 +185,7 @@ public class UsrArticleController {
 		model.addAttribute("isAlreadyAddGoodRp", reactionPointService.isAlreadyAddGoodRp(id, "article"));
 		model.addAttribute("isAlreadyAddBadRp", reactionPointService.isAlreadyAddBadRp(id, "article"));
 
-		model.addAttribute("actorCanMakeReactionRd", actorCanMakeReactionRd);
-		model.addAttribute("actorCanMakeReaction", actorCanMakeReactionRd.isSuccess());
+	 
 		model.addAttribute("actorCanMakeLikeRd", actorCanMakeLikeRd);
 		model.addAttribute("actorCanMakeLike", actorCanMakeLikeRd.isSuccess());
 		
@@ -215,20 +214,17 @@ public class UsrArticleController {
 		return "usr/article/detail";
 	}
 
-	@RequestMapping("/usr/article/doIncreaseHitCountRd")
+	@RequestMapping("usr/article/doIncreaseHitCount")
 	@ResponseBody
-	public ResultData doIncreaseHitCountRd(int id) {
-
+	public ResultData doIncreaseHitCount(int id) {
 		ResultData increaseHitCountRd = articleService.increaseHitCount(id);
-
-		if (increaseHitCountRd.isFail()) {
+		
+		if(increaseHitCountRd.isFail()) {
 			return increaseHitCountRd;
 		}
-
-		ResultData rd = ResultData.newData(increaseHitCountRd, "hitCount", articleService.getArticleHitCount(id));
-
-		rd.setData2("id", id);
-
+		
+		ResultData rd =  ResultData.newData(increaseHitCountRd, articleService.getArticleHitCount(id));
+		
 		return rd;
 	}
 	

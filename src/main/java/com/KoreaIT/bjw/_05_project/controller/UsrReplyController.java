@@ -82,13 +82,13 @@ public class UsrReplyController {
 		Reply reply = replyService.getForPrintReply(rq.getLoginedMemberId(), id);
 
 		if (reply == null) {
-			return rq.jsHitoryBackOnView(Ut.f("%d번 댓글은 존재하지 않습니다!", id));
+			return rq.jsHistoryBackOnView(Ut.f("%d번 댓글은 존재하지 않습니다!", id));
 		}
 
 		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMemberId(), reply);
 
 		if (actorCanModifyRd.isFail()) {
-			return rq.jsHitoryBackOnView(actorCanModifyRd.getMsg());
+			return rq.jsHistoryBackOnView(actorCanModifyRd.getMsg());
 		}
 
 		Article article = articleService.getArticle(reply.getRelId());

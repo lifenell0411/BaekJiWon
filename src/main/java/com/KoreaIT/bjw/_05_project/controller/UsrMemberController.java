@@ -169,7 +169,7 @@ public class UsrMemberController {
 		System.out.println("========================================" + loginPw);
 		System.out.println("========================================" + replaceUri);
 		if (Ut.empty(loginPw)) {
-			return rq.jsHitoryBackOnView("비밀번호 입력해");
+			return rq.jsHistoryBackOnView("비밀번호 입력해");
 		}
 
 		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
@@ -193,16 +193,16 @@ public class UsrMemberController {
 			loginPw = null;
 		}
 		if (Ut.empty(name)) {
-			return rq.jsHitoryBackOnView("name 입력해");
+			return rq.jsHistoryBackOnView("name 입력해");
 		}
 		if (Ut.empty(nickname)) {
-			return rq.jsHitoryBackOnView("nickname 입력해");
+			return rq.jsHistoryBackOnView("nickname 입력해");
 		}
 		if (Ut.empty(cellphoneNum)) {
-			return rq.jsHitoryBackOnView("cellphoneNum 입력해");
+			return rq.jsHistoryBackOnView("cellphoneNum 입력해");
 		}
 		if (Ut.empty(email)) {
-			return rq.jsHitoryBackOnView("email 입력해");
+			return rq.jsHistoryBackOnView("email 입력해");
 		}
 
 		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, cellphoneNum,
