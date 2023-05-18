@@ -15,6 +15,7 @@ import com.KoreaIT.bjw._05_project.service.MemberService;
 import com.KoreaIT.bjw._05_project.util.Ut;
 
 import lombok.Getter;
+
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
@@ -77,7 +78,7 @@ public class Rq {
 
 	}
 
-	public void printHitoryBackJs(String msg) throws IOException {
+	public void printHistoryBackJs(String msg) throws IOException {
 		resp.setContentType("text/html; charset=UTF-8");
 		print(Ut.jsHistoryBack("F-B", msg));
 	}
@@ -221,7 +222,17 @@ public class Rq {
 
 		return loginedMember.isAdmin();
 	}
-	
-	
+
+	public String getImgUri(int id) {
+		return "/common/genFile/file/article/" + id + "/extra/Img/1";
+	}
+
+	public String getProfileFallbackImgUri() {
+		return "https://via.placeholder.com/150/?text=*^_^*";
+	}
+
+	public String getProfileFallbackImgOnErrorHtml() {
+		return "this.src = '" + getProfileFallbackImgUri() + "'";
+	}
 
 }

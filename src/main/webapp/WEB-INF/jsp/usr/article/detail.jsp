@@ -258,6 +258,9 @@ input[type="text"], textarea {
         });
 	}
 	
+	
+	
+	
 </script>
 
 
@@ -301,7 +304,14 @@ input[type="text"], textarea {
 							<span class="article-detail__hit-count">${article.hitCount }</span>
 						</td>
 					</tr>
-
+		<tr>
+						<th>첨부 이미지</th>
+						<td>
+							<img class="w-full rounded-xl" src="${rq.getImgUri(article.id)}"
+								onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
+							<div>${rq.getImgUri(article.id)}</div>
+						</td>
+					</tr>
 					<tr>
 						<c:if test="${article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
 							<tr>
@@ -335,6 +345,7 @@ input[type="text"], textarea {
 													찜하기
 													<span id="loveCount">${article.likePoint}</span>
 												</button>
+											 
 										</div>
 									</c:if>
 									

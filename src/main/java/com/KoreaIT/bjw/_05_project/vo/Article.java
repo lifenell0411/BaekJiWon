@@ -18,7 +18,7 @@ public class Article {
 	private int badReactionPoint;
 	private int boardId;
 	private int likePoint;
-
+	private int doCancelLikePoint;
 	private String extra__writer;
 
 	private boolean actorCanModify;

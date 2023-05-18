@@ -1,6 +1,7 @@
 package com.KoreaIT.bjw._05_project.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,9 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.KoreaIT.bjw._05_project.service.ArticleService;
 import com.KoreaIT.bjw._05_project.service.BoardService;
+import com.KoreaIT.bjw._05_project.service.GenFileService;
 import com.KoreaIT.bjw._05_project.service.LikePointService;
 import com.KoreaIT.bjw._05_project.service.ReactionPointService;
 import com.KoreaIT.bjw._05_project.service.ReplyService;
@@ -22,6 +26,7 @@ import com.KoreaIT.bjw._05_project.vo.ResultData;
 import com.KoreaIT.bjw._05_project.vo.Rq;
 
 
+
 @Controller
 public class UsrArticleController {
 
@@ -29,16 +34,18 @@ public class UsrArticleController {
 	private ArticleService articleService;
 	@Autowired
 	private BoardService boardService;
- 
 	@Autowired
 	private ReplyService replyService;
+	@Autowired
+	private LikePointService likePointService;
 	@Autowired
 	private Rq rq;
 	@Autowired
 	private ReactionPointService reactionPointService;
+
 	@Autowired
-	private LikePointService likePointService;
-	
+	private GenFileService genFileService;
+
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
 			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
@@ -138,7 +145,8 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(int boardId, String title, String body, String replaceUri) {
+	public String doWrite(int boardId, String title, String body, String replaceUri,
+			MultipartRequest multipartRequest) {
 
 		if (Ut.empty(title)) {
 			return rq.jsHistoryBack("F-1", "제목을 입력해주세요");
@@ -153,6 +161,16 @@ public class UsrArticleController {
 
 		if (Ut.empty(replaceUri)) {
 			replaceUri = Ut.f("../article/detail?id=%d", id);
+		}
+
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+		for (String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+
+			if (multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, id);
+			}
 		}
 
 		return rq.jsReplace(Ut.f("%d번 글이 생성되었습니다", id), replaceUri);
@@ -177,6 +195,10 @@ public class UsrArticleController {
 			model.addAttribute("actorCanMakeReaction", actorCanMakeReactionRd.isSuccess());
 			
 		}
+		if(actorCanMakeLikeRd.isSuccess()) {
+			model.addAttribute("actorCanMakeLike", actorCanMakeLikeRd.isSuccess());
+			
+		}
 		
 
 		model.addAttribute("repliesCount", repliesCount);
@@ -185,10 +207,7 @@ public class UsrArticleController {
 		model.addAttribute("isAlreadyAddGoodRp", reactionPointService.isAlreadyAddGoodRp(id, "article"));
 		model.addAttribute("isAlreadyAddBadRp", reactionPointService.isAlreadyAddBadRp(id, "article"));
 		model.addAttribute("isAlreadyAddLikeRp", likePointService.isAlreadyAddLikeRp(id, "article"));
-	 
-		model.addAttribute("actorCanMakeLikeRd", actorCanMakeLikeRd);
-		model.addAttribute("actorCanMakeLike", actorCanMakeLikeRd.isSuccess());
-		
+ 
 		if (actorCanMakeReactionRd.getResultCode().equals("F-2")) {
 			int sumReactionPointByMemberId = (int) actorCanMakeReactionRd.getData1();
 
@@ -208,6 +227,9 @@ public class UsrArticleController {
 			
 			}
 		}
+		
+	 
+
 
 		
 		

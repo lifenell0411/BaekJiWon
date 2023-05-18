@@ -96,7 +96,12 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
-		
+		<!-- 파일 업로드를 위한 -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>31.1-jre</version>
+		</dependency>
 		
 		  <dependency>
         <groupId>commons-validator</groupId>
