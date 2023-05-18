@@ -42,7 +42,7 @@ public interface LikePointRepository {
 			""")
 	public void deleteLikePoint(int actorId, String relTypeCode, int relId);
 	@Update("""
-				DELETE FROM likePoint
+			DELETE FROM likePoint
 			WHERE relTypeCode = #{relTypeCode}
 			AND relId = #{relId}
 			AND memberId = #{actorId}

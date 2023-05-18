@@ -50,7 +50,7 @@ public class UsrLikePointController {
 			return rq.jsHistoryBackOnView(actorCanMakeLikePoint.getMsg());
 		}
 
-		ResultData rd = likePointService.cancelLikePoint(rq.getLoginedMemberId(), relTypeCode, relId);
+		ResultData rd = likePointService.deleteLikePoint(rq.getLoginedMemberId(), relTypeCode, relId);
 
 		if (rd.isFail()) {
 			rq.jsHistoryBack(rd.getMsg(), "찜하기 취소 실패");

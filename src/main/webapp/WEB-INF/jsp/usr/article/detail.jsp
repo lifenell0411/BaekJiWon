@@ -229,18 +229,16 @@ input[type="text"], textarea {
                 if (data.resultCode.startsWith('S-')) {
                     var loveButton = $('#loveButton');
                     var loveCount = $('#loveCount');
-                    var DisLoveButton = $('#DisLoveButton');
-                    var DisLoveCount = $('#DisLoveCount');
-
+                
                     if (data.resultCode == 'S-1') {
                     	loveButton.removeClass('btn-danger').addClass('btn-outline');
-                    	loveCount.text(parseInt(likeCount.text()) - 1);
+                    	loveCount.text(parseInt(loveCount.text()) - 1);
                     } 
-                    else if (data.resultCode == 'S-2') {
-                    	DisLoveButton.removeClass('btn-danger').addClass('btn-outline');
-                    	DisLoveCount.text(parseInt(DislikeCount.text()) - 1);
+                    else if (data.resultCode == 'S-3') {
                     	loveButton.removeClass('btn-outline').addClass('btn-danger');
                     	loveCount.text(parseInt(loveCount.text()) + 1);
+                
+                    	
                     }
                     else {
                     	loveButton.removeClass('btn-outline').addClass('btn-danger');
@@ -334,7 +332,7 @@ input[type="text"], textarea {
 						</c:if>
 						<c:if test="${article.boardId eq 1 || article.boardId eq 2 || article.boardId eq 3 || article.boardId eq 4}">
 							<tr>
-								<th class="table-header">찜하기</th>
+								<th class="table-header">찜</th>
 								<td class="table-cell">
 								 
 
@@ -342,7 +340,7 @@ input[type="text"], textarea {
 										<div>
 										 
 												<button id="loveButton" class="btn btn-ghost" " type="button" onclick="doLikePoint(${param.id})">
-													찜하기
+													❤
 													<span id="loveCount">${article.likePoint}</span>
 												</button>
 											 

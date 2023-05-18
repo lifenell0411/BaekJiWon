@@ -16,7 +16,7 @@ public class LikePointService {
 	private ArticleService articleService;
 	@Autowired
 	Rq rq;
-////////////////////////////////////////////////////////////////////////////////
+ 
 	
 	public ResultData actorCanMakeLike(int actorId, String relTypeCode, int relId) {
 		if (actorId == 0) {
@@ -51,19 +51,15 @@ public class LikePointService {
 	 
 
 	public ResultData deleteLikePoint(int actorId, String relTypeCode, int relId) {
-	    likePointRepository.deleteLikePoint(actorId, relTypeCode, relId);
-	    int affectedRow = likePointRepository.cancelLikePoint(actorId, relTypeCode, relId);
-	    if (affectedRow != 1) {
-	        return ResultData.from("F-2", "찜하기 취소 실패");
-	    }
-	    switch (relTypeCode) {
-	        case "article":
-	            articleService.decreaseLikePoint(relId);
-	            break;
-	        // 다른 relTypeCode 값에 대한 처리 추가 가능
-	    }
+		likePointRepository.deleteLikePoint(actorId, relTypeCode, relId);
 
-	    return ResultData.from("S-1", "찜 취소 처리 됨");
+		switch (relTypeCode) {
+		case "article":
+			articleService.decreaseLikePoint(relId);
+			break;
+		}
+
+		return ResultData.from("S-1", "좋아요 취소 처리 됨");
 	}
 
 	public Object isAlreadyAddLikeRp(int relId, String relTypeCode) {
@@ -75,20 +71,5 @@ public class LikePointService {
 		return false;
 	}
 
-	public ResultData cancelLikePoint(int actorId, String relTypeCode, int relId) {
-		int affectedRow = likePointRepository.cancelLikePoint(actorId, relTypeCode, relId);
-
-		if (affectedRow != 1) {
-			return ResultData.from("F-2", "찜하기 취소 실패");
-		}
-
-		switch (relTypeCode) {
-		case "article":
-			articleService.decreaseLikePoint(relId);
-			break;
-		}
-
-		return ResultData.from("S-1", "싫어요 처리 됨");
-	}
-
+	 
 }
