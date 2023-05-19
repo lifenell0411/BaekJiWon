@@ -28,6 +28,8 @@ public class GenFileService {
 	@Autowired
 	private GenFileRepository genFileRepository;
 
+	
+	 // 파일 메타 데이터를 저장하기 위한 파라미터 생성
 	public ResultData saveMeta(String relTypeCode, int relId, String typeCode, String type2Code, int fileNo,
 			String originFileName, String fileExtTypeCode, String fileExtType2Code, String fileExt, int fileSize,
 			String fileDir) {
@@ -36,8 +38,9 @@ public class GenFileService {
 				"type2Code", type2Code, "fileNo", fileNo, "originFileName", originFileName, "fileExtTypeCode",
 				fileExtTypeCode, "fileExtType2Code", fileExtType2Code, "fileExt", fileExt, "fileSize", fileSize,
 				"fileDir", fileDir);
+		// 파일 메타 데이터를 저장하는 메서드 호출
 		genFileRepository.saveMeta(param);
-
+		// 저장된 파일 메타 데이터의 ID를 가져옴
 		int id = Ut.getAsInt(param.get("id"), 0);
 		return new ResultData("S-1", "성공하였습니다.", "id", id);
 	}
@@ -94,7 +97,7 @@ public class GenFileService {
 		String targetFileName = newGenFileId + "." + fileExt;
 		String targetFilePath = targetDirPath + "/" + targetFileName;
 
-		// 파일 생성(업로드된 파일을 지정된 경로롤 옮김)
+		// 파일 생성(업로드된 파일을 지정된 경로를 옮김)
 		try {
 			multipartFile.transferTo(new File(targetFilePath));
 		} catch (IllegalStateException | IOException e) {
@@ -197,6 +200,15 @@ public class GenFileService {
 		}
 	}
 
+	
+	public void deleteGenFiles(String relTypeCode, int relId, String typeCode, String type2Code, int fileNo) {
+		GenFile genFile = genFileRepository.getGenFile(relTypeCode, relId, typeCode, type2Code, fileNo);
+
+		deleteGenFile(genFile);
+	}
+
+	
+	
 	private void deleteGenFile(GenFile genFile) {
 		String filePath = genFile.getFilePath(genFileDirPath);
 		Ut.deleteFile(filePath);

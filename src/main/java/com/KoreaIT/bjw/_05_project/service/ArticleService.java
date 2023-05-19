@@ -129,7 +129,7 @@ public class ArticleService {
 	}
 
 	
-	// 조회수 증가 
+	// 해당 게시글의 id값을 전달받아 조회수 증가
 	public ResultData increaseHitCount(int id) {
 		int affectedRow = articleRepository.increaseHitCount(id);
 
@@ -141,13 +141,13 @@ public class ArticleService {
 		return ResultData.from("S-1", "조회수 증가", "affectedRowRd", affectedRow);
 	}
 
-	// 특정 게시글의 조회수를 가져옴
+	// id가 일치하는 특정 게시글의 조회수를 가져옴
 	public int getArticleHitCount(int id) {
 		return articleRepository.getArticleHitCount(id);
 	}
 
 	
-	// 좋아요 클릭시 좋아요를 증가, 게시글의 id를 인자로 넘겨줌
+	// 게시글의 id를 인자로 넘겨줌, 좋아요 클릭시 좋아요를 증가
 	public ResultData increaseGoodReationPoint(int relId) {
 		int affectedRow = articleRepository.increaseGoodReationPoint(relId);
 
@@ -158,7 +158,7 @@ public class ArticleService {
 	}
 
 	
-	// 싫어요 클릭시 싫어요를 증가, 게시글의 id를 인자로 넘겨줌
+	// 게시글의 id를 인자로 넘겨줌, 싫어요 클릭시 싫어요를 증가 
 	public ResultData increaseBadReationPoint(int relId) {
 
 		int affectedRow = articleRepository.increaseBadReationPoint(relId);
@@ -215,5 +215,22 @@ public class ArticleService {
 		return ResultData.from("S-1", "찜하기 감소", "affectedRow", affectedRow);
 	}
 	
+	public Article getArticleById(int id) {
+		return articleRepository.getArticle(id);
+	}
+
+	public void deleteArticles(List<Integer> articleIds) {
+		for (int articleId : articleIds) {
+			Article article = getArticleById(articleId);
+
+			if (article != null) {
+				deleteArticle(article);
+			}
+		}
+	}
+
+	private void deleteArticle(Article article) {
+		articleRepository.deleteArticle(article.getId());
+	}
 	
 }

@@ -20,7 +20,7 @@ public class LikePointService {
 	Rq rq;
  
 	
-	// 해당 사용자가 찜하기 클릭이 가능한지 확인, 사용자의 id와 relTypeCode, 게시글번호를 인자로 전달
+	// 해당 사용자가 찜하기 클릭이 가능한지 확인, 사용자의 id와 게시판 타입인 relTypeCode, 게시글번호를 인자로 전달
 	public ResultData actorCanMakeLike(int actorId, String relTypeCode, int relId) {
 		
 		// 로그인 후 찜하기 가능하도록
@@ -75,7 +75,7 @@ public class LikePointService {
 	}
 
 	
-	// 로그인한 멤버가 이미 좋아요를 추가한 경우 true를, 좋아요를 추가하지 않은 경우 false 리턴
+	// 게시글번호와 게시글 타입에 따라 로그인한 멤버가 이미 좋아요를 추가한 경우 좋아요 할 수 없도록 
 	public boolean isAlreadyAddLikeRp(int relId, String relTypeCode) {
 		int getPointTypeCodeByMemberId = likePointRepository.getSumLikePointByMemberId(rq.getLoginedMemberId(), relTypeCode, relId);
 

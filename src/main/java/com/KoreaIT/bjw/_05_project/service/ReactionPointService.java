@@ -17,7 +17,7 @@ public class ReactionPointService {
 	private ArticleService articleService;
 
 	
-	// 확인된 사용자가 해당 리액션을 할 수 있는지 확인하는 메서드
+	// 특정 회원의 id와 게시판 타입, 게시글번호를 받아 사용자가 리액션을 할 수 있는지 확인하는 메서드
 	public ResultData actorCanMakeReaction(int actorId, String relTypeCode, int relId) {
 		
 		// 로그인 여부 체크
@@ -113,7 +113,7 @@ public class ReactionPointService {
 		return ResultData.from("S-1", "싫어요 취소 처리 됨");
 	}
 	
-	// 사용자가 이미 좋아요 리액션을 추가한 상태인지 확인하는 메서드
+	// detail jsp파일에서 활용하기 위해 구현, 회원이 이미 좋아요를 한 상태인지 확인하는 메서드
 	public boolean isAlreadyAddGoodRp(int relId, String relTypeCode) {
 		int getPointTypeCodeByMemberId = reactionPointRepository.getSumReactionPointByMemberId(rq.getLoginedMemberId(), relTypeCode, relId);
 
@@ -122,7 +122,7 @@ public class ReactionPointService {
 		}
 		return false;
 	}
-
+	// detail jsp파일에서 활용하기 위해 구현, 회원이 이미 싫어요를 한 상태인지 확인하는 메서드
 	public boolean isAlreadyAddBadRp(int relId, String relTypeCode) {
 		int getPointTypeCodeByMemberId = reactionPointRepository.getSumReactionPointByMemberId(rq.getLoginedMemberId(), relTypeCode, relId);
 

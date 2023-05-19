@@ -162,6 +162,9 @@ public class UsrMemberController {
 		if (member.getLoginPw().equals(loginPw) == false) {
 			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다"));
 		}
+		if (member.isDelStatus() == true) {
+			return Ut.jsReplace("사용정지된 계정입니다", "/");
+		}
 
 		rq.login(member);
 
@@ -258,4 +261,6 @@ public class UsrMemberController {
 		return rq.jsReplace(modifyRd.getMsg(), "../member/myPage");
 	}
 
+	
+	
 }

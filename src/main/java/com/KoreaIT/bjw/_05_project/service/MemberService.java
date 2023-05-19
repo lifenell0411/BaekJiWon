@@ -19,13 +19,13 @@ public class MemberService {
 	}
 	
 	
-	// 특정 조건에 따라 회원의 수를 조회
+	// 사용자가 지정한 조건에 따라 회원의 수를 조회
 	public int getMembersCount(String authLevel, String searchKeywordTypeCode, String searchKeyword) {
 		return memberRepository.getMembersCount(authLevel, searchKeywordTypeCode, searchKeyword);
 	}
 
 	
-	 // 특정 조건에 따라 회원을 보여줌
+	 // 사용자가 지정한 따라 List에 회원데이터를 담아서 보여줌
 	public List<Member> getForPrintMembers(String authLevel, String searchKeywordTypeCode, String searchKeyword,
 			int itemsInAPage, int page) {
 
@@ -37,7 +37,7 @@ public class MemberService {
 		return members;
 	}
 
-	// 회원가입
+	// 회원가입 메서드
 	// 아이디, 패스워드, 이름, 닉네임, 휴대폰, 이메일정보를 인자로 넘겨받음
 	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
 			String email) {
@@ -93,5 +93,19 @@ public class MemberService {
 	public Member getMemberByEmail(String email) {
 		return memberRepository.getMemberByEmail(email);
 	}
+	public void deleteMembers(List<Integer> memberIds) {
+		for (int memberId : memberIds) {
+			Member member = getMemberById(memberId);
+
+			if (member != null) {
+				deleteMember(member);
+			}
+		}
+	}
+
+	private void deleteMember(Member member) {
+		memberRepository.deleteMember(member.getId());
+	}
+
 
 }
