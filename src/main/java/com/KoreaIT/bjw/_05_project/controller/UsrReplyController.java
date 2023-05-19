@@ -24,6 +24,8 @@ public class UsrReplyController {
 	@Autowired
 	private ArticleService articleService;
 
+	
+	// 댓글 작성 구현
 	@RequestMapping("/usr/reply/doWrite")
 	@ResponseBody
 	public String doWrite(String relTypeCode, int relId, String body, String replaceUri) {
@@ -38,10 +40,14 @@ public class UsrReplyController {
 			return rq.jsHistoryBack("F-3", "body 을(를) 입력해주세요");
 		}
 
+		
+		// 사용자로부터 받은 relTypeCode와 relId를 기준으로 댓글을 작성
 		ResultData<Integer> writeReplyRd = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
 
 		int id = (int) writeReplyRd.getData1();
 
+		// replaceUri가 비어있으면 기본값인 "../article/detail?id={relId}"로 설정
+		
 		if (Ut.empty(replaceUri)) {
 			replaceUri = Ut.f("../article/detail?id=%d", relId);
 		}
@@ -49,12 +55,17 @@ public class UsrReplyController {
 		return rq.jsReplace(writeReplyRd.getMsg(), replaceUri);
 	}
 
+	
+	// 댓글삭제처리
 	@RequestMapping("/usr/reply/doDelete")
 	@ResponseBody
 	public String doDelete(int id, String replaceUri) {
 
+		// DB에 저장된 댓글을 가져옴
 		Reply reply = replyService.getReply(id);
 
+		
+		// 댓글삭제에 대한 권한체크 및 댓글존재여부 확인
 		if (reply == null) {
 			return Ut.jsHistoryBack("F-1", Ut.f("%d번 댓글은 존재하지 않습니다", id));
 		}
@@ -63,6 +74,8 @@ public class UsrReplyController {
 			return Ut.jsHistoryBack("F-2", Ut.f("%d번 댓글에 대한 권한이 없습니다", id));
 		}
 
+		
+		// 위 조건 충족이 되었다면 댓글삭제
 		ResultData deleteReplyRd = replyService.deleteReply(id);
 
 		if (Ut.empty(replaceUri)) {
@@ -76,6 +89,9 @@ public class UsrReplyController {
 		return Ut.jsReplace(deleteReplyRd.getMsg(), replaceUri);
 	}
 
+	
+	// 댓글수정
+	
 	@RequestMapping("/usr/reply/modify")
 	public String showModify(Model model, int id, String replaceUri) {
 
@@ -84,7 +100,7 @@ public class UsrReplyController {
 		if (reply == null) {
 			return rq.jsHistoryBackOnView(Ut.f("%d번 댓글은 존재하지 않습니다!", id));
 		}
-
+		// 사용자가 해당 댓글수정이 가능한지 권한체크
 		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMemberId(), reply);
 
 		if (actorCanModifyRd.isFail()) {
@@ -99,6 +115,7 @@ public class UsrReplyController {
 		return "usr/reply/modify";
 	}
 
+	// 실제 댓글수정처리
 	@RequestMapping("/usr/reply/doModify")
 	@ResponseBody
 	public String doModify(int id, String body, String replaceUri) {

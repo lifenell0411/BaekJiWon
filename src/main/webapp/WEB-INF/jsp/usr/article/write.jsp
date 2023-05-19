@@ -99,7 +99,7 @@
 						<tr>
 							<th></th>
 							<td>
-								<button type="submit" value="작성" />
+								<button class="custom-btn btn-7" type="submit" value="작성" />
 								작성
 								</button>
 							</td>
@@ -109,14 +109,14 @@
 				</table>
 			</form>
 		</div>
-		<div class="btns">
-			<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
+		
+	</div>
+	
+ <div class="btns">
+			<button class="custom-btn btn-7" type="button" onclick="history.back();">뒤로가기</button>
 
 
 		</div>
-	</div>
-	
- 
 </section>
 
 <script>const form = document.getElementById('uploadForm');
@@ -149,5 +149,89 @@ form.addEventListener('submit', (e) => {
 });
 
 </script>
+
+<style>
+
+
+.container {margin-top: 300px;
+border : 2px solid #5C5470;
+padding: 40px 40px;
+   border-radius: 10px;
+}
+
+ .btns {
+  margin-top: 50px;
+ margin-left: 1500px;
+ }
+ button {
+    margin: 20px;
+    outline: none;
+      border-radius: 10px;
+  }
+  
+  .custom-btn {
+    width: 130px;
+    height: 40px;
+    padding: 10px 25px;
+    border: 2px solid #000;
+    font-family: 'SUITE-Regular', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    text-align: center; /* 가운데 정렬을 위한 속성 추가 */
+        text-decoration: none; /* 밑줄 제거 */
+        border-radius: 10px;
+  }
+  
+  .btn-7 {
+    background: #5C5470;
+    color: #fff;
+    line-height: 42px;
+    padding: 0;
+    border: none;
+    z-index: 1;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+      border-radius: 10px;
+  }
+  
+  .btn-7:hover {
+    background: transparent;
+    color: #000;
+        text-decoration: none; /* 밑줄 제거 */
+          border-radius: 10px;
+  }
+  
+  .btn-7:before,
+  .btn-7:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    width: 100%;
+    height: 50%;
+    right: 0;
+    z-index: -1;
+    background:  #5C5470;
+    transition: all 0.3s ease;
+      border-radius: 10px;
+  }
+  
+  .btn-7:before {
+    top: 0;
+  }
+  
+  .btn-7:after {
+    bottom: 0;
+  }
+  
+  .btn-7:hover:before,
+  .btn-7:hover:after {
+    height: 0;
+    background-color: #000;
+  }
+</style>
 
 <%@ include file="../common/foot.jspf"%>

@@ -191,8 +191,7 @@ button {
    
 }
 
-btns{
-l200}
+ 
 
 /* 버튼 호버 스타일 */
 button:hover {
@@ -201,10 +200,7 @@ button:hover {
 table tr:nth-child(odd) {
   background-color: white;
 }
- body {
-   background-color: #FDE2F3;
-    height: 705px; /* 높이 */}
-
+ 
 
 </style>
 <%@ include file="../common/foot.jspf"%>

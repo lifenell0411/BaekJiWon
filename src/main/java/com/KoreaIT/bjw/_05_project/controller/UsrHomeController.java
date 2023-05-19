@@ -12,6 +12,8 @@ public class UsrHomeController {
 		this.rq = rq;
 	}
 
+	
+	// main 페이지로 이동
 	@RequestMapping("/usr/home/main")
 	public String showMain() {
 		rq.run();
@@ -19,12 +21,14 @@ public class UsrHomeController {
 
 	}
 
-	
+	// main2 페이지로 이동
 	@RequestMapping("/usr/home/main2")
 	public String showMain2() {
 		rq.run();
 		return "usr/home/main2";
 	}
+	
+	// localhost:8083/ 입력시 main2 페이지를 보여줌
 	@RequestMapping("/")
 	public String showRoot() {
 		return "redirect:/usr/home/main2";

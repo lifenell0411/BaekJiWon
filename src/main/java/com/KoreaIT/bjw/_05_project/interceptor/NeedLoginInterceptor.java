@@ -9,6 +9,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.KoreaIT.bjw._05_project.vo.Rq;
 
+
+// 로그인 후 페이지를 사용할 수 있도록 
 @Component
 public class NeedLoginInterceptor implements HandlerInterceptor {
 	@Autowired

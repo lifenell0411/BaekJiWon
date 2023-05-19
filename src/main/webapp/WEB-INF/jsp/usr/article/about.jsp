@@ -52,7 +52,7 @@ body {
 	max-width: 1280px;
 	min-height: 600px;
 	min-width: 1000px;
-	margin-top: 120px;
+margin-top: 300px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -70,7 +70,7 @@ font-size: 20px;
 	transform: translateY(-50%);
 	padding: 10px;
 	width: 700px;
-	color: black;
+	color: white;
 	border-radius: 5px;
 	transition: width 1s;
 }
@@ -125,7 +125,7 @@ font-size: 20px;
 
 .card:hover .text {
 	display: block;
-	color: black;
+	color: #2A2438;
 }
 
 .card1 {
@@ -144,7 +144,7 @@ font-size: 20px;
 
 .card:hover .text1 {
 	display: block;
-	color: black;
+		color: #2A2438;
 }
 
 .card1:hover h2, .card1:hover .fa {
@@ -209,6 +209,7 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
+			color: #5C5470;
 }
 
 .about2 {
@@ -220,6 +221,7 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
+			color: #5C5470;
 }
 
 .about3 {
@@ -231,6 +233,7 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
+			color: #5C5470;
 }
 
 .about4 {
@@ -242,6 +245,7 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
+			color: #5C5470;
 }
 
 .about5 {
@@ -253,6 +257,7 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
+			color: #5C5470;
 }
 </style>
 

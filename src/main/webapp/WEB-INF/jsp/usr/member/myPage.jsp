@@ -4,11 +4,10 @@
 <%@ include file="../common/head.jspf"%>
 <%@ page import="com.KoreaIT.bjw._05_project.util.Ut"%>
 <hr />
-
 <section class="mt-8 text-xl">
-<div class="container mx-auto px-3 d-flex align-items-center justify-content-center" style="height: 100vh;">
-    <div class="table-box-type-1">
-        <table border="1">
+    <div class="container" >
+        <div class="table-box-type-1" style="max-width: 800px;">
+            <table border="1">
             <colgroup>
                 <col width="200" />
             </colgroup>
@@ -48,29 +47,37 @@
         </table>
     </div>
 </div>
-
+<div class ="like"></div>
 </section>
 
 <style>
 body {
-  overflow: hidden;
-}
- table {
-  border-spacing: 0;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  border: none;
+  overflow: visible;
 }
 
-th, td {
+table {
+  border-spacing: 0;
+  width: 100%;
+  border: none;
+   margin-left: 200px;
+  margin-top: 100px;
+}
+.like{
+
+width: 100px;
+height: 100px;
+background-color: red;
+border : 3px solid black;
+margin-left: 300px;}
+th,
+td {
   border: none;
   padding: 10px;
   text-align: center;
 }
 
 th {
-  background-color: #917FB3;
+  background-color: #5C5470;
   font-weight: bold;
   color: white;
 }
@@ -82,7 +89,5 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
   background-color: white;
 }
-
 </style>
-
 <%@ include file="../common/foot.jspf"%>

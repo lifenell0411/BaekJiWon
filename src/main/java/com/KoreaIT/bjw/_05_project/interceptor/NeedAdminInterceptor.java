@@ -9,6 +9,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.KoreaIT.bjw._05_project.vo.Rq;
 
+
+// 관리자페이지 인터셉터
 @Component
 public class NeedAdminInterceptor implements HandlerInterceptor {
 	@Autowired

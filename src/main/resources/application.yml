@@ -21,7 +21,7 @@ mybatis:
   type-aliases-package: com.KoreaIT.bjw._05_project.vo
 
 custom:
-  genFileDirPath: C:\workspace_bjw\sts-4.18.0.RELEASE-workspace\23_05_project\images
+  genFileDirPath: C:\workspace_bjw\sts-4.17.2.RELEASE-workspace\23_05_project\images
   siteName: 23_05_project
   siteMainUri: http://localhost:8083
   emailFrom: no-reply@localhost

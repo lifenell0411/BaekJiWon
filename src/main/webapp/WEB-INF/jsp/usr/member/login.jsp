@@ -28,13 +28,7 @@
 
 <style>
 
- body {
-   background-color: #FDE2F3;
-    height: 705px; /* 높이 */}
-html, body {
-  height: 100%;
-  margin: 0;
-}
+ 
 
 body {
   height: 100%;
@@ -97,7 +91,7 @@ body {
 	left: 0;
 	padding: 10px 0;
 	font-size: 16px;
-	color: #FDE2F3;
+	color: #DBD8E3;
 	pointer-events: none;
 	transition: 0.5s;
 }
@@ -106,7 +100,7 @@ body {
 	 ~ label {
 	top: -20px;
 	left: 0;
-	color: #FDE2F3;
+	color: #DBD8E3;
 	font-size: 12px;
 }
 
@@ -114,7 +108,7 @@ body {
 	position: relative;
 	display: inline-block;
 	padding: 10px 20px;
-	color: #FDE2F3;
+	color: #DBD8E3;
 	font-size: 16px;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -123,17 +117,17 @@ body {
 	margin-top: 40px;
 	letter-spacing: 4px;
 	background: transparent;
-	border: 2px solid #FDE2F3;
+	border: 2px solid #DBD8E3;
 	border-radius: 5px;
-	box-shadow: 0 0 5px #FDE2F3;
+	box-shadow: 0 0 5px #DBD8E3;
 	cursor: pointer;
 }
 
 .login-box button:hover {
-	background: #FDE2F3;
+	background: #DBD8E3;
 	color: #fff;
-	box-shadow: 0 0 5px #FDE2F3, 0 0 25px #FDE2F3, 0 0 50px #FDE2F3, 0 0
-		100px #FDE2F3;
+	box-shadow: 0 0 5px #DBD8E3, 0 0 25px #DBD8E3, 0 0 50px #DBD8E3, 0 0
+		100px #DBD8E3;
 }
 
  

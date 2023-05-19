@@ -30,7 +30,7 @@ th, td {
 }
 
 .table-header {
-	background-color: #917FB3;
+	background-color: #5C5470;
 	font-weight: bold;
 	color: white;
 }
@@ -40,7 +40,7 @@ th, td {
 }
 
 .replyHD {
-	background-color: #917FB3;
+	background-color: #5C5470;
 	font-weight: bold;
 	color: white;
 }
@@ -303,7 +303,7 @@ input[type="text"], textarea {
 						</td>
 					</tr>
 		<tr>
-						<th>첨부 이미지</th>
+						<th class="table-header">첨부 이미지</th>
 						<td>
 							<img class="w-full rounded-xl" src="${rq.getImgUri(article.id)}"
 								onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
@@ -311,7 +311,8 @@ input[type="text"], textarea {
 						</td>
 					</tr>
 					<tr>
-						<c:if test="${article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
+						<c:if test="${actorCanCancelGoodReaction}">
+						<c:if test="${article.boardId eq 5 || article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
 							<tr>
 								<th class="table-header">추천</th>
 								<td class="table-cell">
@@ -329,6 +330,7 @@ input[type="text"], textarea {
 											<span id="DislikeCount">${article.badReactionPoint}</span>
 										</button>
 									</div>
+						</c:if>
 						</c:if>
 						<c:if test="${article.boardId eq 1 || article.boardId eq 2 || article.boardId eq 3 || article.boardId eq 4}">
 							<tr>
@@ -368,15 +370,89 @@ input[type="text"], textarea {
 
 
 		<br />
-		<button class="btn btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
-	</div>
-
-	<c:if test="${rq.getLoginedMemberId()==article.memberId }">
-		<a class="btn btn-outline" href="../article/modify?id=${article.id }">수정</a>
-		<a class="btn btn-outline" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
+		<button class="custom-btn btn-7" type="button" onclick="history.back();">뒤로가기</button>
+		<c:if test="${rq.getLoginedMemberId()==article.memberId }">
+		<a class="custom-btn btn-7" href="../article/modify?id=${article.id }">수정</a>
+		<a class="custom-btn btn-7" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
 			href="doDelete?id=${article.id }">삭제</a>
 	</c:if>
+	</div>
+
+	 
 
 
 </section>
+
+<style>
+  button {
+    margin: 20px;
+    outline: none;
+      border-radius: 10px;
+  }
+  
+  .custom-btn {
+    width: 130px;
+    height: 40px;
+    padding: 10px 25px;
+    border: 2px solid #000;
+    font-family: 'SUITE-Regular', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    text-align: center; /* 가운데 정렬을 위한 속성 추가 */
+        text-decoration: none; /* 밑줄 제거 */
+        border-radius: 10px;
+  }
+  
+  .btn-7 {
+    background: #5C5470;
+    color: #fff;
+    line-height: 42px;
+    padding: 0;
+    border: none;
+    z-index: 1;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+      border-radius: 10px;
+  }
+  
+  .btn-7:hover {
+    background: transparent;
+    color: #000;
+        text-decoration: none; /* 밑줄 제거 */
+          border-radius: 10px;
+  }
+  
+  .btn-7:before,
+  .btn-7:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    width: 100%;
+    height: 50%;
+    right: 0;
+    z-index: -1;
+    background:  #5C5470;
+    transition: all 0.3s ease;
+      border-radius: 10px;
+  }
+  
+  .btn-7:before {
+    top: 0;
+  }
+  
+  .btn-7:after {
+    bottom: 0;
+  }
+  
+  .btn-7:hover:before,
+  .btn-7:hover:after {
+    height: 0;
+    background-color: #000;
+  }
+</style>
+
 <%@ include file="../common/foot.jspf"%>

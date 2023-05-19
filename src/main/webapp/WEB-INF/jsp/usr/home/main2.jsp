@@ -28,8 +28,8 @@ body {
   padding: 50px 0;
   min-height: 100vh;
   margin: 0;  
-  background: radial-gradient(ellipse farthest-corner at center bottom, #917FB3, #917FB3);
-  color: #917FB3;
+  background: radial-gradient(ellipse farthest-corner at center bottom, #5C5470, #5C5470);
+  color: #5C5470;
   font-size: 14px;
   font-family: 'Roboto', sans-serif;
   font-weight: 900;

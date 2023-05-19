@@ -18,13 +18,14 @@ public class UsrLikePointController {
 	
 	
 
+	// 찜하기, 찜하기 가능여부를 체크 후 
 	@RequestMapping("/usr/likePoint/doLikePoint")
 	@ResponseBody
 	public ResultData doLikePoint(String relTypeCode, int relId, String replaceUri) {
 		ResultData actorCanMakeLikeRd = likePointService.actorCanMakeLike(rq.getLoginedMemberId(), relTypeCode, relId);
 		
 		int actorCanMakeLike = (int) actorCanMakeLikeRd.getData1();
-		
+		// 값이 1인 경우, 이미 좋아요를 추가한 상태이므로 좋아요를 취소
 		if (actorCanMakeLike == 1) {
 			ResultData rd = likePointService.deleteLikePoint(rq.getLoginedMemberId(), relTypeCode, relId);
 			return ResultData.from("S-1", "찜하기 취소");
@@ -39,6 +40,8 @@ public class UsrLikePointController {
 		return ResultData.from("S-3", "찜하기");
 	}
 
+	// 찜하기 취소
+	
 	@RequestMapping("/usr/likePoint/doCancelLikePoint")
 	@ResponseBody
 	public String doCancelLikePoint(String relTypeCode, int relId, String replaceUri) {

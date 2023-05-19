@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface LikePointRepository {
 
@@ -41,12 +40,5 @@ public interface LikePointRepository {
 			AND memberId = #{actorId}
 			""")
 	public void deleteLikePoint(int actorId, String relTypeCode, int relId);
-	@Update("""
-			DELETE FROM likePoint
-			WHERE relTypeCode = #{relTypeCode}
-			AND relId = #{relId}
-			AND memberId = #{actorId}
-			""")
-	public int cancelLikePoint(int actorId, String relTypeCode, int relId);
-
+ 
 }

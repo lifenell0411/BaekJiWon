@@ -149,7 +149,7 @@
 				</colgroup>
 				<tbody>
 					<tr>
-						<th style="background-color: #917FB3;">아이디</th>
+						<th style="background-color: #5C5470;">아이디</th>
 						<td style="background-color: white;">
 							<input onblur="checkLoginIdDup(this);" name="loginId" class="w-full input input-bordered  max-w-xs"
 								placeholder="아이디를 입력해주세요" autocomplete="off" />
@@ -157,37 +157,37 @@
 						</td>
 					</tr>
 					<tr>
-						<th style="background-color: #917FB3;">비밀번호</th>
+						<th style="background-color: #5C5470;">비밀번호</th>
 						<td style="background-color: white;">
 							<input name="loginPw" class="w-full input input-bordered max-w-xs" placeholder="비밀번호를 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
-						<th style="background-color: #917FB3;">비밀번호 확인</th>
+						<th style="background-color: #5C5470;">비밀번호 확인</th>
 						<td style="background-color: white;">
 							<input name="loginPwConfirm" class="w-full input input-bordered max-w-xs" placeholder="비밀번호 확인을 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
-						<th style="background-color: #917FB3;">이름</th>
+						<th style="background-color: #5C5470;">이름</th>
 						<td style="background-color: white;">
 							<input name="name" class="w-full input input-bordered max-w-xs" placeholder="이름을 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
-						<th style="background-color: #917FB3;">닉네임</th>
+						<th style="background-color: #5C5470;">닉네임</th>
 						<td>
 							<input name="nickname" class="w-full input input-bordered max-w-xs" placeholder="닉네임을 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
-						<th style="background-color: #917FB3;">전화번호</th>
+						<th style="background-color: #5C5470;">전화번호</th>
 						<td style="background-color: white;">
 							<input name="cellphoneNum" class="w-full input input-bordered max-w-xs" placeholder="전화번호를 입력해주세요" />
 						</td>
 					</tr>
 					<tr>
-						<th style="background-color: #917FB3;">이메일</th>
+						<th style="background-color: #5C5470;">이메일</th>
 						<td>
 							<input onblur="getLoginEmailDup(this);" name="email" class="w-full input input-bordered  max-w-xs"
 								placeholder="이메일을 입력해주세요" autocomplete="off" />
@@ -195,7 +195,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th style="background-color: #917FB3;"></th>
+						<th style="background-color: #5C5470;"></th>
 						<td style="background-color: white;">
 							<button class="btn btn-active btn-ghost" type="submit" value="회원가입">회원가입</button>
 						</td>
@@ -214,12 +214,8 @@
 <%@ include file="../common/foot.jspf"%>
 
 	<style>
-body {
-	background-color: #FDE2F3;
-	 
-  
  
-}
+ 
 
 .table-container {
   display: flex;
