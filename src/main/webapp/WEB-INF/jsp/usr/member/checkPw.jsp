@@ -37,9 +37,9 @@ body {
   overflow: hidden;
 }
 .btn-custom {
-  background-color: #917FB3;
+  background-color: #5C5470;
   color: white;
-  border: 2px solid #917FB3;
+  border: 2px solid #5C5470;
   border-radius: 4px;
   padding: 6px 12px;
 }
@@ -48,10 +48,10 @@ body {
 }
 
 .card-header{
- background-color: #917FB3;}
+ background-color: #5C5470;}
  
  .card-footer{
-  background-color: #917FB3;
+  background-color: #5C5470;
  }
 .card-title{
 color: white;}

@@ -272,6 +272,8 @@
 						<a class="btn" href="${baseUri }&Apage=1">1</a>
 						<button class="btn btn-disabled">...</button>
 					</c:if>
+				 
+					<a class="custom-btn btn-7" href="/">HOME</a>
 
 					<c:forEach begin="${startPage }" end="${endPage }" var="i">
 						<a class="btn ${Apage == i ? 'btn-active' : '' }" href="${baseUri }&page=${i}">${i }</a>
@@ -285,5 +287,78 @@
 			</div>
 		</div>
 	</div>
+ 
 </section>
+<style>
+button {
+	margin: 20px;
+	outline: none;
+	border-radius: 10px;
+}
+
+.custom-btn {
+	width: 130px;
+	height: 40px;
+	padding: 10px 25px;
+	border: 2px solid #000;
+	font-family: 'SUITE-Regular', sans-serif;
+	font-weight: 500;
+	background: transparent;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	display: inline-block;
+	text-align: center; /* 가운데 정렬을 위한 속성 추가 */
+	text-decoration: none; /* 밑줄 제거 */
+	border-radius: 10px;
+	bottom: 70px;
+	
+}
+
+.btn-7 {
+	background: #5C5470;
+	color: #fff;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	z-index: 1;
+	-webkit-transition: all 0.3s linear;
+	transition: all 0.3s linear;
+	border-radius: 10px;
+}
+
+.btn-7:hover {
+	background: transparent;
+	color: #000;
+	text-decoration: none; /* 밑줄 제거 */
+	border-radius: 10px;
+}
+
+.btn-7:before, .btn-7:after {
+	position: absolute;
+	content: "";
+	left: 0;
+	width: 100%;
+	height: 50%;
+	right: 0;
+	z-index: -1;
+	background: #5C5470;
+	transition: all 0.3s ease;
+	border-radius: 10px;
+}
+
+.btn-7:before {
+	top: 0;
+}
+
+.btn-7:after {
+	bottom: 0;
+}
+
+.btn-7:hover:before, .btn-7:hover:after {
+	height: 0;
+	background-color: #000;
+}
+</style>
+
 <%@ include file="../common/foot.jspf"%>

@@ -68,6 +68,7 @@ input[type="text"], textarea {
 	background-color: red;
 	color: white;
 }
+
 </style>
 <!-- 리액션 실행 코드 -->
 <script>
@@ -82,7 +83,7 @@ input[type="text"], textarea {
 
 
 
-</style>
+ 
 <!-- 변수 생성 -->
 <script>
 	const params = {};
@@ -260,8 +261,10 @@ input[type="text"], textarea {
 	
 	
 </script>
+ 
 
 
+ 
 
 
 
@@ -311,7 +314,7 @@ input[type="text"], textarea {
 						</td>
 					</tr>
 					<tr>
-						<c:if test="${actorCanCancelGoodReaction}">
+					 
 						<c:if test="${article.boardId eq 5 || article.boardId eq 6 || article.boardId eq 7 || article.boardId eq 8}">
 							<tr>
 								<th class="table-header">추천</th>
@@ -331,7 +334,7 @@ input[type="text"], textarea {
 										</button>
 									</div>
 						</c:if>
-						</c:if>
+					 
 						<c:if test="${article.boardId eq 1 || article.boardId eq 2 || article.boardId eq 3 || article.boardId eq 4}">
 							<tr>
 								<th class="table-header">찜</th>
@@ -382,6 +385,102 @@ input[type="text"], textarea {
 
 
 </section>
+
+<section class="mt-8 text-xl">
+	<div class="container mx-auto px-3">
+		<div class="table-box-type-1">
+			<c:if test="${rq.logined }">
+				<form action="../reply/doWrite" method="POST" onsubmit="ReplyWrite__submitForm(this); return false;">
+					<input type="hidden" name="relTypeCode" value="article" />
+					<input type="hidden" name="relId" value="${article.id }" />
+					<input type="hidden" name="replaceUri" value="${rq.currentUri }" />
+					<table>
+						<colgroup>
+							<col width="200" />
+						</colgroup>
+
+						<tbody>
+							<tr>
+								<th>댓글</th>
+								<td>
+									<textarea class="input input-bordered w-full max-w-xs" type="text" name="body" placeholder="내용을 입력해주세요" /></textarea>
+								</td>
+							</tr>
+							<tr>
+								<th></th>
+								<td>
+									<button type="submit" value="작성" />
+									댓글 작성
+									</button>
+								</td>
+							</tr>
+						</tbody>
+
+					</table>
+				</form>
+			</c:if>
+			<c:if test="${rq.notLogined }">
+				<a class="btn-text-link btn btn-active btn-ghost" href="${rq.loginUri }">로그인</a> 하고 해라
+			</c:if>
+		</div>
+
+	</div>
+</section>
+<section class="mt-5">
+	<div class="container mx-auto px-3">
+		<h1 class="text-3xl">댓글 리스트(${repliesCount })</h1>
+		<table class="table table-zebra w-full">
+			<colgroup>
+				<col width="70" />
+				<col width="100" />
+				<col width="100" />
+				<col width="50" />
+				<col width="140" />
+				<col width="50" />
+				<col width="50" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>날짜</th>
+					<th>작성자</th>
+					<th>추천</th>
+					<th>내용</th>
+					<th>수정</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<c:forEach var="reply" items="${replies }">
+					<tr class="hover">
+						<td>
+							<div class="badge">${reply.id}</div>
+						</td>
+						<td>${reply.getForPrintRegDateType1()}</td>
+						<td>${reply.extra__writer}</td>
+						<td>${reply.goodReactionPoint}</td>
+						<td align="left">${reply.body}</td>
+						<td>
+							<c:if test="${reply.actorCanModify }">
+								<a class="btn-text-link btn btn-active btn-ghost"
+									href="../reply/modify?id=${reply.id }&replaceUri=${rq.encodedCurrentUri}">수정</a>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${reply.actorCanDelete }">
+								<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
+									href="../reply/doDelete?id=${reply.id }&replaceUri=${rq.encodedCurrentUri}">삭제</a>
+							</c:if>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+
+		</table>
+	</div>
+</section>
+
 
 <style>
   button {

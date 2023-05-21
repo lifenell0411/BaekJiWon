@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="MEMBER MYPAGE" />
 <%@ include file="../common/head.jspf"%>
-<%@ page import="com.KoreaIT.bjw._05_project.util.Ut"%>
+c
 <hr />
 <section class="mt-8 text-xl">
     <div class="container" >
@@ -17,9 +17,9 @@
                     <th>가입일</th>
                     <td>${rq.loginedMember.regDate }</td>
                 </tr>
-                <tr>
-                    <th>아이디</th>
-                    <td>${rq.loginedMember.loginId }</td>
+                 <tr>
+                    <th>이메일</th>
+                    <td>${rq.loginedMember.email }</td>
                 </tr>
                 <tr>
                     <th>이름</th>
@@ -33,10 +33,7 @@
                     <th>전화번호</th>
                     <td>${rq.loginedMember.cellphoneNum }</td>
                 </tr>
-                <tr>
-                    <th>이메일</th>
-                    <td>${rq.loginedMember.email }</td>
-                </tr>
+             
                 <tr>
                     <th></th>
                     <td>
@@ -47,13 +44,17 @@
         </table>
     </div>
 </div>
-<div class ="like"></div>
+ 
 </section>
-
+ 
 <style>
 body {
   overflow: visible;
 }
+
+.table1{
+
+width: 500px;}
 
 table {
   border-spacing: 0;

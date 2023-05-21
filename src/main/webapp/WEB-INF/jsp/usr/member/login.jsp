@@ -10,8 +10,8 @@
 		<form action="../member/doLogin" method="POST">
 			<input type="hidden" name="afterLoginUri" value="${param.afterLoginUri }" />
 			<div class="user-box">
-				<input type="text" name="loginId" required="" autocomplete="off">
-				<label>LoginId</label>
+				<input type="text" name="email" required="" autocomplete="off">
+				<label>email</label>
 			</div>
 			<div class="user-box">
 				<input type="password" name="loginPw" required="" autocomplete="off">

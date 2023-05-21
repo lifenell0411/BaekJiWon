@@ -369,13 +369,64 @@ ALTER TABLE reply ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 
 ALTER TABLE `SB_AM_04`.`reply` ADD KEY `relTypeCodeId` (`relTypeCode` , `relId`);
 
 
+
+
+# 파일 테이블 추가
+CREATE TABLE genFile (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, # 번호
+  regDate DATETIME DEFAULT NULL, # 작성날짜
+  updateDate DATETIME DEFAULT NULL, # 갱신날짜
+  delDate DATETIME DEFAULT NULL, # 삭제날짜
+  delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0, # 삭제상태(0:미삭제,1:삭제)
+  relTypeCode CHAR(50) NOT NULL, # 관련 데이터 타입(article, member)
+  relId INT(10) UNSIGNED NOT NULL, # 관련 데이터 번호
+  originFileName VARCHAR(100) NOT NULL, # 업로드 당시의 파일이름
+  fileExt CHAR(10) NOT NULL, # 확장자
+  typeCode CHAR(20) NOT NULL, # 종류코드 (common)
+  type2Code CHAR(20) NOT NULL, # 종류2코드 (attatchment)
+  fileSize INT(10) UNSIGNED NOT NULL, # 파일의 사이즈
+  fileExtTypeCode CHAR(10) NOT NULL, # 파일규격코드(img, video)
+  fileExtType2Code CHAR(10) NOT NULL, # 파일규격2코드(jpg, mp4)
+  fileNo SMALLINT(2) UNSIGNED NOT NULL, # 파일번호 (1)
+  fileDir CHAR(20) NOT NULL, # 파일이 저장되는 폴더명
+  PRIMARY KEY (id),
+  KEY relId (relTypeCode,relId,typeCode,type2Code,fileNo)
+);
+
+
+
 ###################################################################
+
+SELECT IFNULL(SUM(LP.point),0)
+FROM likePoint AS LP
+WHERE LP.relTypeCode = article
+AND LP.relId = 1
+AND LP.memberId = 2;
+
+
+INSERT INTO likePoint
+SET regDate = NOW(),
+updateDate = NOW(),
+relTypeCode = article,
+relId = 1,
+memberId = 2,
+`point` = 1;
+ 
 SELECT * FROM article;
 SELECT * FROM `member`;
 SELECT * FROM board;
 SELECT * FROM reactionPoint;
 SELECT * FROM likePoint;
+SELECT * FROM `genFile`;
 SELECT * FROM `reply`;
+
+
+SELECT A.*, L.point
+FROM article AS A
+INNER JOIN likePoint AS L ON A.memberId = L.memberId
+WHERE A.memberId = 3 AND L.point = 1
+GROUP BY L.point;
+
 
 SELECT R.*, M.nickname AS extra__writer
 				FROM reply AS R
@@ -432,7 +483,7 @@ INSERT INTO article
 ( 
     regDate, updateDate, memberId, boardId, title, `body`
 )
-SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 8, FLOOR(RAND() * 2) + 1, CONCAT('제목_',RAND()), CONCAT('내용_',RAND())
+SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 2, FLOOR(RAND() * 2) + 1, CONCAT('제목_',RAND()), CONCAT('내용_',RAND())
 FROM article;
 
 SELECT COUNT(*) FROM article;

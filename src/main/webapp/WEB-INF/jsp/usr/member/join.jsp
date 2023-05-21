@@ -7,7 +7,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
 	let submitJoinFormDone = false;
-	let validLoginId = "";
+ 
 	let validEmail = "";
 
 	function submitJoinForm(form) {
@@ -15,15 +15,15 @@
 			alert('처리중입니다');
 			return;
 		}
-		form.loginId.value = form.loginId.value.trim();
-		if (form.loginId.value == 0) {
-			alert('아이디를 입력해주세요');
+		form.email.value = form.email.value.trim();
+		if (form.email.value == 0) {
+			alert('이메일을 입력해주세요');
 			return;
 		}
 
-		if (form.loginId.value != validLoginId) {
+		if (form.loginId.value != validEmail) {
 			alert('사용할 수 없는 아이디입니다');
-			form.loginId.focus();
+			form.email.focus();
 			return;
 		}
 
@@ -52,11 +52,7 @@
 			alert('닉네임을 입력해주세요');
 			return;
 		}
-		form.email.value = form.email.value.trim();
-		if (form.email.value == 0) {
-			alert('이메일을 입력해주세요');
-			return;
-		}
+		
 		form.cellphoneNum.value = form.cellphoneNum.value.trim();
 		if (form.cellphoneNum.value == 0) {
 			alert('전화번호를 입력해주세요');
@@ -66,39 +62,7 @@
 		form.submit();
 	}
 
-	function checkLoginIdDup(el) {
-		$('.checkDup-msg').empty();
-		const form = $(el).closest('form').get(0);
-
-		const regExp = /^[a-zA-Z0-9]+$/; // 영어와 숫자로만 이루어져 있는지 확인하는 정규식
-
-		if (form.loginId.value.length < 5) {
-			$('.checkDup-msg').html(
-					'<div class="mt-2">아이디를 5글자 이상 입력해주세요.</div>');
-			validLoginId = '';
-			return;
-		} if (!regExp.test(form.loginId.value)) { // 입력된 아이디가 영어와 숫자로만 이루어져 있는지 확인
-			$('.checkDup-msg').html(
-					'<div class="mt-2">아이디는 영어와 숫자로만 구성될 수 있습니다.</div>');
-			validLoginId = '';
-			return;
-		}
-
-		$.get('../member/getLoginIdDup', {
-			isAjax : 'Y',
-			loginId : form.loginId.value
-		}, function(data) {
-			$('.checkDup-msg').html('<div class="mt-2">' + data.msg + '</div>')
-			if (data.success) {
-				validLoginId = data.data1;
-			} else {
-				validLoginId = '';
-			}
-		}, 'json');
-
-		
-
-	}
+	 
 	function getLoginEmailDup(el) {
 		$('.checkDup-msg1').empty();
 		const form = $(el).closest('form').get(0);
@@ -148,12 +112,12 @@
 					<col width="200" />
 				</colgroup>
 				<tbody>
-					<tr>
-						<th style="background-color: #5C5470;">아이디</th>
-						<td style="background-color: white;">
-							<input onblur="checkLoginIdDup(this);" name="loginId" class="w-full input input-bordered  max-w-xs"
-								placeholder="아이디를 입력해주세요" autocomplete="off" />
-							<div class="checkDup-msg"></div>
+						<tr>
+						<th style="background-color: #5C5470;">이메일</th>
+						<td>
+							<input onblur="getLoginEmailDup(this);" name="email" class="w-full input input-bordered  max-w-xs"
+								placeholder="이메일을 입력해주세요" autocomplete="off" />
+							<div class="checkDup-msg1"></div>
 						</td>
 					</tr>
 					<tr>
@@ -186,14 +150,7 @@
 							<input name="cellphoneNum" class="w-full input input-bordered max-w-xs" placeholder="전화번호를 입력해주세요" />
 						</td>
 					</tr>
-					<tr>
-						<th style="background-color: #5C5470;">이메일</th>
-						<td>
-							<input onblur="getLoginEmailDup(this);" name="email" class="w-full input input-bordered  max-w-xs"
-								placeholder="이메일을 입력해주세요" autocomplete="off" />
-							<div class="checkDup-msg1"></div>
-						</td>
-					</tr>
+				
 					<tr>
 						<th style="background-color: #5C5470;"></th>
 						<td style="background-color: white;">
